@@ -1,0 +1,18 @@
+
+G
+java:S1659"%Declare "et_name" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+q	java:S116"PRename this field "et_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+r	java:S116"WRename this field "btn_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êŽód8Ã‘—Ã¢/
+s	java:S116"RRename this field "et_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+s	java:S116"RRename this field "et_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+F
+java:S1659"$Declare "et_age" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+r	java:S116"QRename this field "et_age" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+8
+java:S36268"Remove this redundant jump.(ûÁÝ…8Ã‘—Ã¢/
+w
+java:S1450"[Remove the "btn_register" field and declare it as a local variable in the relevant methods.(êŽód8Ã‘—Ã¢/
+J
+java:S1604,"(Make this anonymous inner class a lambda(‚–Õ§ùÿÿÿÿ8Ã‘—Ã¢/
+G
+java:S1659"%Declare "et_pass" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GoogleloginActivity"
+    android:id="@+id/layout_main"
+    android:orientation="vertical"
+    android:background="@drawable/loginimg"
+    >
+
+    <TextView
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="370dp"
+        android:text="GPSmia에 오신 걸 환영합니다"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/tv_contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="나의 위치와 지도를 화면으로 만나보세요."
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_glide"
+        android:layout_below="@+id/tv_contents"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signInButton"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/btn_result"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:backgroundTint="#4374D9"
+        android:text="가입하기" />
+
+    <Button
+        android:backgroundTint="@color/black"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="로그인"/>
+
+</LinearLayout>

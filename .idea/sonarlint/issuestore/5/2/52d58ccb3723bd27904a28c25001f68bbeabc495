@@ -1,0 +1,17 @@
+
+s	java:S116"WRename this field "btn_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒŸþà8Ë‹§Ã¢/
+p	java:S116"TRename this field "btn_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒŸþà8Ë‹§Ã¢/
+G
+java:S1659"*Declare "btn_register" on a separate line.(ŒŸþà8Ë‹§Ã¢/
+x
+java:S1450"[Remove the "btn_register" field and declare it as a local variable in the relevant methods.(ŒŸþà8Ë‹§Ã¢/
+G
+java:S1659"%Declare "et_pass" on a separate line.(ûÅœéþÿÿÿÿ8Ë‹§Ã¢/
+u
+java:S1450"XRemove the "btn_login" field and declare it as a local variable in the relevant methods.(ŒŸþà8Ë‹§Ã¢/
+s	java:S116"RRename this field "et_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÅœéþÿÿÿÿ8Ë‹§Ã¢/
+8
+java:S3626?"Remove this redundant jump.(ûÁÝ…8Ë‹§Ã¢/
+q	java:S116"PRename this field "et_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÅœéþÿÿÿÿ8Ë‹§Ã¢/
+J
+java:S1604/"(Make this anonymous inner class a lambda(‚–Õ§ùÿÿÿÿ8Ë‹§Ã¢/

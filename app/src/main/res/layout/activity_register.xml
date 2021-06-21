@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:orientation="vertical"
+>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="#6799FF">
+
+        <TextView
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="간편 회원가입"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="세부 개인정보 없이 회원가입으로 앱을 사용하세요."
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+
+            android:layout_marginLeft="20dp"
+            android:textColor="#5D5D5D"
+            android:textSize="17dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름              "/>
+
+        <EditText
+            android:textSize="13dp"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/et_id"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="아이디 (영문, 숫자 조합권장)"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textColor="#5D5D5D"
+            android:textSize="17dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호      "/>
+
+        <EditText
+            android:textSize="13dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:id="@+id/et_pass"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="비밀번호 (20자 이내)"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/et_id"
+            app:layout_constraintStart_toStartOf="@+id/et_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_id" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textColor="#5D5D5D"
+            android:textSize="17dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름              "/>
+
+        <EditText
+            android:textSize="13dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:layout_gravity="center"
+            android:id="@+id/et_name"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="이름을 입력하세요."
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/et_pass"
+            app:layout_constraintStart_toStartOf="@+id/et_pass"
+            app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+    </LinearLayout>
+        <LinearLayout
+
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textColor="#5D5D5D"
+            android:textSize="17dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나이              "/>
+
+            <EditText
+                android:textSize="13dp"
+                android:id="@+id/et_age"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="나이를 입력하세요. (숫자)"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/et_name"
+                app:layout_constraintStart_toStartOf="@+id/et_name"
+                app:layout_constraintTop_toBottomOf="@+id/et_name" />
+        </LinearLayout>
+
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btn_register"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:text="가입하기"
+        android:textColor="@color/white"
+        android:backgroundTint="#4374D9"
+        app:layout_constraintEnd_toEndOf="@+id/et_age"
+        app:layout_constraintStart_toStartOf="@+id/et_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_age" />
+    <Button
+        android:backgroundTint="@color/black"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="로그인"/>
+    <Button
+        android:backgroundTint="#D5D5D5"
+        android:textColor="@color/black"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_back"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="구글계정으로 로그인"/>
+
+</LinearLayout>
