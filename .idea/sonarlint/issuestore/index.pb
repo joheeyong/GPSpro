@@ -31,3 +31,9 @@ g
 7app/src/main/java/com/android/gpspro/LoginActivity.java,5\2\52d58ccb3723bd27904a28c25001f68bbeabc495
 g
 7app/src/main/java/com/android/gpspro/FragmentPage1.java,4\b\4b0701e8fe82a63c567a249c454f443343ccaf75
+g
+7app/src/main/java/com/android/gpspro/MygpsActivity.java,c\0\c0e5c0596800939b6b9dc866d2acfdb8fcb7ce68
+h
+8app/src/main/java/com/android/gpspro/ChangeActivity.java,a\6\a6a4ecb1e3f460ba4c170b763d360584d4383e4e
+g
+7app/src/main/java/com/android/gpspro/SemapActivity.java,4\4\449c4dd4ca6f96dad9f16ce17efe94c2b8d7fa46

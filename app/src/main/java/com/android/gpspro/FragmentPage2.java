@@ -21,12 +21,13 @@ public class FragmentPage2 extends Fragment
 {
     private MapView mapView = null;
 
-
+    private GoogleMap mMap;//!
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -36,6 +37,7 @@ public class FragmentPage2 extends Fragment
 
         mapView = (MapView)layout.findViewById(R.id.map);
         mapView.getMapAsync(this);
+
 
         return layout;
     }

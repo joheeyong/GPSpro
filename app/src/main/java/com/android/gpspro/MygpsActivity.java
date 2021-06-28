@@ -50,7 +50,7 @@ public class MygpsActivity extends AppCompatActivity
     private GoogleMap mMap;
     private Marker currentMarker = null;
 
-    private static final String TAG = "googlemap_example";
+    private static final String TAG = "googlemap";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
@@ -113,6 +113,8 @@ public class MygpsActivity extends AppCompatActivity
         Log.d(TAG, "onMapReady :");
 
         mMap = googleMap;
+
+
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
@@ -207,7 +209,6 @@ public class MygpsActivity extends AppCompatActivity
 
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet);
-
                 mCurrentLocatiion = location;
             }
 

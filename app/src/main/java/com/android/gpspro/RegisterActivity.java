@@ -1,5 +1,6 @@
 package com.android.gpspro;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends Activity {
 
     private EditText et_id, et_pass, et_name, et_age;
     private Button btn_register;

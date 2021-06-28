@@ -189,6 +189,7 @@
         android:id="@+id/btn_login"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
+        android:textColor="@color/white"
         android:text="로그인"/>
     <Button
         android:backgroundTint="#D5D5D5"

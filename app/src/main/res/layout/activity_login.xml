@@ -119,7 +119,8 @@
         android:id="@+id/btn_register"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:text="회원가입"/>
+        android:text="회원가입"
+        android:textColor="@color/white"/>
     <Button
         android:backgroundTint="#D5D5D5"
         android:textColor="@color/black"

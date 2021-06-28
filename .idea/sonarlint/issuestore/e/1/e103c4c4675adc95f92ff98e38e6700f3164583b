@@ -1,3 +1,10 @@
 
-E
-java:S1185"(Remove this method to simply inherit it.(¡Œþø8ð„ÀÆ¢/
+U
+java:S1128"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ8•£àê¢/
+J
+java:S1068"(Remove this unused "mMap" private field.(¶¤ÀÍþÿÿÿÿ8ù¬²ì¢/
+D
+java:S1185"(Remove this method to simply inherit it.(¥Ë©8Ó§´ì¢/
+r	java:S117e"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öñ±žúÿÿÿÿ8ŠÓ°ì¢/
+V
+java:S1874Y"9Remove this use of "onActivityCreated"; it is deprecated.(€…É’8Â¹¶ì¢/

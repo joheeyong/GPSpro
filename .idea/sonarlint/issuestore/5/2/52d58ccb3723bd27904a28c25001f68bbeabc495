@@ -1,17 +1,24 @@
 
-s	java:S116"WRename this field "btn_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒŸşà8Ë‹§Ã¢/
-p	java:S116"TRename this field "btn_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒŸşà8Ë‹§Ã¢/
-G
-java:S1659"*Declare "btn_register" on a separate line.(ŒŸşà8Ë‹§Ã¢/
 x
-java:S1450"[Remove the "btn_register" field and declare it as a local variable in the relevant methods.(ŒŸşà8Ë‹§Ã¢/
+java:S1450"[Remove the "btn_register" field and declare it as a local variable in the relevant methods.(¾ê¡œ8Ë‹§Ã¢/
 G
-java:S1659"%Declare "et_pass" on a separate line.(ûÅœéşÿÿÿÿ8Ë‹§Ã¢/
-u
-java:S1450"XRemove the "btn_login" field and declare it as a local variable in the relevant methods.(ŒŸşà8Ë‹§Ã¢/
-s	java:S116"RRename this field "et_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÅœéşÿÿÿÿ8Ë‹§Ã¢/
-8
-java:S3626?"Remove this redundant jump.(ûÁİ…8Ë‹§Ã¢/
-q	java:S116"PRename this field "et_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÅœéşÿÿÿÿ8Ë‹§Ã¢/
+java:S1659"*Declare "btn_register" on a separate line.(¾ê¡œ8Ë‹§Ã¢/
+C
+java:S1659"&Declare "btn_back" on a separate line.(¾ê¡œ8Ëé¢/
+s	java:S116"RRename this field "et_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÅœéşÿÿÿÿ8Ë‹§Ã¢/
+q	java:S116"PRename this field "et_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÅœéşÿÿÿÿ8Ë‹§Ã¢/
 J
-java:S1604/"(Make this anonymous inner class a lambda(‚–Õ§ùÿÿÿÿ8Ë‹§Ã¢/
+java:S16049"(Make this anonymous inner class a lambda(‚–Õ§ùÿÿÿÿ8Ë‹§Ã¢/
+t
+java:S1450"WRemove the "btn_back" field and declare it as a local variable in the relevant methods.(¾ê¡œ8­ùé¢/
+G
+java:S1659"%Declare "et_pass" on a separate line.(ûÅœéşÿÿÿÿ8Ë‹§Ã¢/
+p	java:S116"TRename this field "btn_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ê¡œ8Ë‹§Ã¢/
+s	java:S116"WRename this field "btn_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ê¡œ8Ë‹§Ã¢/
+o	java:S116"SRename this field "btn_back" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ê¡œ8Ëé¢/
+u
+java:S1450"XRemove the "btn_login" field and declare it as a local variable in the relevant methods.(¾ê¡œ8Ë‹§Ã¢/
+8
+java:S3626I"Remove this redundant jump.(ûÁİ…8Ë‹§Ã¢/
+b
+java:S1128"ERemove this unused import 'androidx.appcompat.app.AppCompatActivity'.(€¶£î8«’Š¥/

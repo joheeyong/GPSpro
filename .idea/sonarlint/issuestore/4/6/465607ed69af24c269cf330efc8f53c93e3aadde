@@ -1,3 +1,47 @@
 
+P
+java:S1199º"-Extract this nested code block into a method.(¶»Ó«ÿÿÿÿÿ8œËó¤/
+u
+java:S3252å"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(™ò‘ƒ8œËó¤/
+R
+java:S1068C"0Remove this unused "DEFAULT_ZOOM" private field.(¹ÒÔ¹ùÿÿÿÿ8Øº¤/
+
+java:S1186N"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(×·±Ê8Øº¤/
+U
+java:S1135æ"2Complete the task associated to this TODO comment.(áÃæùÿÿÿÿ8œËó¤/
+b
+java:S2259m"EA "NullPointerException" could be thrown; "mapView" is nullable here.(Ô½ä‘8Øº¤/
+V
+java:S1874u"9Remove this use of "onActivityCreated"; it is deprecated.(€…É’8ğıì¤/
+n
+java:S1301¹"KReplace this "switch" statement by "if" statements to increase readability.(×ö³–úÿÿÿÿ8œËó¤/
+F
+java:S1148×"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8œËó¤/
+u
+java:S3252å"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(™ò‘ƒ8œËó¤/
+Y
+java:S1874z"7Remove this use of "LocationRequest"; it is deprecated.(Òºèıÿÿÿÿ8Øº¤/
+D
+java:S1185X"(Remove this method to simply inherit it.(¥Ë©8¸ü‹¤/
+m
+java:S1874µ"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(şèçúÿÿÿÿ8œËó¤/
 E
-java:S1185"(Remove this method to simply inherit it.(¡Œşø8‘ ÁÆ¢/
+java:S1604’"(Make this anonymous inner class a lambda(’Ö«o8¶îŒ¤/
+Q
+java:S1481f"4Remove this unused "mCameraPosition" local variable.(ÈŠáû8Øº¤/
+D	java:S131¹""Add a default case to this switch.(×ö³–úÿÿÿÿ8œËó¤/
+T
+java:S1128"7Remove this unused import 'android.view.WindowManager'.(Ü³‹Å8Øº¤/
+p	java:S100†"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùô¢êÿÿÿÿÿ8œËó¤/
+m
+java:S1128'"KRemove this unused import 'com.google.android.gms.maps.SupportMapFragment'.(ğ¤Çÿÿÿÿÿ8Øº¤/
+X
+java:S1068G";Remove this unused "GPS_ENABLE_REQUEST_CODE" private field.(µ¸¡¨8Øº¤/
+b
+java:S3398†"?Move this method into the anonymous class declared at line 235.(Ùô¢êÿÿÿÿÿ8œËó¤/
+L
+java:S1481ˆ")Remove this unused "date" local variable.(–èÒÓüÿÿÿÿ8œËó¤/
+W
+java:S1068@"5Remove this unused "mCurrentLocatiion" private field.(Ôã…ûÿÿÿÿ8Øº¤/
+V
+java:S1197¶"8Move the array designator from the variable to the type.(³Ûü¢8œËó¤/

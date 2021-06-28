@@ -16,26 +16,44 @@ import androidx.fragment.app.Fragment;
 
 public class FragmentPage1 extends Fragment {
     ViewFlipper v_fllipper;
-    private ImageButton btn_main;
+    private ImageButton btn_main, btn_change,btn_test;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int images[] = {
-                R.drawable.bhcevent,
-                R.drawable.pizzahut,
-                R.drawable.onegrand
+                R.drawable.nev1,
+                R.drawable.nev2,
+                R.drawable.nev3
         };
 
 
         setHasOptionsMenu(true);
         ViewGroup rootView = (ViewGroup)inflater.inflate (R.layout.fragment_page_1, container, false);
         btn_main = (ImageButton) rootView.findViewById (R.id.one);
+        btn_change = (ImageButton) rootView.findViewById (R.id.three);
+        btn_test = (ImageButton) rootView.findViewById (R.id.btn_test);
+
+
+        btn_change.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent (getActivity (),ChangeActivity.class);
+                startActivity (intent);
+            }
+        });
 
         btn_main.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent (getActivity (),MygpsActivity.class);
+                startActivity (intent);
+            }
+        });
+        btn_test.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent (getActivity (),SemapActivity.class);
                 startActivity (intent);
             }
         });
