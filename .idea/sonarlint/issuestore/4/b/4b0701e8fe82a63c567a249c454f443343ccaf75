@@ -1,21 +1,21 @@
 
-Z
-java:S1197"8Move the array designator from the variable to the type.(ï‹”Éùÿÿÿÿ8¤ÙœÆ¢/
-C
-java:S1659"&Declare "btn_test" on a separate line.(ŒÓ«æ8„ä––£/
-v	java:S116"URename this field "v_fllipper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨œñ­øÿÿÿÿ8¤ÙœÆ¢/
 t
 java:S1450"WRemove the "btn_test" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8…±˜–£/
-t
-java:S1450"WRemove the "btn_main" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8‰—ìé¢/
-v
-java:S1450"YRemove the "btn_change" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8Ş‘ïí¢/
-E
-java:S1659"(Declare "btn_change" on a separate line.(ŒÓ«æ8ÜÒìí¢/
-E
-java:S1185H"(Remove this method to simply inherit it.(¡Œşø8°‹ğí¢/
+o	java:S116"SRename this field "btn_test" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8„ä––£/
+Z
+java:S1197"8Move the array designator from the variable to the type.(ï‹”Éùÿÿÿÿ8¤ÙœÆ¢/
 T
 java:S1128"2Remove this unused import 'android.widget.Button'.(²òıÿÿÿÿ8àÄìé¢/
+v	java:S116"URename this field "v_fllipper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨œñ­øÿÿÿÿ8¤ÙœÆ¢/
 q	java:S116"URename this field "btn_change" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8ÜÒìí¢/
-o	java:S116"SRename this field "btn_test" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8„ä––£/
+E
+java:S1659"(Declare "btn_change" on a separate line.(ŒÓ«æ8ÜÒìí¢/
+v
+java:S1450"YRemove the "btn_change" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8Ş‘ïí¢/
 o	java:S116"SRename this field "btn_main" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8‰—ìé¢/
+t
+java:S1450"WRemove the "btn_main" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8‰—ìé¢/
+C
+java:S1659"&Declare "btn_test" on a separate line.(ŒÓ«æ8„ä––£/
+E
+java:S1185H"(Remove this method to simply inherit it.(¡Œşø8°‹ğí¢/

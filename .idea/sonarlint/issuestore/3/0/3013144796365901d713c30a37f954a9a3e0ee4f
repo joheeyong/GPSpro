@@ -1,28 +1,28 @@
 
-w
-java:S1450"[Remove the "btn_register" field and declare it as a local variable in the relevant methods.(êŽód8Ã‘—Ã¢/
-u	java:S116"TRename this field "btn_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹¢•¦ÿÿÿÿÿ8”Á›è¢/
+r	java:S116"WRename this field "btn_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êŽód8Ã‘—Ã¢/
+t	java:S116"SRename this field "btn_back" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹¢•¦ÿÿÿÿÿ8äµÀè¢/
 8
 java:S3626M"Remove this redundant jump.(ûÁÝ…8Ã‘—Ã¢/
-y
-java:S1450"WRemove the "btn_back" field and declare it as a local variable in the relevant methods.(‹¢•¦ÿÿÿÿÿ8ÈþÁè¢/
-r	java:S116"QRename this field "et_age" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-q	java:S116"PRename this field "et_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-t	java:S116"SRename this field "btn_back" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹¢•¦ÿÿÿÿÿ8äµÀè¢/
-G
-java:S1659"%Declare "et_name" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-G
-java:S1659"%Declare "et_pass" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-z
-java:S1450"XRemove the "btn_login" field and declare it as a local variable in the relevant methods.(‹¢•¦ÿÿÿÿÿ8öõœè¢/
-s	java:S116"RRename this field "et_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-F
-java:S1659"$Declare "et_age" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-r	java:S116"WRename this field "btn_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êŽód8Ã‘—Ã¢/
-s	java:S116"RRename this field "et_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
-J
-java:S1604A"(Make this anonymous inner class a lambda(‚–Õ§ùÿÿÿÿ8Ã‘—Ã¢/
 H
 java:S1659"&Declare "btn_back" on a separate line.(‹¢•¦ÿÿÿÿÿ8äµÀè¢/
 b
 java:S1128"ERemove this unused import 'androidx.appcompat.app.AppCompatActivity'.(€¶£î8°ì’Š¥/
+z
+java:S1450"XRemove the "btn_login" field and declare it as a local variable in the relevant methods.(‹¢•¦ÿÿÿÿÿ8öõœè¢/
+w
+java:S1450"[Remove the "btn_register" field and declare it as a local variable in the relevant methods.(êŽód8Ã‘—Ã¢/
+u	java:S116"TRename this field "btn_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹¢•¦ÿÿÿÿÿ8”Á›è¢/
+J
+java:S1604A"(Make this anonymous inner class a lambda(‚–Õ§ùÿÿÿÿ8Ã‘—Ã¢/
+s	java:S116"RRename this field "et_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+G
+java:S1659"%Declare "et_name" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+y
+java:S1450"WRemove the "btn_back" field and declare it as a local variable in the relevant methods.(‹¢•¦ÿÿÿÿÿ8ÈþÁè¢/
+G
+java:S1659"%Declare "et_pass" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+F
+java:S1659"$Declare "et_age" on a separate line.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+q	java:S116"PRename this field "et_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+s	java:S116"RRename this field "et_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/
+r	java:S116"QRename this field "et_age" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÀ›µøÿÿÿÿ8Ã‘—Ã¢/

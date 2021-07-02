@@ -37,3 +37,11 @@ h
 8app/src/main/java/com/android/gpspro/ChangeActivity.java,a\6\a6a4ecb1e3f460ba4c170b763d360584d4383e4e
 g
 7app/src/main/java/com/android/gpspro/SemapActivity.java,4\4\449c4dd4ca6f96dad9f16ce17efe94c2b8d7fa46
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+Z
+*app/src/main/res/layout/activity_semap.xml,d\0\d0af0b2a0ecc5d1c106125f6b5ac1905df3324b8
+R
+"app/src/main/res/values/themes.xml,e\b\eb7f0f821bde169dd21862705b2b042d2cea69a3
+X
+(app/src/main/res/values-night/themes.xml,8\c\8c3a6b96d9ffba496992e612d58227c19e6b9e65

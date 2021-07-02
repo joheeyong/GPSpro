@@ -365,8 +365,8 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
             return;
         }
         mFusedLocationProviderClient.requestLocationUpdates (locationRequest, locationCallback, null);
-            if (mMap!=null) mMap.setMyLocationEnabled(true);
-        }
+        if (mMap!=null) mMap.setMyLocationEnabled(true);
+    }
 
 
     @Override

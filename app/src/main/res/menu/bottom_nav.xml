@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/navigation_1"
-        android:icon="@drawable/home"
-        android:title="홈" />
+        android:icon="@drawable/rjator"
+        android:title="장소 등록" />
 
     <item
         android:id="@+id/navigation_2"
         android:icon="@drawable/heart"
-        android:title="찜" />
+        android:title="지도 보기" />
 
     <item
-    android:id="@+id/navigation_3"
-    android:icon="@drawable/rjator"
-    android:title="검색" />
+        android:id="@+id/navigation_3"
+        android:icon="@drawable/home"
+        android:title="현위치" />
 
     <item
         android:id="@+id/navigation_4"
         android:icon="@drawable/anstj"
-        android:title="주문내역" />
+        android:title="부가기능" />
 
     <item
         android:id="@+id/navigation_5"
         android:icon="@drawable/myyogi"
-        android:title="마이요기요" />
+        android:title="마이페이지" />
 
 </menu>

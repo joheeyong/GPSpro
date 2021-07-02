@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("자주가는 장소등록");
         Intent intent = getIntent();
         String text = intent.getStringExtra("text");
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
                 fragment = new FragmentPage2 ();
             }else if (id == R.id.navigation_3){
-               fragment=new FragmentPage3 ();
+                fragment=new FragmentPage3 ();
 
             } else if (id == R.id.navigation_4){
 

@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,104 +19,135 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class FragmentPage2 extends Fragment
-        implements OnMapReadyCallback
-{
-    private MapView mapView = null;
+import java.util.List;
 
+public class FragmentPage2 extends Fragment
+        implements OnMapReadyCallback {
+    private PlaceViewModel model;
+
+    private MapView mapView = null;
     private GoogleMap mMap;//!
 
+    private TextView testdb;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate (savedInstanceState);
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_page_2, container, false);
+        View layout = inflater.inflate (R.layout.fragment_page_2, container, false);
 
-        mapView = (MapView)layout.findViewById(R.id.map);
-        mapView.getMapAsync(this);
+        mapView = (MapView) layout.findViewById (R.id.map);
+        mapView.getMapAsync (this);
+
+        testdb = (TextView) layout.findViewById (R.id.testdb);
+
+
 
 
         return layout;
     }
 
+
+
     @Override
     public void onStart() {
-        super.onStart();
-        mapView.onStart();
+        super.onStart ();
+        mapView.onStart ();
     }
 
     @Override
     public void onStop() {
-        super.onStop();
-        mapView.onStop();
+        super.onStop ();
+        mapView.onStop ();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
+        super.onSaveInstanceState (outState);
+        mapView.onSaveInstanceState (outState);
     }
 
     @Override
     public void onResume() {
-        super.onResume();
-        mapView.onResume();
+        super.onResume ();
+        mapView.onResume ();
     }
 
     @Override
     public void onPause() {
-        super.onPause();
-        mapView.onPause();
+        super.onPause ();
+        mapView.onPause ();
     }
 
     @Override
     public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
+        super.onLowMemory ();
+        mapView.onLowMemory ();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        mapView.onLowMemory();
+        super.onDestroy ();
+        mapView.onLowMemory ();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        super.onActivityCreated (savedInstanceState);
 
         //액티비티가 처음 생성될 때 실행되는 함수
 
-        if(mapView != null)
-        {
-            mapView.onCreate(savedInstanceState);
+        if (mapView != null) {
+            mapView.onCreate (savedInstanceState);
         }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+        mMap = googleMap;
+        model = new ViewModelProvider (this).get (PlaceViewModel.class);
+        model.getAllPlaces ().observe (this, new Observer<List<Place>> () {
+            @Override
+            public void onChanged(List<Place> places) {
+                updateUserProfileList (places);
+            }
 
-        MarkerOptions markerOptions = new MarkerOptions();
-
-        markerOptions.position(SEOUL);
-
-        markerOptions.title("서울");
-
-        markerOptions.snippet("수도");
-
-        googleMap.addMarker(markerOptions);
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+            private void updateUserProfileList(List<Place> userProfileList) {
+                String userListText = "";
+                String title;
+                Double lat, lng;
 
 
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                for (Place userProfile : userProfileList) {
+                    MarkerOptions makerOptions = new MarkerOptions ();
+                    title = userProfile.getTitle ();
+                    lat = userProfile.getLat ();
+                    lng = userProfile.getLng ();
+                    userListText += title + lat + lng + "\n";
+                    makerOptions // LatLng에 대한 어레이를 만들어서 이용할 수도 있다.
+                            .position (new LatLng (lat, lng))
+                            .title ("마커" + title); // 타이틀.
+                    mMap.addMarker (makerOptions);
+
+                    LatLng startingPoint = new LatLng(lat, lng);
+
+                    mMap.moveCamera (CameraUpdateFactory.newLatLngZoom(startingPoint,16));
+
+
+                }
+
+            }
+        });
+
     }
 
+
+
+
 }
+
