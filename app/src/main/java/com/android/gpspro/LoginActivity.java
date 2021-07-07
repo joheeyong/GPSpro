@@ -22,6 +22,7 @@ public class LoginActivity extends Activity {
     private EditText et_id, et_pass;
     private Button btn_login, btn_register, btn_back;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);

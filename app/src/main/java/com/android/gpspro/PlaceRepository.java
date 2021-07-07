@@ -12,7 +12,6 @@ public class PlaceRepository {
 
     private PlaceDao placeDao;
     private LiveData<List<Place>> allPlaces;
-
     public PlaceRepository(Application application) {
         PlaceDatabase database = PlaceDatabase.getInstance(application);
         placeDao = database.placeDao();

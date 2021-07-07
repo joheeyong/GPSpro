@@ -22,7 +22,6 @@
         <activity android:name=".LodingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,7 +30,9 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MygpsActivity"/>
-        <activity android:name=".ChangeActivity"/>
+        <activity android:name=".AddEditPlaceActivity"/>
+        <activity android:name=".AddClickPlaceActivity"/>
+        <activity android:name=".TestActivity"/>
     </application>
 
 </manifest>

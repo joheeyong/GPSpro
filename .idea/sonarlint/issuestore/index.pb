@@ -1,6 +1,4 @@
 
-g
-7app/src/main/java/com/android/gpspro/AfterActivity.java,9\5\953dc6278116eec81f90f7ce23c17c9a08401bd6
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 H
@@ -33,15 +31,33 @@ g
 7app/src/main/java/com/android/gpspro/FragmentPage1.java,4\b\4b0701e8fe82a63c567a249c454f443343ccaf75
 g
 7app/src/main/java/com/android/gpspro/MygpsActivity.java,c\0\c0e5c0596800939b6b9dc866d2acfdb8fcb7ce68
-h
-8app/src/main/java/com/android/gpspro/ChangeActivity.java,a\6\a6a4ecb1e3f460ba4c170b763d360584d4383e4e
-g
-7app/src/main/java/com/android/gpspro/SemapActivity.java,4\4\449c4dd4ca6f96dad9f16ce17efe94c2b8d7fa46
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
-Z
-*app/src/main/res/layout/activity_semap.xml,d\0\d0af0b2a0ecc5d1c106125f6b5ac1905df3324b8
 R
 "app/src/main/res/values/themes.xml,e\b\eb7f0f821bde169dd21862705b2b042d2cea69a3
 X
 (app/src/main/res/values-night/themes.xml,8\c\8c3a6b96d9ffba496992e612d58227c19e6b9e65
+_
+/app/src/main/java/com/android/gpspro/Place.java,3\2\32b183b6ba323678b5d98d022344184602d9b310
+f
+6app/src/main/java/com/android/gpspro/PlaceAdapter.java,f\1\f1e1c56c290447923f940d389280192e63b07e40
+b
+2app/src/main/java/com/android/gpspro/PlaceDao.java,e\0\e0c18fb0e462646e790dba5501d907f78048fba2
+g
+7app/src/main/java/com/android/gpspro/PlaceDatabase.java,f\6\f60fd8d4b98d65c9d619a51b7bfb143970b3d8e2
+i
+9app/src/main/java/com/android/gpspro/PlaceRepository.java,9\2\921adb3678ca480a53fd8dd174c74e3f4e3308f6
+h
+8app/src/main/java/com/android/gpspro/PlaceViewModel.java,d\f\df077da215b5c96ea1cf57ddedb2b1d498f41665
+d
+4app/src/main/res/drawable/ic_launcher_foreground.xml,5\8\587f297f0f0eaa1dcf927b2b5f0bc5430fadf54f
+U
+%app/src/main/res/drawable/ic_save.xml,f\0\f0d1e7a66149ae0a6dfb953d5c4b0123cea78eb6
+]
+-app/src/main/res/layout/activity_register.xml,6\b\6b9b12c7f310575e3ba8779b7acd1ae20f5a2442
+n
+>app/src/main/java/com/android/gpspro/AddEditPlaceActivity.java,6\a\6a5c496bd56ecfde0a091797e31f34e06706c797
+o
+?app/src/main/java/com/android/gpspro/AddClickPlaceActivity.java,d\5\d54cc66605963e1254e0d806d4a62f93c0dee9b6
+f
+6app/src/main/java/com/android/gpspro/TestActivity.java,3\e\3e08429ccaa641fe3be30a8a606afb0cf4fdc49c

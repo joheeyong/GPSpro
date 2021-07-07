@@ -1,47 +1,59 @@
 
-
-java:S1186N"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(×·±Ê8Øº¤/
-R
-java:S1068C"0Remove this unused "DEFAULT_ZOOM" private field.(¹ÒÔ¹ùÿÿÿÿ8Øº¤/
-F
-java:S1148×"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8œËó¤/
-E
-java:S1604’"(Make this anonymous inner class a lambda(’Ö«o8¶îŒ¤/
-T
-java:S1128"7Remove this unused import 'android.view.WindowManager'.(Ü³‹Å8Øº¤/
-Q
-java:S1481f"4Remove this unused "mCameraPosition" local variable.(ÈŠáû8Øº¤/
-m
-java:S1874µ"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(şèçúÿÿÿÿ8œËó¤/
-b
-java:S2259m"EA "NullPointerException" could be thrown; "mapView" is nullable here.(Ô½ä‘8Øº¤/
 D
-java:S1185X"(Remove this method to simply inherit it.(¥Ë©8¸ü‹¤/
-p	java:S100†"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùô¢êÿÿÿÿÿ8œËó¤/
-Y
-java:S1874z"7Remove this use of "LocationRequest"; it is deprecated.(Òºèıÿÿÿÿ8Øº¤/
-V
-java:S1874u"9Remove this use of "onActivityCreated"; it is deprecated.(€…É’8ğıì¤/
-P
-java:S1199º"-Extract this nested code block into a method.(¶»Ó«ÿÿÿÿÿ8œËó¤/
-W
-java:S1068@"5Remove this unused "mCurrentLocatiion" private field.(Ôã…ûÿÿÿÿ8Øº¤/
-L
-java:S1481ˆ")Remove this unused "date" local variable.(–èÒÓüÿÿÿÿ8œËó¤/
-b
-java:S3398†"?Move this method into the anonymous class declared at line 235.(Ùô¢êÿÿÿÿÿ8œËó¤/
-D	java:S131¹""Add a default case to this switch.(×ö³–úÿÿÿÿ8œËó¤/
+java:S1185^"(Remove this method to simply inherit it.(¥Ë©8ŠÀÖ§/
+?
+java:S1643®"Use a StringBuilder instead.(×°Èşÿÿÿÿ8ŠÀÖ§/
+D	java:S131à""Add a default case to this switch.(×ö³–úÿÿÿÿ8ŠÀÖ§/
 m
-java:S1128'"KRemove this unused import 'com.google.android.gms.maps.SupportMapFragment'.(ğ¤Çÿÿÿÿÿ8Øº¤/
-n
-java:S1301¹"KReplace this "switch" statement by "if" statements to increase readability.(×ö³–úÿÿÿÿ8œËó¤/
-X
-java:S1068G";Remove this unused "GPS_ENABLE_REQUEST_CODE" private field.(µ¸¡¨8Øº¤/
-u
-java:S3252å"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(™ò‘ƒ8œËó¤/
-u
-java:S3252å"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(™ò‘ƒ8œËó¤/
-V
-java:S1197¶"8Move the array designator from the variable to the type.(³Ûü¢8œËó¤/
+java:S1128,"KRemove this unused import 'com.google.android.gms.maps.SupportMapFragment'.(ğ¤Çÿÿÿÿÿ8ŠÀÖ§/
+R
+java:S1068I"0Remove this unused "DEFAULT_ZOOM" private field.(¹ÒÔ¹ùÿÿÿÿ8ŠÀÖ§/
+?
+java:S1659£"!Declare "lng" on a separate line.(±®¡8ŠÀÖ§/
 U
-java:S1135æ"2Complete the task associated to this TODO comment.(áÃæùÿÿÿÿ8œËó¤/
+java:S1135"2Complete the task associated to this TODO comment.(áÃæùÿÿÿÿ8ŠÀÖ§/
+¤
+java:S1186Ã"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(äÑöÖüÿÿÿÿ8ŠÀÖ§/
+p	java:S100ª"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùô¢êÿÿÿÿÿ8ŠÀÖ§/
+P
+java:S1199á"-Extract this nested code block into a method.(¶»Ó«ÿÿÿÿÿ8ŠÀÖ§/
+u
+java:S3252Œ"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(™ò‘ƒ8ŠÀÖ§/
+T
+java:S1128"7Remove this unused import 'android.view.WindowManager'.(Ü³‹Å8ŠÀÖ§/
+Z
+java:S1874‚"7Remove this use of "LocationRequest"; it is deprecated.(Òºèıÿÿÿÿ8ŠÀÖ§/
+n
+java:S1301à"KReplace this "switch" statement by "if" statements to increase readability.(×ö³–úÿÿÿÿ8ŠÀÖ§/
+E
+java:S1604Á"(Make this anonymous inner class a lambda(’Ö«o8ŠÀÖ§/
+q
+java:S1450="TRemove the "model" field and declare it as a local variable in the relevant methods.(şûÍ§8ŠÀÖ§/
+V
+java:S1197İ"8Move the array designator from the variable to the type.(³Ûü¢8ŠÀÖ§/
+u
+java:S3252Œ"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(™ò‘ƒ8ŠÀÖ§/
+F
+java:S1148û"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ŠÀÖ§/
+
+java:S1186T"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(×·±Ê8ŠÀÖ§/
+Q
+java:S1481m"4Remove this unused "mCameraPosition" local variable.(ÈŠáû8ŠÀÖ§/
+b
+java:S2259t"EA "NullPointerException" could be thrown; "mapView" is nullable here.(Ô½ä‘8ŠÀÖ§/
+P
+java:S1481µ"2Remove this unused "startingPoint" local variable.(›¹Â¯8ŠÀÖ§/
+O
+java:S1481¡"1Remove this unused "userListText" local variable.(Úîêá8ŠÀÖ§/
+X
+java:S1068M";Remove this unused "GPS_ENABLE_REQUEST_CODE" private field.(µ¸¡¨8ŠÀÖ§/
+b
+java:S3398ª"?Move this method into the anonymous class declared at line 271.(Ùô¢êÿÿÿÿÿ8ŠÀÖ§/
+W
+java:S1068F"5Remove this unused "mCurrentLocatiion" private field.(Ôã…ûÿÿÿÿ8ŠÀÖ§/
+L
+java:S1481¬")Remove this unused "date" local variable.(–èÒÓüÿÿÿÿ8ŠÀÖ§/
+V
+java:S1874}"9Remove this use of "onActivityCreated"; it is deprecated.(€…É’8ŠÀÖ§/
+m
+java:S1874Ü"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(şèçúÿÿÿÿ8ŠÀÖ§/

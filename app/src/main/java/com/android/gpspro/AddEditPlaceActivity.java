@@ -29,6 +29,9 @@ public class AddEditPlaceActivity extends AppCompatActivity {
             "com.bdtask.architectureexample.EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION =
             "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
+    public static final String EXTRA_USERID=
+            "com.bdtask.architectureexample.EXTRA_USERID";
+
     public static final String EXTRA_LAT =
             "com.bdtask.architectureexample.EXTRA_LAT";
     public static final String EXTRA_LNG =
@@ -44,13 +47,16 @@ public class AddEditPlaceActivity extends AppCompatActivity {
     private EditText editTextDescription;
     private TextView edit_lat;
     private TextView edit_lng;
-
     private NumberPicker numberPickerPriority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_place);
+
+        Intent intent = getIntent();
+        String userID = intent.getStringExtra("userID");
+        setTitle (userID+"님 환영합니다.");
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
@@ -63,10 +69,8 @@ public class AddEditPlaceActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
-        Intent intent = getIntent();
 
         if (intent.hasExtra(EXTRA_ID)){
-            setTitle("장소 등록");
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
             edit_lat.setText(intent.getStringExtra(EXTRA_LAT));
@@ -74,7 +78,6 @@ public class AddEditPlaceActivity extends AppCompatActivity {
 
             //      numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY,1));
         }else {
-            setTitle("장소 등록");
 
         }
 
@@ -84,7 +87,7 @@ public class AddEditPlaceActivity extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
 
         if (title.trim().isEmpty() ) {
-            Toast.makeText(this, "주소를 입력하세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "주소 확인을 클릭하세요", Toast.LENGTH_SHORT).show();
 
         }
         // 주소 -> 좌표 (지오코딩)
@@ -124,8 +127,12 @@ public class AddEditPlaceActivity extends AppCompatActivity {
     }
 
     private void savePlace() {
+        Intent intent = getIntent();
+        String userID = intent.getStringExtra("userID");
+
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
+        String userid = userID;
         String lat = edit_lat.getText().toString();
         String lng = edit_lng.getText().toString();
 
@@ -139,6 +146,7 @@ public class AddEditPlaceActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
+        data.putExtra(EXTRA_USERID, userid);
         data.putExtra(EXTRA_LAT, lat);
         data.putExtra(EXTRA_LNG, lng);
 

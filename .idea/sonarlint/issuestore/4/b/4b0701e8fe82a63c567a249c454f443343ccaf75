@@ -1,21 +1,74 @@
 
-t
-java:S1450"WRemove the "btn_test" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8…±˜–£/
-o	java:S116"SRename this field "btn_test" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8„ä––£/
-Z
-java:S1197"8Move the array designator from the variable to the type.(ï‹”Éùÿÿÿÿ8¤ÙœÆ¢/
+t	java:S1162"SRename this field "fab_sub2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç‹“îÿÿÿÿÿ8÷±—Õ§/
+^
+java:S1117G"<Rename "fab_sub1" which hides the field declared at line 50.(ŽÆäìÿÿÿÿÿ8÷±—Õ§/
+r	java:S117G"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŽÆäìÿÿÿÿÿ8÷±—Õ§/
+F
+java:S1604¶"(Make this anonymous inner class a lambda(õúº…8÷±—Õ§/
+H
+java:S16592"&Declare "fab_sub1" on a separate line.(ç‹“îÿÿÿÿÿ8÷±—Õ§/
+Y
+java:S1117F"<Rename "fab_main" which hides the field declared at line 50.(Ç­à8÷±—Õ§/
+X
+java:S1874ˆ":Remove this use of "ViewModelProviders"; it is deprecated.(Ä›ø†8÷±—Õ§/
+H
+java:S1874ˆ"*Remove this use of "of"; it is deprecated.(Ä›ø†8÷±—Õ§/
+j
+java:S1871f"HThis case's code block is the same as the block for the case on line 96.(Ôªßüÿÿÿÿ8÷±—Õ§/
 T
-java:S1128"2Remove this unused import 'android.widget.Button'.(²òžýÿÿÿÿ8àÄìé¢/
-v	java:S116"URename this field "v_fllipper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨œñ­øÿÿÿÿ8¤ÙœÆ¢/
-q	java:S116"URename this field "btn_change" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8ÜÒìí¢/
-E
-java:S1659"(Declare "btn_change" on a separate line.(ŒÓ«æ8ÜÒìí¢/
-v
-java:S1450"YRemove the "btn_change" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8Þ‘ïí¢/
-o	java:S116"SRename this field "btn_main" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÓ«æ8‰—ìé¢/
-t
-java:S1450"WRemove the "btn_main" field and declare it as a local variable in the relevant methods.(ŒÓ«æ8‰—ìé¢/
-C
-java:S1659"&Declare "btn_test" on a separate line.(ŒÓ«æ8„ä––£/
-E
-java:S1185H"(Remove this method to simply inherit it.(¡Œþø8°‹ðí¢/
+java:S1128"2Remove this unused import 'android.widget.Button'.(²òžýÿÿÿÿ8÷±—Õ§/
+q
+java:S1450."TRemove the "model" field and declare it as a local variable in the relevant methods.(þûÍ§8÷±—Õ§/
+a
+java:S1874©">Remove this use of "startActivityForResult"; it is deprecated.(â×Ž®øÿÿÿÿ8÷±—Õ§/
+F
+java:S1185ÿ"(Remove this method to simply inherit it.(öÿÕÅ8÷±—Õ§/
+o	java:S1164"SRename this field "fab_open" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–Ñý¢8÷±—Õ§/
+K
+java:S1604‰"(Make this anonymous inner class a lambda(¡ÎÐ€ÿÿÿÿÿ8÷±—Õ§/
+i
+java:S1192A"GDefine a constant instead of duplicating this literal "userID" 3 times.(¥ý—Øüÿÿÿÿ8÷±—Õ§/
+^
+java:S1117H"<Rename "fab_sub2" which hides the field declared at line 50.(­Ø±Ýþÿÿÿÿ8÷±—Õ§/
+e
+java:S2259Ð"BA "NullPointerException" could be thrown; "data" is nullable here.(¶éÑúÿÿÿÿ8÷±—Õ§/
+t	java:S1162"SRename this field "fab_sub1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç‹“îÿÿÿÿÿ8÷±—Õ§/
+t	java:S1162"SRename this field "fab_main" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç‹“îÿÿÿÿÿ8÷±—Õ§/
+[
+java:S1874Ì"8Remove this use of "onActivityResult"; it is deprecated.(Žß¬©úÿÿÿÿ8÷±—Õ§/
+[
+java:S1874O">Remove this use of "startActivityForResult"; it is deprecated.(·×Š²8÷±—Õ§/
+e
+java:S2259Þ"BA "NullPointerException" could be thrown; "data" is nullable here.(ì®‚Šÿÿÿÿÿ8÷±—Õ§/
+O
+java:S1128"2Remove this unused import 'android.app.ActionBar'.(Åêñª8÷±—Õ§/
+q
+java:S1128"TRemove this unused import 'androidx.recyclerview.widget.StaggeredGridLayoutManager'.(ó–ì»8÷±—Õ§/
+C	java:S131_""Add a default case to this switch.(×“¾ñùÿÿÿÿ8÷±—Õ§/
+m	java:S117F"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç­à8÷±—Õ§/
+f
+java:S1128"DRemove this unused import 'android.graphics.drawable.ColorDrawable'.(ÖŸÂ«øÿÿÿÿ8÷±—Õ§/
+\
+java:S1155¹">Use isEmpty() to check whether the collection is empty or not.(Æ§ËÀ8÷±—Õ§/
+U
+java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòþÿÿÿÿ8÷±—Õ§/
+p	java:S1164"TRename this field "fab_close" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–Ñý¢8÷±—Õ§/
+[
+java:S1874Í"8Remove this use of "onActivityResult"; it is deprecated.(Žß¬©úÿÿÿÿ8÷±—Õ§/
+e
+java:S1128"CRemove this unused import 'androidx.fragment.app.FragmentActivity'.(Êñô–úÿÿÿÿ8÷±—Õ§/
+e
+java:S1871c"HThis case's code block is the same as the block for the case on line 96.(¡Íðò8÷±—Õ§/
+n
+java:S1301†"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8÷±—Õ§/
+F
+java:S1604ž"(Make this anonymous inner class a lambda(’¼ÍÐ8÷±—Õ§/
+D
+java:S16594"'Declare "fab_close" on a separate line.(–Ñý¢8÷±—Õ§/
+[
+java:S1874X">Remove this use of "startActivityForResult"; it is deprecated.(·×Š²8÷±—Õ§/
+F
+java:S1185Æ"(Remove this method to simply inherit it.(¡Œþø8÷±—Õ§/
+r	java:S117H"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­Ø±Ýþÿÿÿÿ8÷±—Õ§/
+H
+java:S16592"&Declare "fab_sub2" on a separate line.(ç‹“îÿÿÿÿÿ8÷±—Õ§/

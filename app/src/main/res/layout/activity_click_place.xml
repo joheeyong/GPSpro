@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D5D5D5">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="#6799FF">
+
+        <TextView
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="자주가는 장소를 등록하세요"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+
+        <TextView
+            android:id="@+id/tv_conte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="등록하고 싶은 장소를 클릭하세요."
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="언제든 수정, 삭제를 할 수 있습니다."
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:id="@+id/boxMap"
+        android:visibility="invisible"
+        android:layout_width="380dp"
+        android:layout_height="400dp">
+        <fragment
+            android:id="@+id/map"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    </RelativeLayout>
+
+    <Button
+        android:backgroundTint="#4641D9"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_clickback"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="뒤로가기"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

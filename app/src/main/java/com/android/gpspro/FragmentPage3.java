@@ -4,6 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +27,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -39,9 +45,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -52,17 +60,20 @@ import java.util.Locale;
 public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
 
     private FragmentActivity mContext;
-
+    private PlaceViewModel model;
     private static final String TAG = FragmentPage3.class.getSimpleName ();
     private GoogleMap mMap;
     private MapView mapView = null;
     private Marker currentMarker = null;
-
+    Marker  addedMarker = null;
+    Double[] latt = new Double[100];
+    Double[] lngg = new Double[100];
+    String[] title = new String[100];
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient; // Deprecated된 FusedLocationApi를 대체
     private LocationRequest locationRequest;
     private Location mCurrentLocatiion;
-
+     LatLng previousPosition = null;
     private final LatLng mDefaultLocation = new LatLng (37.56, 126.97);
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -74,6 +85,9 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
 
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+    int tracking = 0;
+    private Location location;
+    LatLng currentPosition;
 
     public FragmentPage3() {
     }
@@ -97,6 +111,7 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // Layout 을 inflate 하는 곳이다.
+
         if (savedInstanceState != null) {
             mCurrentLocatiion = savedInstanceState.getParcelable (KEY_LOCATION);
             CameraPosition mCameraPosition = savedInstanceState.getParcelable (KEY_CAMERA_POSITION);
@@ -107,6 +122,21 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
             mapView.onCreate (savedInstanceState);
         }
         mapView.getMapAsync (this);
+
+        final Button button = (Button)layout.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                tracking = 1 - tracking;
+
+                if ( tracking == 1){
+                    button.setText("Stop");
+                }
+                else button.setText("Start");
+            }
+        });
+
         return layout;
     }
 
@@ -142,21 +172,47 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        model = new ViewModelProvider (this).get (PlaceViewModel.class);
+        model.getAllPlaces ().observe (this, new Observer<List<Place>> () {
+            @Override
+            public void onChanged(List<Place> places) {
+                updateUserProfileList (places);
+            }
+
+            private void updateUserProfileList(List<Place> userProfileList) {
+                String userListText = "";
+
+                Double lat, lng;
+                int i=0;
+
+                for (Place userProfile : userProfileList) {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.gpsmia2);
+                    Bitmap b=bitmapdraw.getBitmap();
+                    Bitmap smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
+
+                    i++;
+                    title[i] = userProfile.getTitle ();
+                    latt[i] = userProfile.getLat ();
+                    lngg[i] = userProfile.getLng ();
+
+                    markerOptions.position(new LatLng (latt[i], lngg[i]))
+                            .title ("마커" + title[i]) // 타이틀.
+                            .icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                    addedMarker = mMap.addMarker(markerOptions);
+
+                    LatLng startingPoint = new LatLng(latt[i], lngg[i]);
+                    mMap.moveCamera (CameraUpdateFactory.newLatLngZoom(startingPoint,16));
+
+
+                }
+
+            }
+        });
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
             @Override
             public void onMapClick(LatLng point) {
-                MarkerOptions mOptions = new MarkerOptions();
-                // 마커 타이틀
-                mOptions.title("마커 좌표");
-                Double latitude = point.latitude; // 위도
-                Double longitude = point.longitude; // 경도
-                // 마커의 스니펫(간단한 텍스트) 설정
-                mOptions.snippet(latitude.toString() + ", " + longitude.toString());
-                // LatLng: 위도 경도 쌍을 나타냄
-                mOptions.position(new LatLng(latitude, longitude));
-                // 마커(핀) 추가
-                googleMap.addMarker(mOptions);
             }
         });
         setDefaultLocation (); // GPS를 찾지 못하는 장소에 있을 경우 지도의 초기 위치가 필요함.
@@ -232,33 +288,47 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         return addressStringBuilder.toString ();
     }
 
-    LocationCallback locationCallback = new LocationCallback () {
+    LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
-            super.onLocationResult (locationResult);
+            super.onLocationResult(locationResult);
+            List<Location> locationList = locationResult.getLocations();
+            int i=1;
 
-            List<Location> locationList = locationResult.getLocations ();
 
-            if (locationList.size () > 0) {
-                Location location = locationList.get (locationList.size () - 1);
+            if (locationList.size() > 0) {
+                location = locationList.get(locationList.size() - 1);
 
-                LatLng currentPosition
-                        = new LatLng (location.getLatitude (), location.getLongitude ());
+                previousPosition = currentPosition;
 
-                String markerTitle = getCurrentAddress (currentPosition);
-                String markerSnippet = "위도:" + String.valueOf (location.getLatitude ())
-                        + " 경도:" + String.valueOf (location.getLongitude ());
+                currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
-                Log.d (TAG, "Time :" + CurrentTime () + " onLocationResult : " + markerSnippet);
+                if (previousPosition == null) previousPosition = currentPosition;
 
-                //현재 위치에 마커 생성하고 이동
-                setCurrentLocation (location, markerTitle, markerSnippet);
-                mCurrentLocatiion = location;
+                if ( (addedMarker != null) && tracking == 1 ) {
+                    double radius = 100; // 500m distance.
+                    for(i=1; latt[i]!=null ;i++){
+                        double distance = SphericalUtil.computeDistanceBetween (currentPosition, new LatLng (latt[i],lngg[i]));
+
+                        if ((distance < radius) && (!previousPosition.equals (currentPosition))) {
+
+                            Toast.makeText (getActivity (), title[i] + "도착", Toast.LENGTH_LONG).show ();
+                        }        }
+
+
+
+                    //else
+                    //{
+                    //  Toast.makeText (TestActivity.this, addedMarker.getTitle () + "까지" + (int) distance + "m 남음", Toast.LENGTH_LONG).show ();
+                    // }
+                }
             }
+
+
+
         }
 
     };
-
     private String CurrentTime() {
         Date today = new Date ();
         SimpleDateFormat date = new SimpleDateFormat ("yyyy/MM/dd");
@@ -276,8 +346,6 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         markerOptions.title (markerTitle);
         markerOptions.snippet (markerSnippet);
         markerOptions.draggable (true);
-
-        currentMarker = mMap.addMarker (markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng (currentLatLng);
         mMap.moveCamera (cameraUpdate);

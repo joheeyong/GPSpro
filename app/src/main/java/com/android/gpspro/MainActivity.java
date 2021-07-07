@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        setTitle("자주가는 장소등록");
+        setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-        String text = intent.getStringExtra("text");
+        String userID = intent.getStringExtra("userID");
+        setTitle (userID+"님 환영합니다.");
 
 
 
@@ -67,12 +68,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        Intent intent = getIntent();
+        String userID = intent.getStringExtra("userID");
         if (fragment == null) {
             if (id == R.id.navigation_1) {
                 fragment = new FragmentPage1 ();
+                Bundle bundle = new Bundle(1);
+                bundle.putString("userID",userID);
+                fragment.setArguments (bundle);
+
 
             } else if (id == R.id.navigation_2){
-
                 fragment = new FragmentPage2 ();
             }else if (id == R.id.navigation_3){
                 fragment=new FragmentPage3 ();

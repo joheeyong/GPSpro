@@ -19,11 +19,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:text="Title"
+            android:textSize="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#0054FF"
             android:textStyle="bold" />
 
         <TextView
+            android:textSize="10dp"
             android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +37,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/gpsmia2"
+            android:src="@drawable/recycleicon"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     </RelativeLayout>

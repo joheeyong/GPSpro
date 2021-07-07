@@ -11,32 +11,32 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface PlaceDao {
-
+public abstract class PlaceDao extends MainActivity{
     @Insert
-    void insert(Place place);
+    public abstract void insert(Place place);
 
     @Update
-    void update(Place place);
+    public abstract void update(Place place);
 
     @Delete
-    void delete(Place place);
+    public abstract void delete(Place place);
 
     //@Query is used to create custom query
     @Query("DELETE FROM geocoding")
-    void deleteAllNotes();
-
-    @Query("SELECT * FROM geocoding ORDER BY priority DESC")
-    LiveData<List<Place>> getAllplaces();
-
-    @Query ("SELECT * FROM geocoding")
-    List<Place> getAll();
+    public abstract void deleteAllNotes();
 
     @Query("SELECT * FROM geocoding")
-    public List<Place> loadFullName();
+    public abstract LiveData<List<Place>> getAllplaces();
+
 
     @Query ("SELECT * FROM geocoding")
-    public Place[] loadAllUser();
+    public abstract List<Place> getAll();
+
+    @Query("SELECT * FROM geocoding")
+    public abstract List<Place> loadFullName();
+
+    @Query ("SELECT * FROM geocoding")
+    public abstract Place[] loadAllUser();
 
 
 }

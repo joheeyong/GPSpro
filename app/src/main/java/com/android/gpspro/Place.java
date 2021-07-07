@@ -10,12 +10,14 @@ public class Place {
     private int id;
     private String title;
     private String description;
+    private String userid;
     private Double lat;
     private Double lng;
     private int priority;
 
-    public Place(String title, String description, Double lat, Double lng, int priority) {
+    public Place(String title, String description, String userid, Double lat, Double lng, int priority) {
         this.title = title;
+        this.userid = userid;
         this.description = description;
         this.lat = lat;
         this.lng = lng;
@@ -39,6 +41,10 @@ public class Place {
         return description;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
     public Double getLat() {
         return lat;
     }
@@ -59,6 +65,7 @@ public class Place {
                 + id +
                         title +
                         description +
+                        userid+
                         lat +
                         lng +
                         priority
