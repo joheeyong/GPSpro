@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_1"
-        android:icon="@drawable/rjator"
+        android:icon="@drawable/anstj"
         android:title="장소 등록" />
 
     <item
@@ -13,12 +13,12 @@
 
     <item
         android:id="@+id/navigation_3"
-        android:icon="@drawable/home"
+        android:icon="@drawable/rjator"
         android:title="현위치" />
 
     <item
         android:id="@+id/navigation_4"
-        android:icon="@drawable/anstj"
+        android:icon="@drawable/home"
         android:title="부가기능" />
 
     <item

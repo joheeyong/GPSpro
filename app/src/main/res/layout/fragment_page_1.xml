@@ -5,52 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#D5D5D5">
+    android:background="#F6F6F6">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical"
-        android:background="#6799FF">
-
-        <TextView
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="자주가는 장소를 등록하세요"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
-        <TextView
-            android:id="@+id/tv_conte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+        <LinearLayout
             android:layout_marginTop="15dp"
-            android:text="등록된 장소는 지도에서 표시됩니다."
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:background="#6799FF">
 
-        <Button
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="다음화면"
-            android:visibility="gone"/>
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="자주가는 장소를 등록하세요"
+                android:textColor="@color/white"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tv_conte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="등록된 장소는 지도에서 표시됩니다."
+                android:textColor="@color/white"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다음화면"
+                android:visibility="gone"/>
 
 
 
 
-    </LinearLayout>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/empty_image"
@@ -76,14 +76,18 @@
     </LinearLayout>
 
 
-
+<GridLayout
+    android:layout_marginTop="150dp"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="horizontal">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="130dp"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/place_item" />
+</GridLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_sub1"

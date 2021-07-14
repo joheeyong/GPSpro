@@ -6,6 +6,9 @@
     android:id="@+id/layout_main"
     android:orientation="vertical">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"

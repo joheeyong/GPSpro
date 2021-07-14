@@ -1,5 +1,15 @@
 package com.android.gpspro;
 
+import android.os.Bundle;
+
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,7 +24,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,13 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,7 +47,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-public class AddClickPlaceActivity extends FragmentActivity implements OnMapReadyCallback {
+public class Test2 extends FragmentActivity implements OnMapReadyCallback {
     public static final String EXTRA_ID =
             "com.bdtask.architectureexample.EXTRA_ID";
     public static final String EXTRA_TITLE =
@@ -59,6 +61,8 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
             "com.bdtask.architectureexample.EXTRA_LAT";
     public static final String EXTRA_LNG =
             "com.bdtask.architectureexample.EXTRA_LNG";
+    public static final String EXTRA_COUNT =
+            "com.bdtask.architectureexample.EXTRA_COUNT";
 
 
     public static final String EXTRA_PRIORITY =
@@ -82,7 +86,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_click_place);
+        setContentView(R.layout.activity_test2);
 
 
 
@@ -115,9 +119,9 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
         //마시멜로 이상이면 권한 요청하기
         if(Build.VERSION.SDK_INT >= 23){
             //권한이 없는 경우
-            if(ContextCompat.checkSelfPermission(AddClickPlaceActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(AddClickPlaceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(AddClickPlaceActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION , Manifest.permission.ACCESS_FINE_LOCATION} , 1);
+            if(ContextCompat.checkSelfPermission(Test2.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(Test2.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(Test2.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION , Manifest.permission.ACCESS_FINE_LOCATION} , 1);
             }
             //권한이 있는 경우
             else{
@@ -152,8 +156,8 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
 
     //나의 위치 요청
     public void requestMyLocation(){
-        if(ContextCompat.checkSelfPermission(AddClickPlaceActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(AddClickPlaceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(Test2.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(Test2.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             return;
         }
         //요청
@@ -164,8 +168,8 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            if(ContextCompat.checkSelfPermission(AddClickPlaceActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(AddClickPlaceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(Test2.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(Test2.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                 return;
             }
             //나의 위치를 한번만 가져오기 위해
@@ -178,7 +182,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
             //맵생성
             SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
             //콜백클래스 설정
-            mapFragment.getMapAsync(AddClickPlaceActivity.this);
+            mapFragment.getMapAsync(Test2.this);
         }
 
         @Override
@@ -196,7 +200,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         model = new ViewModelProvider (this).get (PlaceViewModel.class);
-        model.getAllPlaces().observe (this, new Observer<List<Place>> () {
+        model.getAllPlaces ().observe (this, new Observer<List<Place>> () {
             @Override
             public void onChanged(List<Place> places) {
                 updateUserProfileList (places);
@@ -273,7 +277,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
 
                 }
 
-                dialog=new AlertDialog.Builder(AddClickPlaceActivity.this)
+                dialog=new AlertDialog.Builder(Test2.this)
                         .setView(loginLayout)
                         .show();
                 save.setOnClickListener (new View.OnClickListener () {
@@ -300,7 +304,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
                         data.putExtra(EXTRA_USERID, userid);
                         data.putExtra(EXTRA_LAT, lat);
                         data.putExtra(EXTRA_LNG, lng);
-
+                        data.putExtra(EXTRA_COUNT, 5);
                         //   data.putExtra(EXTRA_PRIORITY, priority);
 
                         int id = getIntent().getIntExtra(EXTRA_ID,-1);

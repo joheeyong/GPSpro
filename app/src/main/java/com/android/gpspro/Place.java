@@ -2,7 +2,6 @@ package com.android.gpspro;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.Room;
 
 @Entity(tableName = "geocoding")
 public class Place {
@@ -13,15 +12,17 @@ public class Place {
     private String userid;
     private Double lat;
     private Double lng;
+    private int count;
     private int priority;
 
-    public Place(String title, String description, String userid, Double lat, Double lng, int priority) {
+    public Place(String title, String description, String userid, Double lat, Double lng, int count, int priority) {
         this.title = title;
         this.userid = userid;
         this.description = description;
         this.lat = lat;
         this.lng = lng;
         this.priority = priority;
+        this.count =count;
 
     }
 
@@ -53,7 +54,9 @@ public class Place {
         return lng;
     }
 
-
+    public int getCount() {
+        return count;
+    }
     public int getPriority() {
         return priority;
     }
@@ -68,6 +71,7 @@ public class Place {
                         userid+
                         lat +
                         lng +
+                        count+
                         priority
                 ;
     }

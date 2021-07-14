@@ -2,6 +2,10 @@ package com.android.gpspro;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -20,10 +25,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -51,11 +56,27 @@ import java.util.Locale;
 public class TestActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
+    public static final String EXTRA_ID =
+            "com.bdtask.architectureexample.EXTRA_ID";
+    public static final String EXTRA_TITLE =
+            "com.bdtask.architectureexample.EXTRA_TITLE";
+    public static final String EXTRA_DESCRIPTION =
+            "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
+    public static final String EXTRA_USERID=
+            "com.bdtask.architectureexample.EXTRA_USERID";
 
+    public static final String EXTRA_LAT =
+            "com.bdtask.architectureexample.EXTRA_LAT";
+    public static final String EXTRA_LNG =
+            "com.bdtask.architectureexample.EXTRA_LNG";
+    public static final String EXTRA_COUNT =
+            "com.bdtask.architectureexample.EXTRA_COUNT";
+    public static final String EXTRA_PRIORITY =
+            "com.bdtask.architectureexample.EXTRA_PRIORITY";
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
-
+    private Button back;
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
@@ -73,11 +94,12 @@ public class TestActivity extends AppCompatActivity
 
     Location mCurrentLocatiion;
     LatLng currentPosition;
-
+    Double[] distance = new Double[100];
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
+    Boolean[] istrue = new Boolean[] {true,true,true,true,true,true};
 
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
@@ -87,7 +109,8 @@ public class TestActivity extends AppCompatActivity
     Double[] latt = new Double[100];
     Double[] lngg = new Double[100];
     String[] title = new String[100];
-
+    int[] count = new int[100];
+    int i;
 
     int tracking = 0;
 
@@ -100,20 +123,48 @@ public class TestActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_test);
 
+        back = findViewById (R.id.back);
+        back.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getApplicationContext (), FragmentPage1.class);
+                startActivity (intent);
+            }
+        });
         mLayout = findViewById(R.id.layout_main);
         final Button button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast myToast = Toast.makeText(getApplicationContext (),"dddd", Toast.LENGTH_SHORT);
+                myToast.show();
+                Intent intent = getIntent();
+                String userID = intent.getStringExtra("userID");
 
-                tracking = 1 - tracking;
+                String title = "인천";
+                String description = "테스트";
+                String userid = userID;
+                String lat = "37.490386";
+                String lng = "126.723631";
+                Intent data = new Intent();
+                data.putExtra(EXTRA_TITLE, title);
+                data.putExtra(EXTRA_DESCRIPTION, description);
+                data.putExtra(EXTRA_USERID, userid);
+                data.putExtra(EXTRA_LAT, lat);
+                data.putExtra(EXTRA_LNG, lng);
+                data.putExtra(EXTRA_COUNT, 5);
+                //   data.putExtra(EXTRA_PRIORITY, priority);
 
-                if ( tracking == 1){
-                    button.setText("Stop");
+                int id = getIntent().getIntExtra(EXTRA_ID,-1);
+                if (id != -1){
+                    data.putExtra(EXTRA_ID,id);
                 }
-                else button.setText("Start");
+                setResult(RESULT_OK, data);
             }
         });
+
+
+
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
@@ -133,6 +184,34 @@ public class TestActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+//    public class ServiceThread extends Thread {
+//        Handler handler;
+//        boolean isRun = true;
+//
+//        public ServiceThread(Handler handler) {
+//            this.handler = handler;
+//        }
+//        public void stopForever() {
+//            synchronized (this) {
+//                this.isRun = false;
+//            }
+//        }
+//        public void run() {
+//
+//            while (isRun) {
+//                handler.sendEmptyMessage( 0 );
+//                try {
+//                    Thread.sleep( 1000 );
+//                    } catch (Exception e) {
+//                }
+//            }
+//        }
+//    }
+
+
+
+
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
@@ -157,9 +236,9 @@ public class TestActivity extends AppCompatActivity
 
                     i++;
                     title[i] = userProfile.getTitle ();
-                    latt[i] = userProfile.getLat ();
-                    lngg[i] = userProfile.getLng ();
-
+                    latt[i] = Double.valueOf (userProfile.getLat ());
+                    lngg[i] = Double.valueOf (userProfile.getLng ());
+                    count[i] =userProfile.getCount ();
                     markerOptions.position(new LatLng (latt[i], lngg[i]))
                             .title ("마커" + title[i]); // 타이틀.
                     addedMarker = mMap.addMarker(markerOptions);
@@ -262,12 +341,41 @@ public class TestActivity extends AppCompatActivity
                 if ( (addedMarker != null) && tracking == 1 ) {
                     double radius = 100; // 500m distance.
                     for(i=1; latt[i]!=null ;i++){
-                    double distance = SphericalUtil.computeDistanceBetween (currentPosition, new LatLng (latt[i],lngg[i]));
+                     distance[i] = SphericalUtil.computeDistanceBetween (currentPosition, new LatLng (latt[i],lngg[i]));
 
-                    if ((distance < radius) && (!previousPosition.equals (currentPosition))) {
+                    if ((distance[i] < radius) && (!previousPosition.equals (currentPosition))) {
+                        if(istrue[i]==true) {
+                            istrue[i]=false;
 
-                        Toast.makeText (TestActivity.this, title[i] + "도착", Toast.LENGTH_LONG).show ();
-                    }        }
+                            Toast.makeText (TestActivity.this, title[i] + "도착", Toast.LENGTH_LONG).show ();
+                            PendingIntent mPendingIntent = PendingIntent.getActivity(
+                                    TestActivity.this,0,
+                                    new Intent (getApplicationContext (), TestActivity.class),
+                                    PendingIntent.FLAG_CANCEL_CURRENT
+                            );
+
+
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder (TestActivity.this, "default");
+                            builder.setSmallIcon (R.drawable.gpsmia2);
+                            builder.setContentTitle ("GPS 위치도착 알림");
+                            builder.setContentText (title[i] + "에 도착했습니다.");
+                            builder.setAutoCancel (true);
+                            builder.setContentIntent (mPendingIntent);
+                            NotificationManager notificationManager = (NotificationManager) TestActivity.this.getSystemService (Context.NOTIFICATION_SERVICE);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                notificationManager.createNotificationChannel (new NotificationChannel ("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                            }
+
+                            notificationManager.notify (1, builder.build ());
+
+
+                        }
+
+
+                    }else if ((distance[i] > 200) && (!previousPosition.equals (currentPosition)))
+                        istrue[i]=true;
+
+                    }
 
 
 

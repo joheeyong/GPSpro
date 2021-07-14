@@ -62,6 +62,6 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:text="로그인"/>
+        android:text="로그인" />
 
 </LinearLayout>

@@ -11,7 +11,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public abstract class PlaceDao extends MainActivity{
+public interface PlaceDao {
     @Insert
     public abstract void insert(Place place);
 
@@ -28,7 +28,8 @@ public abstract class PlaceDao extends MainActivity{
     @Query("SELECT * FROM geocoding")
     public abstract LiveData<List<Place>> getAllplaces();
 
-
+    @Query("SELECT * FROM geocoding WHERE id= :taskId")
+    LiveData<List<Place>> fetchAllTasks(int taskId);
     @Query ("SELECT * FROM geocoding")
     public abstract List<Place> getAll();
 

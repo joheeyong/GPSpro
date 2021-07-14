@@ -1,8 +1,11 @@
 package com.android.gpspro;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,8 +14,8 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
-
-
+    private static final int RESULT_OK = 1;
+    private final int GET_GALLERY_IMAGE = 200;
     private static final DiffUtil.ItemCallback<Place> DIFF_CALLBACK = new DiffUtil.ItemCallback<Place>() {
 
 
@@ -25,9 +28,13 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         public boolean areContentsTheSame(@NonNull Place oldItem, @NonNull Place newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
                     oldItem.getDescription().equals(newItem.getDescription()) &&
-                    oldItem.getPriority() == newItem.getPriority();
+
+//                    oldItem.getLat().equals(newItem.getLat()) &&
+//                    oldItem.getLng().equals(newItem.getLng()) ;
+                   oldItem.getPriority() == newItem.getCount ();
         }
     };
+
     //private List<Note> notes = new ArrayList<>();
     private PlaceAdapter.OnItemClickListener listener;
 
@@ -47,8 +54,11 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
     public void onBindViewHolder(@NonNull PlaceAdapter.PlaceHolder holder, int position) {
         Place currentNote = getItem(position);
         holder.textViewTitle.setText(currentNote.getTitle());
-        holder.textViewDescription.setText(currentNote.getDescription());
-        //   holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
+        holder.textViewDescription.setText(currentNote.getDescription ());
+//        holder.textViewLat.setText(String.valueOf(currentNote.getLat()));
+//        holder.textViewLng.setText(String.valueOf(currentNote.getLng()));
+
+
     }
 
 
@@ -65,17 +75,20 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         void onItemClick(Place place);
     }
 
+
     class PlaceHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDescription;
-        //  private TextView textViewPriority;
+        private TextView textViewCount;
+        private TextView textViewLat;
+        private TextView textViewLng;
+          private TextView textViewPriority;
 
         public PlaceHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
-            //  textViewPriority = itemView.findViewById(R.id.text_view_priority);
-
+//              textViewPriority = itemView.findViewById(R.id.text_view_priority);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

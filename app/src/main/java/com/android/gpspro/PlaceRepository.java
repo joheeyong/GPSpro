@@ -2,14 +2,17 @@ package com.android.gpspro;
 
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Room;
 
 import java.util.List;
 
 public class PlaceRepository {
-
+    private String DB_NAME = "geocoding";
+    private PlaceDatabase noteDatabase;
     private PlaceDao placeDao;
     private LiveData<List<Place>> allPlaces;
     public PlaceRepository(Application application) {
@@ -18,13 +21,15 @@ public class PlaceRepository {
         allPlaces = placeDao.getAllplaces();
     }
 
+    public PlaceRepository(Context context) {
+        noteDatabase = Room.databaseBuilder(context, PlaceDatabase.class, DB_NAME).build();
+    }
+
     public void insert(Place place) {
         new InsertPlaceAsyncTask (placeDao).execute(place);
     }
 
-    public void update(Place place) {
-        new UpdatePlaceAsyncTask (placeDao).execute(place);
-    }
+    public void update(Place place) { new UpdatePlaceAsyncTask (placeDao).execute(place); }
 
     public void delete(Place place) {
         new DeletePlaceAsyncTask (placeDao).execute(place);
@@ -99,5 +104,9 @@ public class PlaceRepository {
             placeDao.deleteAllNotes();
             return null;
         }
+    }
+
+    public LiveData<List<Place>> getTasks(int id) {
+        return noteDatabase.placeDao ().fetchAllTasks(id);
     }
 }

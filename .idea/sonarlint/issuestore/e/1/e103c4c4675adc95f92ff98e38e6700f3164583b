@@ -1,29 +1,29 @@
 
-U
-java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8†—ÆÏ§/
-?
-java:S1643“"Use a StringBuilder instead.(×°Èşÿÿÿÿ8†—ÆÏ§/
+J
+java:S14811"-Remove this unused "rootView" local variable.(á×ë¹8†—ÆÏ§/
+O
+java:S1128"2Remove this unused import 'android.app.ActionBar'.(Åêñª8†—ÆÏ§/
 V
 java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ8†—ÆÏ§/
 e
 java:S1128"CRemove this unused import 'androidx.fragment.app.FragmentActivity'.(Êñô–úÿÿÿÿ8†—ÆÏ§/
-U
-java:S1128"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ8†—ÆÏ§/
-D
-java:S1185("(Remove this method to simply inherit it.(¥Ë©8†—ÆÏ§/
-O
-java:S1481‰"1Remove this unused "userListText" local variable.(Úîêá8†—ÆÏ§/
 V
 java:S1874u"9Remove this use of "onActivityCreated"; it is deprecated.(€…É’8†—ÆÏ§/
-r
-java:S1450%"URemove the "testdb" field and declare it as a local variable in the relevant methods.(µ’í¾8†—ÆÏ§/
-J
-java:S14811"-Remove this unused "rootView" local variable.(á×ë¹8†—ÆÏ§/
-q
-java:S1450 "TRemove the "model" field and declare it as a local variable in the relevant methods.(şûÍ§8†—ÆÏ§/
-f
-java:S1128"DRemove this unused import 'android.graphics.drawable.ColorDrawable'.(ÖŸÂ«øÿÿÿÿ8†—ÆÏ§/
 ?
 java:S1659‹"!Declare "lng" on a separate line.(±®¡8†—ÆÏ§/
+q
+java:S1450 "TRemove the "model" field and declare it as a local variable in the relevant methods.(şûÍ§8†—ÆÏ§/
+?
+java:S1643“"Use a StringBuilder instead.(×°Èşÿÿÿÿ8†—ÆÏ§/
+f
+java:S1128"DRemove this unused import 'android.graphics.drawable.ColorDrawable'.(ÖŸÂ«øÿÿÿÿ8†—ÆÏ§/
+U
+java:S1128"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ8†—ÆÏ§/
+r
+java:S1450%"URemove the "testdb" field and declare it as a local variable in the relevant methods.(µ’í¾8†—ÆÏ§/
 O
-java:S1128"2Remove this unused import 'android.app.ActionBar'.(Åêñª8†—ÆÏ§/
+java:S1481‰"1Remove this unused "userListText" local variable.(Úîêá8†—ÆÏ§/
+U
+java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8†—ÆÏ§/
+D
+java:S1185("(Remove this method to simply inherit it.(¥Ë©8†—ÆÏ§/

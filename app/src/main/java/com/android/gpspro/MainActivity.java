@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment=new FragmentPage3 ();
 
             } else if (id == R.id.navigation_4){
-
+                fragment=new FragmentPage4 ();
             } else {
                 fragment=new FragmentPage5 ();
             }

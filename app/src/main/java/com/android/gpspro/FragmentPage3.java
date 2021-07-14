@@ -2,28 +2,33 @@ package com.android.gpspro;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -42,10 +47,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -59,8 +62,26 @@ import java.util.Locale;
 
 public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
 
+    public static final String EXTRA_ID =
+            "com.bdtask.architectureexample.EXTRA_ID";
+    public static final String EXTRA_TITLE =
+            "com.bdtask.architectureexample.EXTRA_TITLE";
+    public static final String EXTRA_DESCRIPTION =
+            "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
+    public static final String EXTRA_USERID=
+            "com.bdtask.architectureexample.EXTRA_USERID";
+
+    public static final String EXTRA_LAT =
+            "com.bdtask.architectureexample.EXTRA_LAT";
+    public static final String EXTRA_LNG =
+            "com.bdtask.architectureexample.EXTRA_LNG";
+    public static final String EXTRA_COUNT =
+            "com.bdtask.architectureexample.EXTRA_COUNT";
+    public static final String EXTRA_PRIORITY =
+            "com.bdtask.architectureexample.EXTRA_PRIORITY";
     private FragmentActivity mContext;
     private PlaceViewModel model;
+    private PlaceViewModel placeViewModel;
     private static final String TAG = FragmentPage3.class.getSimpleName ();
     private GoogleMap mMap;
     private MapView mapView = null;
@@ -69,6 +90,12 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     Double[] latt = new Double[100];
     Double[] lngg = new Double[100];
     String[] title = new String[100];
+    String[] description = new String[100];
+    String[] userid = new String[100];
+    int[] id = new int[100];
+    int[] priority =new int[100];
+    int[] count= new int[100];
+
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient; // Deprecated된 FusedLocationApi를 대체
     private LocationRequest locationRequest;
@@ -88,7 +115,8 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     int tracking = 0;
     private Location location;
     LatLng currentPosition;
-
+    Double[] distance = new Double[100];
+    Boolean[] istrue = new Boolean[] {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
     public FragmentPage3() {
     }
 
@@ -123,19 +151,19 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         }
         mapView.getMapAsync (this);
 
-        final Button button = (Button)layout.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                tracking = 1 - tracking;
-
-                if ( tracking == 1){
-                    button.setText("Stop");
-                }
-                else button.setText("Start");
-            }
-        });
+//        final Button button = (Button)layout.findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+                  tracking = 1 - tracking;
+//
+//                if ( tracking == 1){
+//                    button.setText("Stop");
+//                }
+//                else button.setText("Start");
+//            }
+//        });
 
         return layout;
     }
@@ -146,7 +174,6 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         // Activity와 Fragment의 뷰가 모두 생성된 상태로, View를 변경하는 작업이 가능한 단계다.
         super.onActivityCreated (savedInstanceState);
 
-        //액티비티가 처음 생성될 때 실행되는 함수
         MapsInitializer.initialize (mContext);
 
         locationRequest = new LocationRequest ()
@@ -193,9 +220,12 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
 
                     i++;
                     title[i] = userProfile.getTitle ();
+                    description[i] = userProfile.getDescription ();
                     latt[i] = userProfile.getLat ();
                     lngg[i] = userProfile.getLng ();
-
+                    count[i] = userProfile.getCount ();
+                    id[i]=userProfile.getId ();
+                    priority[i] =userProfile.getPriority ();
                     markerOptions.position(new LatLng (latt[i], lngg[i]))
                             .title ("마커" + title[i]) // 타이틀.
                             .icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
@@ -305,15 +335,71 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
 
                 if (previousPosition == null) previousPosition = currentPosition;
 
-                if ( (addedMarker != null) && tracking == 1 ) {
+
                     double radius = 100; // 500m distance.
                     for(i=1; latt[i]!=null ;i++){
-                        double distance = SphericalUtil.computeDistanceBetween (currentPosition, new LatLng (latt[i],lngg[i]));
+                        distance[i] = SphericalUtil.computeDistanceBetween (currentPosition, new LatLng (latt[i],lngg[i]));
 
-                        if ((distance < radius) && (!previousPosition.equals (currentPosition))) {
+                        if ((distance[i] < radius) && (!previousPosition.equals (currentPosition))) {
+                            if(istrue[i]==true) {
 
-                            Toast.makeText (getActivity (), title[i] + "도착", Toast.LENGTH_LONG).show ();
-                        }        }
+                                Intent push = new Intent();
+                                push.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                push.setClass(getActivity(), FragmentPage3.class);
+                                PendingIntent mPendingIntent = PendingIntent.getActivity(
+                                        getActivity (),0,
+                                        push,
+                                        PendingIntent.FLAG_CANCEL_CURRENT
+                                );
+                                Bitmap mLargeIconForNoti = BitmapFactory.decodeResource (getResources (),R.drawable.gpsmia2);
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder (getActivity (),"default");
+                                builder.setSmallIcon (R.mipmap.ic_launcher_foreground);
+                                builder.setContentTitle ("GPS 위치도착 알림");
+                                builder.setContentText (title[i] + "에 도착했습니다.");
+                                builder.setContentText ("에 도착했습니다.");
+                                builder.setAutoCancel (true);
+                                builder.setColor(Color.BLUE);
+                                builder.setLargeIcon (mLargeIconForNoti);
+                                builder.setFullScreenIntent(mPendingIntent, true);
+                                count[i]++;
+//
+//                                Intent intent = getIntent();
+//                                Intent data = new Intent();
+//                                data.putExtra(EXTRA_TITLE, title);
+//                                data.putExtra(EXTRA_DESCRIPTION, description);
+//                                data.putExtra(EXTRA_USERID, userid);
+//                                data.putExtra(EXTRA_LAT, latt[i]);
+//                                data.putExtra(EXTRA_LNG, lngg[i]);
+//                                data.putExtra(EXTRA_COUNT, count[i]);
+//                                //   data.putExtra(EXTRA_PRIORITY, priority);
+//
+//                                int id = getIntent().getIntExtra(EXTRA_ID,-1);
+//                                if (id != -1){
+//                                    data.putExtra(EXTRA_ID,id);
+//                                }
+//
+//                                setResult(RESULT_OK, data);
+//                                data.putExtra(EXTRA_COUNT, count);
+//                                int id = getIntent().getIntExtra(EXTRA_ID,-1);
+//                                if (id != -1){
+//                                    data.putExtra(EXTRA_ID,id);
+//                                }
+//
+//                                setResult(RESULT_OK, data);
+                                NotificationManager notificationManager = (NotificationManager) getActivity ().getSystemService (Context.NOTIFICATION_SERVICE);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    notificationManager.createNotificationChannel (new NotificationChannel ("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                                }
+
+                                notificationManager.notify (1, builder.build ());
+
+                            }
+
+
+                        }else if ((distance[i] > 150) && (!previousPosition.equals (currentPosition)))
+                            istrue[i]=true;
+
+                    }
 
 
 
@@ -321,7 +407,7 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
                     //{
                     //  Toast.makeText (TestActivity.this, addedMarker.getTitle () + "까지" + (int) distance + "m 남음", Toast.LENGTH_LONG).show ();
                     // }
-                }
+
             }
 
 
@@ -329,6 +415,8 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         }
 
     };
+
+
     private String CurrentTime() {
         Date today = new Date ();
         SimpleDateFormat date = new SimpleDateFormat ("yyyy/MM/dd");

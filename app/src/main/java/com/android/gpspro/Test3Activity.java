@@ -1,29 +1,59 @@
 package com.android.gpspro;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Query;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class AddEditPlaceActivity extends AppCompatActivity {
+public class Test3Activity extends AppCompatActivity {
     public static final String EXTRA_ID =
             "com.bdtask.architectureexample.EXTRA_ID";
     public static final String EXTRA_TITLE =
@@ -37,11 +67,11 @@ public class AddEditPlaceActivity extends AppCompatActivity {
             "com.bdtask.architectureexample.EXTRA_LAT";
     public static final String EXTRA_LNG =
             "com.bdtask.architectureexample.EXTRA_LNG";
-
-
+    public static final String EXTRA_COUNT =
+            "com.bdtask.architectureexample.EXTRA_COUNT";
     public static final String EXTRA_PRIORITY =
             "com.bdtask.architectureexample.EXTRA_PRIORITY";
-
+    private PlaceViewModel placeViewModel;
     double lat1,lng1;
 
     private EditText editTextTitle;
@@ -49,16 +79,43 @@ public class AddEditPlaceActivity extends AppCompatActivity {
     private TextView edit_lat;
     private TextView edit_lng;
     private NumberPicker numberPickerPriority;
-
+    private Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_place);
+        setContentView(R.layout.activity_test3);
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
         setTitle (userID+"님 환영합니다.");
 
+
+        back = findViewById (R.id.back);
+        back.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+////                Toast.makeText(getApplicationContext (), "주소 확인을 클릭하세요", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent (getApplicationContext (), FragmentPage1.class);
+//                Intent data = new Intent();
+//                data.putExtra(EXTRA_TITLE, "test");
+//                data.putExtra(EXTRA_DESCRIPTION, "test");
+//                data.putExtra(EXTRA_USERID, "null");
+//                data.putExtra(EXTRA_LAT, 126.44);
+//                data.putExtra(EXTRA_LNG, 36.55);
+//                data.putExtra(EXTRA_COUNT, 5);
+//
+//
+//                //   data.putExtra(EXTRA_PRIORITY, priority);
+//
+////                int id = getIntent().getIntExtra(EXTRA_ID,-1);
+////                if (id != -1){
+////                    data.putExtra(EXTRA_ID,id);
+////                }
+//
+//                setResult(RESULT_OK, data);
+//                finish ();
+            }
+        });
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
         edit_lat = findViewById(R.id.edit_lat);
@@ -149,38 +206,11 @@ public class AddEditPlaceActivity extends AppCompatActivity {
     }
 
     private void savePlace() {
-        Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
 
-        String title = editTextTitle.getText().toString();
-        String description = editTextDescription.getText().toString();
-        String userid = userID;
-        String lat = edit_lat.getText().toString();
-        String lng = edit_lng.getText().toString();
 
-        //  int priority = numberPickerPriority.getValue();
 
-        if (lat.trim().isEmpty() || lng.trim().isEmpty()) {
-            Toast.makeText(this, "주소를 확인하세요.", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        Intent data = new Intent();
-        data.putExtra(EXTRA_TITLE, title);
-        data.putExtra(EXTRA_DESCRIPTION, description);
-        data.putExtra(EXTRA_USERID, userid);
-        data.putExtra(EXTRA_LAT, lat);
-        data.putExtra(EXTRA_LNG, lng);
 
-        //   data.putExtra(EXTRA_PRIORITY, priority);
-
-        int id = getIntent().getIntExtra(EXTRA_ID,-1);
-        if (id != -1){
-            data.putExtra(EXTRA_ID,id);
-        }
-
-        setResult(RESULT_OK, data);
-        finish();
     }
 
 

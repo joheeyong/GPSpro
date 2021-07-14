@@ -1,47 +1,46 @@
 
-z
-java:S1450!"XRemove the "mBottomNV" field and declare it as a local variable in the relevant methods.(¥¡¸¹ıÿÿÿÿ8ÓÅ»Æ¢/
-w
-java:S2637]"ZParameter 2 to this call is marked "androidx.annotation.NonNull" but null could be passed.(åî ¾8¬éëÚ¦/
-n
-java:S1128"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ8ÓÅ»Æ¢/
-P
-java:S1128".Remove this unused import 'android.view.View'.(Ø½­äşÿÿÿÿ8ÓÅ»Æ¢/
-d
-java:S1128"BRemove this unused import 'com.google.firebase.auth.FirebaseUser'.(’àíĞùÿÿÿÿ8ÓÅ»Æ¢/
-s
-java:S1128"VRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignInClient'.(ì¡ı8ÓÅ»Æ¢/
-W
-java:S1128"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ8ÓÅ»Æ¢/
-f
-java:S1128"DRemove this unused import 'com.google.firebase.auth.AuthCredential'.(¢ü§–üÿÿÿÿ8ÓÅ»Æ¢/
-[
-java:S1128">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô8ÓÅ»Æ¢/
 V
-java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ8ÓÅ»Æ¢/
-J	java:S108W")Either remove or fill this block of code.(ñ¢Ş¯ıÿÿÿÿ8¬éëÚ¦/
-y
-java:S1128"WRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignInOptions'.(¢ÉÀÿÿÿÿÿ8ÓÅ»Æ¢/
-d
-java:S1128"BRemove this unused import 'com.google.firebase.auth.FirebaseAuth'.(İÄğöûÿÿÿÿ8ÓÅ»Æ¢/
+java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ8ÓÅ»Æ¢/
 t
-java:S1128"WRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignInAccount'.(‘Ï¦â8ÓÅ»Æ¢/
-o	java:S100="NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±á¿úÿÿÿÿ8¬éëÚ¦/
-e
-java:S1128"HRemove this unused import 'com.google.firebase.auth.GoogleAuthProvider'.(€´©±8ÓÅ»Æ¢/
+java:S1128"WRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignInAccount'.(‘Ï¦â8ÓÅ»Æ¢/
+s
+java:S1128"VRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignInClient'.(ì¡ı8ÓÅ»Æ¢/
 h
-java:S1128"KRemove this unused import 'com.google.android.gms.common.api.ApiException'.(šÄØ‚8ÓÅ»Æ¢/
+java:S1128"KRemove this unused import 'com.google.android.gms.common.api.ApiException'.(šÄØ‚8ÓÅ»Æ¢/
+d
+java:S1128"BRemove this unused import 'com.google.firebase.auth.FirebaseAuth'.(İÄğöûÿÿÿÿ8ÓÅ»Æ¢/
 l
-java:S1128"PRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignIn'.(‹é±e8ÓÅ»Æ¢/
-g
-java:S1128"JRemove this unused import 'com.google.android.material.snackbar.Snackbar'.(ë„ƒŠ8ÓÅ»Æ¢/
-J
-java:S16041"(Make this anonymous inner class a lambda(ˆ¤ƒïúÿÿÿÿ8¬éëÚ¦/
-d
-java:S1128"GRemove this unused import 'com.google.android.gms.common.SignInButton'.(ºÇÂü8ÓÅ»Æ¢/
-d
-java:S1192)"GDefine a constant instead of duplicating this literal "userID" 3 times.(àõø8¶­õÚ¦/
-m
-java:S18741"KRemove this use of "setOnNavigationItemSelectedListener"; it is deprecated.(ˆ¤ƒïúÿÿÿÿ8¬éëÚ¦/
+java:S1128"PRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignIn'.(‹é±e8ÓÅ»Æ¢/
+[
+java:S1128">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô8ÓÅ»Æ¢/
 \
-java:S1128"@Remove this unused import 'com.google.firebase.auth.AuthResult'.(âÂ8ÓÅ»Æ¢/
+java:S1128"@Remove this unused import 'com.google.firebase.auth.AuthResult'.(âÂ8ÓÅ»Æ¢/
+g
+java:S1128"JRemove this unused import 'com.google.android.material.snackbar.Snackbar'.(ë„ƒŠ8ÓÅ»Æ¢/
+f
+java:S1128"DRemove this unused import 'com.google.firebase.auth.AuthCredential'.(¢ü§–üÿÿÿÿ8ÓÅ»Æ¢/
+W
+java:S1128"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ8ÓÅ»Æ¢/
+e
+java:S1128"HRemove this unused import 'com.google.firebase.auth.GoogleAuthProvider'.(€´©±8ÓÅ»Æ¢/
+m
+java:S18740"KRemove this use of "setOnNavigationItemSelectedListener"; it is deprecated.(ˆ¤ƒïúÿÿÿÿ8›ˆóô§/
+J
+java:S16040"(Make this anonymous inner class a lambda(ˆ¤ƒïúÿÿÿÿ8¬éëÚ¦/
+n
+java:S1128"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ8ÓÅ»Æ¢/
+P
+java:S1128".Remove this unused import 'android.view.View'.(Ø½­äşÿÿÿÿ8ÓÅ»Æ¢/
+o	java:S100<"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±á¿úÿÿÿÿ8¬éëÚ¦/
+d
+java:S1128"GRemove this unused import 'com.google.android.gms.common.SignInButton'.(ºÇÂü8ÓÅ»Æ¢/
+d
+java:S1192*"GDefine a constant instead of duplicating this literal "userID" 3 times.(àõø8¶­õÚ¦/
+z
+java:S1450""XRemove the "mBottomNV" field and declare it as a local variable in the relevant methods.(¥¡¸¹ıÿÿÿÿ8›ˆóô§/
+d
+java:S1128"BRemove this unused import 'com.google.firebase.auth.FirebaseUser'.(’àíĞùÿÿÿÿ8ÓÅ»Æ¢/
+Q
+java:S1128"/Remove this unused import 'androidx.room.Room'.(ı½‘‹ÿÿÿÿÿ8¯±óô§/
+y
+java:S1128"WRemove this unused import 'com.google.android.gms.auth.api.signin.GoogleSignInOptions'.(¢ÉÀÿÿÿÿÿ8ÓÅ»Æ¢/

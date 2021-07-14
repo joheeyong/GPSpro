@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:background="#F6F6F6">
 
-    <RelativeLayout
+
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0.2dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true">
 
 
-        <TextView
-            android:id="@+id/text_view_title"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/view_unlocked"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="Title"
-            android:textSize="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#0054FF"
-            android:textStyle="bold" />
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
-        <TextView
-            android:textSize="10dp"
-            android:id="@+id/text_view_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_title"
-            android:text="Description" />
 
-        <ImageView
-            android:id="@+id/btn_showmap"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/recycleicon"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <LinearLayout
+                android:paddingBottom="15dip"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:paddingTop="15dip"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/text_view_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/text_view_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:textColor="#2a2a2a"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+
+    </androidx.cardview.widget.CardView>

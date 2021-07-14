@@ -70,5 +70,12 @@
         android:layout_gravity="center"
         android:text="뒤로가기"
         android:textColor="@color/white"/>
-
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/et_link_back2"
+        android:text="테두리 있음"
+        android:textStyle="bold" />
 </LinearLayout>
