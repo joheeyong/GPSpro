@@ -1,15 +1,0 @@
-
-A
-java:S1659"%Declare "tv_pass" on a separate line.(€¡½28ÀÁùÆ¢/
-E
-java:S1185"(Remove this method to simply inherit it.(¡Œşø8‘êèÆ¢/
-O
-java:S1128"3Remove this unused import 'android.content.Intent'.(³ğ‹G8ªß¿Ç¢/
-k	java:S116"PRename this field "tv_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¡½28ÀÁùÆ¢/
-Y
-java:S1128"7Remove this unused import 'android.widget.ImageButton'.(‚ÏÉõÿÿÿÿÿ8äÌ†Ç¢/
-m	java:S116"RRename this field "tv_pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¡½28ÀÁùÆ¢/
-p
-java:S1450"TRemove the "tv_id" field and declare it as a local variable in the relevant methods.(€¡½28Ò°†Ç¢/
-G
-java:S1068"+Remove this unused "tv_pass" private field.(€¡½28ªß¿Ç¢/

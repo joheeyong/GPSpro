@@ -12,9 +12,11 @@ import java.util.List;
 
 public class PlaceRepository {
     private String DB_NAME = "geocoding";
-    private PlaceDatabase noteDatabase;
+    private PlaceDatabase placeDatabase;
     private PlaceDao placeDao;
     private LiveData<List<Place>> allPlaces;
+    private LiveData<List<Place>> AllTasks;
+
     public PlaceRepository(Application application) {
         PlaceDatabase database = PlaceDatabase.getInstance(application);
         placeDao = database.placeDao();
@@ -22,26 +24,26 @@ public class PlaceRepository {
     }
 
     public PlaceRepository(Context context) {
-        noteDatabase = Room.databaseBuilder(context, PlaceDatabase.class, DB_NAME).build();
+        placeDatabase = Room.databaseBuilder (context, PlaceDatabase.class, DB_NAME).build ();
     }
 
     public void insert(Place place) {
-        new InsertPlaceAsyncTask (placeDao).execute(place);
+        new InsertPlaceAsyncTask (placeDao).execute (place);
     }
 
-    public void update(Place place) { new UpdatePlaceAsyncTask (placeDao).execute(place); }
+    public void update(Place place) {
+        new UpdatePlaceAsyncTask (placeDao).execute (place);
+    }
 
     public void delete(Place place) {
-        new DeletePlaceAsyncTask (placeDao).execute(place);
+        new DeletePlaceAsyncTask (placeDao).execute (place);
     }
 
     public void deleteAllNotes() {
-        new DeleteAllPlacesAsyncTask (placeDao).execute();
+        new DeleteAllPlacesAsyncTask (placeDao).execute ();
     }
 
-    public LiveData<List<Place>> getAllNotes() {
-        return allPlaces;
-    }
+
 
     private static class InsertPlaceAsyncTask extends AsyncTask<Place, Void, Void> {
 
@@ -53,7 +55,7 @@ public class PlaceRepository {
 
         @Override
         protected Void doInBackground(Place... places) {
-            placeDao.insert(places[0]);
+            placeDao.insert (places[0]);
             return null;
         }
     }
@@ -69,7 +71,7 @@ public class PlaceRepository {
 
         @Override
         protected Void doInBackground(Place... places) {
-            placeDao.update(places[0]);
+            placeDao.update (places[0]);
             return null;
         }
     }
@@ -85,7 +87,7 @@ public class PlaceRepository {
 
         @Override
         protected Void doInBackground(Place... places) {
-            placeDao.delete(places[0]);
+            placeDao.delete (places[0]);
             return null;
         }
     }
@@ -101,12 +103,15 @@ public class PlaceRepository {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            placeDao.deleteAllNotes();
+            placeDao.deleteAllNotes ();
             return null;
         }
     }
 
-    public LiveData<List<Place>> getTasks(int id) {
-        return noteDatabase.placeDao ().fetchAllTasks(id);
+    public LiveData<List<Place>> fetchAllTasks(String userid) {
+        return placeDatabase.placeDao ().fetchAllTasks (userid);
+    }
+    public LiveData<List<Place>> getAllNotes() {
+        return allPlaces;
     }
 }

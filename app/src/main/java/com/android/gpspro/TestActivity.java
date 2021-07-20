@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.gpspro.Fragment.FragmentPage1;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -132,36 +133,36 @@ public class TestActivity extends AppCompatActivity
             }
         });
         mLayout = findViewById(R.id.layout_main);
-        final Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast myToast = Toast.makeText(getApplicationContext (),"dddd", Toast.LENGTH_SHORT);
-                myToast.show();
-                Intent intent = getIntent();
-                String userID = intent.getStringExtra("userID");
-
-                String title = "인천";
-                String description = "테스트";
-                String userid = userID;
-                String lat = "37.490386";
-                String lng = "126.723631";
-                Intent data = new Intent();
-                data.putExtra(EXTRA_TITLE, title);
-                data.putExtra(EXTRA_DESCRIPTION, description);
-                data.putExtra(EXTRA_USERID, userid);
-                data.putExtra(EXTRA_LAT, lat);
-                data.putExtra(EXTRA_LNG, lng);
-                data.putExtra(EXTRA_COUNT, 5);
-                //   data.putExtra(EXTRA_PRIORITY, priority);
-
-                int id = getIntent().getIntExtra(EXTRA_ID,-1);
-                if (id != -1){
-                    data.putExtra(EXTRA_ID,id);
-                }
-                setResult(RESULT_OK, data);
-            }
-        });
+//        final Button button = (Button)findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast myToast = Toast.makeText(getApplicationContext (),"dddd", Toast.LENGTH_SHORT);
+//                myToast.show();
+//                Intent intent = getIntent();
+//                String userID = intent.getStringExtra("userID");
+//
+//                String title = "인천";
+//                String description = "테스트";
+//                String userid = userID;
+//                String lat = "37.490386";
+//                String lng = "126.723631";
+//                Intent data = new Intent();
+//                data.putExtra(EXTRA_TITLE, title);
+//                data.putExtra(EXTRA_DESCRIPTION, description);
+//                data.putExtra(EXTRA_USERID, userid);
+//                data.putExtra(EXTRA_LAT, lat);
+//                data.putExtra(EXTRA_LNG, lng);
+//                data.putExtra(EXTRA_COUNT, 5);
+//                //   data.putExtra(EXTRA_PRIORITY, priority);
+//
+//                int id = getIntent().getIntExtra(EXTRA_ID,-1);
+//                if (id != -1){
+//                    data.putExtra(EXTRA_ID,id);
+//                }
+//                setResult(RESULT_OK, data);
+//            }
+//        });
 
 
 
@@ -238,7 +239,6 @@ public class TestActivity extends AppCompatActivity
                     title[i] = userProfile.getTitle ();
                     latt[i] = Double.valueOf (userProfile.getLat ());
                     lngg[i] = Double.valueOf (userProfile.getLng ());
-                    count[i] =userProfile.getCount ();
                     markerOptions.position(new LatLng (latt[i], lngg[i]))
                             .title ("마커" + title[i]); // 타이틀.
                     addedMarker = mMap.addMarker(markerOptions);

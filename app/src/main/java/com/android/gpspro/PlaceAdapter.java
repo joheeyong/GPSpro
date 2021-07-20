@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
 public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
     private static final int RESULT_OK = 1;
     private final int GET_GALLERY_IMAGE = 200;
@@ -27,11 +28,10 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         @Override
         public boolean areContentsTheSame(@NonNull Place oldItem, @NonNull Place newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
-                    oldItem.getDescription().equals(newItem.getDescription()) &&
+                    oldItem.getDescription().equals(newItem.getDescription());
 
 //                    oldItem.getLat().equals(newItem.getLat()) &&
 //                    oldItem.getLng().equals(newItem.getLng()) ;
-                   oldItem.getPriority() == newItem.getCount ();
         }
     };
 
@@ -82,7 +82,7 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         private TextView textViewCount;
         private TextView textViewLat;
         private TextView textViewLng;
-          private TextView textViewPriority;
+        private TextView textViewPriority;
 
         public PlaceHolder(@NonNull View itemView) {
             super(itemView);

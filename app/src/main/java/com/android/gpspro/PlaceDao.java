@@ -1,6 +1,9 @@
 package com.android.gpspro;
 
 
+import android.app.Application;
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -13,31 +16,21 @@ import java.util.List;
 @Dao
 public interface PlaceDao {
     @Insert
-    public abstract void insert(Place place);
+    void insert(Place place);
 
     @Update
-    public abstract void update(Place place);
+    void update(Place place);
 
     @Delete
-    public abstract void delete(Place place);
+    void delete(Place place);
 
-    //@Query is used to create custom query
     @Query("DELETE FROM geocoding")
-    public abstract void deleteAllNotes();
+    void deleteAllNotes();
 
     @Query("SELECT * FROM geocoding")
-    public abstract LiveData<List<Place>> getAllplaces();
+    LiveData<List<Place>> getAllplaces();
 
-    @Query("SELECT * FROM geocoding WHERE id= :taskId")
-    LiveData<List<Place>> fetchAllTasks(int taskId);
-    @Query ("SELECT * FROM geocoding")
-    public abstract List<Place> getAll();
-
-    @Query("SELECT * FROM geocoding")
-    public abstract List<Place> loadFullName();
-
-    @Query ("SELECT * FROM geocoding")
-    public abstract Place[] loadAllUser();
-
+    @Query("SELECT * FROM geocoding WHERE userid= :userid")
+    LiveData<List<Place>> fetchAllTasks(String userid);
 
 }

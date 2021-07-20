@@ -5,31 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.android.gpspro.Fragment.FragmentPage1;
+import com.android.gpspro.Fragment.FragmentPage2;
+import com.android.gpspro.Fragment.FragmentPage3;
+import com.android.gpspro.Fragment.FragmentPage4;
+import com.android.gpspro.Fragment.FragmentPage5;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
 
@@ -39,10 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
-        setTitle (userID+"님 환영합니다.");
-
-
+        String extitle = intent.getStringExtra("extitle");
+        setTitle ("나의 "+extitle+" 여행");
 
         mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
@@ -69,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
+        String extitle = intent.getStringExtra("extitle");
         if (fragment == null) {
             if (id == R.id.navigation_1) {
                 fragment = new FragmentPage1 ();
                 Bundle bundle = new Bundle(1);
-                bundle.putString("userID",userID);
+                bundle.putString("extitle",extitle);
                 fragment.setArguments (bundle);
 
 
@@ -82,9 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new FragmentPage2 ();
             }else if (id == R.id.navigation_3){
                 fragment=new FragmentPage3 ();
+                Bundle bundle = new Bundle(1);
+                bundle.putString("extitle",extitle);
+                fragment.setArguments (bundle);
 
             } else if (id == R.id.navigation_4){
                 fragment=new FragmentPage4 ();
+                Bundle bundle = new Bundle(1);
+                bundle.putString("extitle",extitle);
+                fragment.setArguments (bundle);
             } else {
                 fragment=new FragmentPage5 ();
             }

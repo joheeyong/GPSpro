@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:layout_height="60dp">
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="420dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="3dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#4374D9"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/text_view_title"
+                android:text="Title"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_alignParentStart="true"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여행일자" />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2021-07-20"
+                android:id="@+id/text_view_date"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/text_view_description"
+                    android:layout_width="200dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Description" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/star"
+                    android:id="@+id/abcc"/>
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="5.0"
+                    android:id="@+id/text_view_star"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:textColor="#4374D9"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최고예요!"
+                    android:gravity="right"
+                    android:id="@+id/coment"
+                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="여행일    2021-07-20"-->
+<!--                    android:id="@+id/abcc"/>-->
+<!--                <TextView-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="#EDD200"-->
+<!--                    android:text="별점 ★"-->
+<!--                    android:id="@+id/abcc"/>-->
+<!--                <TextView-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="#ED0000"-->
+<!--                    android:text="최고였어요!"-->
+<!--                    android:id="@+id/abccc"/>-->
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FF5E00">
+            <TextView
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="삭제"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+</androidx.cardview.widget.CardView>

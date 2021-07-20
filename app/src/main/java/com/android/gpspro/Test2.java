@@ -35,6 +35,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.gpspro.Fragment.FragmentPage1;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -99,7 +100,7 @@ public class Test2 extends FragmentActivity implements OnMapReadyCallback {
         btn_clickback.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext (),FragmentPage1.class);
+                Intent intent = new Intent (getApplicationContext (), FragmentPage1.class);
                 String userID = intent.getStringExtra("userID");
 
                 startActivity (intent);

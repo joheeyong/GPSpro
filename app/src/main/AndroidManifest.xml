@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,15 +33,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".GoogleloginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".MygpsActivity" />
         <activity android:name=".AddEditPlaceActivity" />
         <activity android:name=".AddClickPlaceActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".Test3Activity" />
-        <activity android:name="FragmentPage1"/>
+        <activity android:name=".test"/>
+        <activity android:name=".AddEditNoteActivity"/>
+
     </application>
 
 </manifest>

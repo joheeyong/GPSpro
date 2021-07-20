@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/delete_all_places"
-        android:title="전체 삭제"
+        android:title="전체 여행 삭제"
         app:showAsAction="never" />
 
 </menu>

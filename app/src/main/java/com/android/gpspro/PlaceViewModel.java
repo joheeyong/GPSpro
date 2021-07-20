@@ -10,17 +10,16 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
 import java.util.List;
-
 public class PlaceViewModel extends AndroidViewModel {
 
     private PlaceRepository repository;
     private LiveData<List<Place>> allPlaces;
-    private PlaceDatabase noteDatabase;
     public PlaceViewModel(@NonNull Application application) {
         super(application);
         repository = new PlaceRepository(application);
         allPlaces = repository.getAllNotes();
     }
+
 
 
     public void insert(Place place) {
@@ -42,4 +41,5 @@ public class PlaceViewModel extends AndroidViewModel {
     public LiveData<List<Place>> getAllPlaces() {
         return allPlaces;
     }
+
 }

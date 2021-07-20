@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.gpspro.Fragment.FragmentPage1;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -47,29 +48,25 @@ import java.util.List;
 
 public class AddClickPlaceActivity extends FragmentActivity implements OnMapReadyCallback {
     public static final String EXTRA_ID =
-            "com.bdtask.architectureexample.EXTRA_ID";
+            "EXTRA_ID";
     public static final String EXTRA_TITLE =
-            "com.bdtask.architectureexample.EXTRA_TITLE";
+            "EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION =
-            "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
+            "EXTRA_DESCRIPTION";
     public static final String EXTRA_USERID=
-            "com.bdtask.architectureexample.EXTRA_USERID";
+            "EXTRA_USERID";
 
     public static final String EXTRA_LAT =
-            "com.bdtask.architectureexample.EXTRA_LAT";
+            "EXTRA_LAT";
     public static final String EXTRA_LNG =
-            "com.bdtask.architectureexample.EXTRA_LNG";
+            "EXTRA_LNG";
 
 
-    public static final String EXTRA_PRIORITY =
-            "com.bdtask.architectureexample.EXTRA_PRIORITY";
+
     private PlaceViewModel model;
-    //GoogleMap 객체
     GoogleMap googleMap;
-    MapFragment mapFragment;
     LocationManager locationManager;
     RelativeLayout boxMap;
-    //나의 위도 경도 고도
     double mLatitude;  //위도
     double mLongitude; //경도
 
@@ -84,8 +81,6 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click_place);
 
-
-
         boxMap = (RelativeLayout)findViewById(R.id.boxMap);
 
         //LocationManager
@@ -95,7 +90,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
         btn_clickback.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext (),FragmentPage1.class);
+                Intent intent = new Intent (getApplicationContext (), FragmentPage1.class);
                 String userID = intent.getStringExtra("userID");
 
                 startActivity (intent);
@@ -276,11 +271,12 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
                 dialog=new AlertDialog.Builder(AddClickPlaceActivity.this)
                         .setView(loginLayout)
                         .show();
+                
                 save.setOnClickListener (new View.OnClickListener () {
                     @Override
                     public void onClick(View v) {
                         Intent intent = getIntent();
-                        String userID = intent.getStringExtra("userID");
+                        String userID = intent.getStringExtra("extitle");
 
                         String title = id.getText().toString();
                         String description = pw.getText().toString();
@@ -325,6 +321,7 @@ public class AddClickPlaceActivity extends FragmentActivity implements OnMapRead
 
                         googleMap.addMarker (makerOptions);
                         dialog.dismiss ();
+                        overridePendingTransition(R.anim.stay, R.anim.slide_down);
                     }
                 });
                 cancle.setOnClickListener (new View.OnClickListener () {
