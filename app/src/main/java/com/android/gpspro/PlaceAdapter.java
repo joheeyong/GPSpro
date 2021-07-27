@@ -29,9 +29,6 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         public boolean areContentsTheSame(@NonNull Place oldItem, @NonNull Place newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) &&
                     oldItem.getDescription().equals(newItem.getDescription());
-
-//                    oldItem.getLat().equals(newItem.getLat()) &&
-//                    oldItem.getLng().equals(newItem.getLng()) ;
         }
     };
 
@@ -55,8 +52,6 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         Place currentNote = getItem(position);
         holder.textViewTitle.setText(currentNote.getTitle());
         holder.textViewDescription.setText(currentNote.getDescription ());
-//        holder.textViewLat.setText(String.valueOf(currentNote.getLat()));
-//        holder.textViewLng.setText(String.valueOf(currentNote.getLng()));
 
 
     }
@@ -71,6 +66,10 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
         this.listener = listener;
     }
 
+    public void setOnItemLongClickListener(PlaceAdapter.OnItemLongClickListener listener) {
+        this.listener = (OnItemClickListener) listener;
+    }
+
     public interface OnItemClickListener {
         void onItemClick(Place place);
     }
@@ -79,16 +78,11 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
     class PlaceHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDescription;
-        private TextView textViewCount;
-        private TextView textViewLat;
-        private TextView textViewLng;
-        private TextView textViewPriority;
 
         public PlaceHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
-//              textViewPriority = itemView.findViewById(R.id.text_view_priority);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,5 +95,9 @@ public class PlaceAdapter extends ListAdapter<Place, PlaceAdapter.PlaceHolder> {
             });
 
         }
+    }
+
+    public interface OnItemLongClickListener {
+        void OnItemLongClick(Place place);
     }
 }

@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/navigation_1"
-        android:icon="@drawable/writing"
-        android:title="장소 등록" />
-
-    <item
-        android:id="@+id/navigation_2"
         android:icon="@drawable/house"
         android:title="종합 요약" />
 
     <item
+        android:id="@+id/navigation_2"
+        android:icon="@drawable/writing"
+        android:title="장소 등록" />
+
+    <item
         android:id="@+id/navigation_3"
         android:icon="@drawable/mapicon"
-        android:title="지도 보기" />
+        android:title="장소 보기" />
 
     <item
         android:id="@+id/navigation_4"

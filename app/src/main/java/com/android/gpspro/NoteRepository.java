@@ -54,7 +54,6 @@ public class NoteRepository {
         }
     }
 
-    //
     private static class UpdateNoteAsyncTask extends AsyncTask<Note, Void, Void> {
 
         private NoteDao noteDao;
@@ -70,8 +69,6 @@ public class NoteRepository {
         }
     }
 
-    //
-
     private static class DeleteNoteAsyncTask extends AsyncTask<Note, Void, Void> {
         private NoteDao noteDao;
 
@@ -86,7 +83,6 @@ public class NoteRepository {
         }
     }
 
-    //
     private static class DeleteAllNotesAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private NoteDao noteDao;

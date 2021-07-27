@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:textSize="15dp"
-            android:text="언제든 삭제, 수정이 가능합니다."
+            android:text="수정 시 앱이 재시작됩니다."
             android:textColor="@color/black" />
     </LinearLayout>
 <!--    <EditText-->
@@ -152,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:stepSize="0.1"
-            android:rating="0"
+            android:rating="2.5"
             android:isIndicator="false"
             />
         <EditText
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:text="0.1"
+            android:text="2.5"
             android:inputType="textPersonName" />
 
     </LinearLayout>

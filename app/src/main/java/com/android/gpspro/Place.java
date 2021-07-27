@@ -16,7 +16,7 @@ public class Place implements Serializable {
     private Double lng;
 
 
-    public Place(String title, String description, String userid, Double lat, Double lng) {
+    public Place(String title,String description, String userid, Double lat, Double lng) {
         this.title = title;
         this.userid = userid;
         this.description = description;
@@ -60,11 +60,6 @@ public class Place implements Serializable {
     @Override
     public String toString() {
         return
-                + id +
-                        title +
-                        description +
-                        userid+
-                        lat +
-                        lng;
+         title+("\n");
     }
 }

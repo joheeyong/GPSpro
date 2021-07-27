@@ -79,6 +79,7 @@ public class AddEditPlaceActivity extends AppCompatActivity {
 
         try {
             List<Address> addresses=geocoder.getFromLocationName(addr,3); //최대 3개까지 받는데, 0~3개까지 있으면 받는다.
+
             StringBuffer buffer= new StringBuffer();
             for(Address t : addresses){
                 buffer.append(t.getLatitude()+", "+t.getLongitude()+"\n");
@@ -89,6 +90,7 @@ public class AddEditPlaceActivity extends AppCompatActivity {
             intent.setAction (Intent.ACTION_VIEW);
             Uri uri = Uri.parse ("geo:"+lat1+""+lng1+"?z=16"+"&q="+lat1+","+lng1+"(aaa)");
             intent.setData (uri);
+            editTextDescription.setText(addr);
             edit_lat.setText (String.valueOf(lat1));
             edit_lng.setText (String.valueOf(lng1));
             startActivity (intent);
@@ -113,9 +115,9 @@ public class AddEditPlaceActivity extends AppCompatActivity {
         if (list != null) {
             if (list.size () == 0) {
                 editTextTitle.setText ("해당되는 주소 정보는 없습니다");
-            } else {
-                editTextTitle.setText (list.get (0).getAdminArea () +" "+ list.get (0).getThoroughfare ()+" " + list.get (0).getPostalCode ()+" "+ title);
             }
+                editTextTitle.setText (list.get (0).getAdminArea () +" "+ list.get (0).getThoroughfare ()+" " + list.get (0).getPostalCode ());
+
         }
         return 0;
     }
@@ -127,7 +129,7 @@ public class AddEditPlaceActivity extends AppCompatActivity {
         String lat = edit_lat.getText().toString();
         String lng = edit_lng.getText().toString();
 
-        if (lat.trim().isEmpty() || lng.trim().isEmpty()) {
+        if (title.trim().isEmpty() || lng.trim().isEmpty()) {
             Toast.makeText(this, "주소를 확인하세요.", Toast.LENGTH_SHORT).show();
             return;
         }

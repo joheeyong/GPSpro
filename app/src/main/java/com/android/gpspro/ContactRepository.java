@@ -1,6 +1,7 @@
 package com.android.gpspro;
 
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,6 +10,10 @@ import androidx.room.Update;
 import java.util.List;
 @Dao
 public interface ContactRepository {
+
+
+
+
     // 삽입된 행의 Primary Key값을 long 형으로 return 해준다.
     // 삽입된 행이 여러건일 경우 List<Long> 형으로 return 해준다.
     @Insert
@@ -32,4 +37,6 @@ public interface ContactRepository {
 
     @Query("SELECT * FROM contacts WHERE id = :contactId ")
     Contact findById(long contactId);
+
+
 }

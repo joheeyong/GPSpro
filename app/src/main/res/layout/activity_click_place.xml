@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#D5D5D5">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_gravity="center"
-        android:layout_width="380dp"
-        android:layout_height="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:background="#6799FF">
+
 
         <TextView
             android:textStyle="bold"
             android:textSize="20dp"
-            android:id="@+id/tv_content"
+            android:id="@+id/qwer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -35,47 +48,17 @@
             android:text="등록하고 싶은 장소를 클릭하세요."
             android:textColor="@color/white"
             android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+        <Button
             android:layout_marginTop="10dp"
-            android:text="언제든 수정, 삭제를 할 수 있습니다."
+            android:backgroundTint="#4641D9"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_backpage"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
             android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            android:text="뒤로 가기" />
+
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center"
-        android:id="@+id/boxMap"
-        android:visibility="invisible"
-        android:layout_width="380dp"
-        android:layout_height="400dp">
-        <fragment
-            android:id="@+id/map"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.google.android.gms.maps.SupportMapFragment"/>
-    </RelativeLayout>
-
-    <Button
-        android:backgroundTint="#4641D9"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_clickback"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:text="뒤로가기"
-        android:textColor="@color/white"/>
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/et_link_back2"
-        android:text="테두리 있음"
-        android:textStyle="bold" />
 </LinearLayout>

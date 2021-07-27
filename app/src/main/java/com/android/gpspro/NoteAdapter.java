@@ -29,6 +29,7 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     };
     //private List<Note> notes = new ArrayList<>();
     private OnItemClickListener listener;
+    private OnItemLongClickListener listenerr;
 
     public NoteAdapter() {
         super(DIFF_CALLBACK);
@@ -61,8 +62,6 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         }else {
             holder.textViewComent.setText ("최고예요!");
         }
-
-//        holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
     }
 
 
@@ -75,7 +74,14 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+    public void setOnItemLongClickListener(OnItemLongClickListener listenerr) {
+        this.listenerr = listenerr;
+    }
 
+    public interface OnItemLongClickListener {
+
+        void onItemLongClick(Note note);
+    }
     public interface OnItemClickListener {
         void onItemClick(Note note);
     }
@@ -95,6 +101,15 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             textViewDate = itemView.findViewById(R.id.text_view_date);
             textViewStar = itemView.findViewById(R.id.text_view_star);
             textViewComent =  itemView.findViewById(R.id.coment);
+//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View v) {
+//                    int position = getAdapterPosition();
+//                    if (listener != null && position != RecyclerView.NO_POSITION) {
+//                        listener.onItemClick(getItem(position));
+//                    }
+//                    return false;
+//                }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -104,6 +119,17 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
                     }
                 }
             });
+            itemView.setOnLongClickListener (new View.OnLongClickListener () {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listenerr != null && position != RecyclerView.NO_POSITION) {
+                        listenerr.onItemLongClick(getItem(position));
+                    }
+                    return false;
+                }
+            });
         }
     }
+
 }

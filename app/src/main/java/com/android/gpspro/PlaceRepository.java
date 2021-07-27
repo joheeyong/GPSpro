@@ -20,7 +20,7 @@ public class PlaceRepository {
     public PlaceRepository(Application application) {
         PlaceDatabase database = PlaceDatabase.getInstance(application);
         placeDao = database.placeDao();
-        allPlaces = placeDao.getAllplaces();
+//        allPlaces = placeDao.getAllplaces();
     }
 
     public PlaceRepository(Context context) {
@@ -41,6 +41,14 @@ public class PlaceRepository {
 
     public void deleteAllNotes() {
         new DeleteAllPlacesAsyncTask (placeDao).execute ();
+    }
+
+    public LiveData<List<Place>> getAllNotes(String userid) {
+        return placeDao.getAllplaces(userid);
+    }
+
+    public LiveData<Integer> getRowCount(String userid) {
+        return placeDao.getRowCount (userid);
     }
 
 
@@ -108,9 +116,9 @@ public class PlaceRepository {
         }
     }
 
-    public LiveData<List<Place>> fetchAllTasks(String userid) {
-        return placeDatabase.placeDao ().fetchAllTasks (userid);
-    }
+//    public LiveData<List<Place>> fetchAllTasks(String userid) {
+//        return placeDatabase.placeDao ().fetchAllTasks (userid);
+//    }
     public LiveData<List<Place>> getAllNotes() {
         return allPlaces;
     }

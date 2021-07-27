@@ -7,4 +7,9 @@
         android:title="전체 여행 삭제"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/edit_all_places"
+        android:title="편집 모드"
+        app:showAsAction="never" />
+
 </menu>

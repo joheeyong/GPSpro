@@ -13,18 +13,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 @Database(entities = {Note.class}, version = 2)
 public abstract class NoteDatabase extends RoomDatabase {
 
-    //instance variable is created, so that it can turn "NoteDatabase" class into a singleton.
-    //singleton doesn't let start multiple instance of a class.
     private static NoteDatabase instance;
 
-    //noteDao() returns NoteDao. And this method doesn't have a body.
     public abstract NoteDao noteDao();
 
-    //synchronized means only one thread at a time can access this method.
     public static synchronized NoteDatabase getInstance(Context context){
-        //initialize instance if there is none
         if (instance == null){
-            //new NoteDatabase can't be used because it is abstract. That's why we are using builder.
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     NoteDatabase.class, "note_database")
                     .fallbackToDestructiveMigration()

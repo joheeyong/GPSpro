@@ -27,10 +27,16 @@ public interface PlaceDao {
     @Query("DELETE FROM geocoding")
     void deleteAllNotes();
 
-    @Query("SELECT * FROM geocoding")
-    LiveData<List<Place>> getAllplaces();
-
     @Query("SELECT * FROM geocoding WHERE userid= :userid")
-    LiveData<List<Place>> fetchAllTasks(String userid);
+    LiveData<List<Place>> getAllplaces(String userid);
+//    @Query("SELECT COUNT(userid) FROM geocoding")
+//    LiveData<Integer> getRowCount();
+
+    @Query("SELECT Count(id) FROM geocoding WHERE userid=:userid")
+    LiveData<Integer> getRowCount(String userid);
+
+
+//    @Query("SELECT * FROM geocoding WHERE userid= :userid")
+//    LiveData<List<Place>> fetchAllTasks(String userid);
 
 }

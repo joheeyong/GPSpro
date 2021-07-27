@@ -1,271 +1,209 @@
 package com.android.gpspro.Fragment;
 
-import android.app.Application;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.room.Room;
 
-import com.android.gpspro.AddClickPlaceActivity;
-import com.android.gpspro.AddEditPlaceActivity;
-import com.android.gpspro.NoteRepository;
-import com.android.gpspro.Place;
-import com.android.gpspro.PlaceAdapter;
-import com.android.gpspro.PlaceRepository;
+import com.android.gpspro.ContactService;
+import com.android.gpspro.MainActivity;
+import com.android.gpspro.MainMapActivity;
+import com.android.gpspro.PhotoViewActivity;
+import com.android.gpspro.PlaceDatabase;
 import com.android.gpspro.PlaceViewModel;
 import com.android.gpspro.R;
-import com.android.gpspro.TestActivity;
-import com.android.gpspro.test;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class FragmentPage1 extends Fragment {
-    public static final int ADD_PLACE_REQUEST = 1;
-    public static final int EDIT_PLACE_REQUEST = 2;
-    private static final int RESULT_OK = -1;
-    private PlaceRepository placeRepository;
+
     private PlaceViewModel placeViewModel;
-    private TextView emptyView;
-    private ImageView emptyImage;
-    private RecyclerView recyclerView;
-    private Animation fab_open, fab_close;
-    private boolean isFabOpen = false;
-    PlaceAdapter adapter = new PlaceAdapter();
+    private TextView qwer, tv_mainpicture;
+    MainActivity activity;
+    private Button buttonViewv, buttonView,buttonViewvv,btn_mainback;
+    private CardView cv_frag2,cv_frag3;
+    private CardView cv_frag1;
+    Dialog dialog01;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        //현재 소속된 액티비티를 메인 액티비티로 한다.
+        activity = (MainActivity) getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        ViewGroup rootView = (ViewGroup)inflater .inflate (R.layout.fragment_page_1, container, false);
-        emptyImage= rootView.findViewById (R.id.empty_image);
-        emptyView = rootView.findViewById (R.id.empty_view);
+        setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         String extitle = bundle.getString("extitle");
+        String userid = bundle.getString("extitle");
         getActivity ().setTitle ("나의 "+extitle+" 여행");
-        fab_open = AnimationUtils.loadAnimation(getActivity (), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getActivity (), R.anim.fab_close);
-        placeRepository = new PlaceRepository (getContext ());
-        FloatingActionButton fab_main = rootView.findViewById(R.id.fab_main);
-        FloatingActionButton  fab_sub1 = rootView.findViewById(R.id.fab_sub1);
-        FloatingActionButton  fab_sub2= rootView.findViewById(R.id.fab_sub2);
 
-        fab_sub1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity (), AddEditPlaceActivity.class);
-                intent.putExtra ("extitle",extitle);
-                startActivityForResult (intent,ADD_PLACE_REQUEST);
-            }
-        });
-        fab_sub2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity (), AddClickPlaceActivity.class);
-                intent.putExtra ("extitle",extitle);
-                startActivityForResult (intent,ADD_PLACE_REQUEST);
-            }
-        });
-        fab_main.setOnClickListener (new View.OnClickListener () {
+        ViewGroup rootView = (ViewGroup)inflater.inflate (R.layout.fragment_page_1, container, false);
+        buttonViewv = rootView.findViewById (R.id.buttonViewv);
+        buttonView = rootView.findViewById (R.id.buttonView);
+        buttonViewvv= rootView.findViewById (R.id.buttonViewvv);
+        btn_mainback=rootView.findViewById (R.id.btn_mainback);
+        cv_frag3=rootView.findViewById (R.id.cv_frag3);
+        buttonView.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-
-                switch (v.getId ()) {
-                case R.id.fab_main:
-                toggleFab();
-                break;
-                case R.id.fab_sub1:
-                toggleFab();
-                break;
-                case R.id.fab_sub2:
-                toggleFab();
-                break;
-                }
-            }
-
-        private void toggleFab() {
-                if (isFabOpen) {
-                fab_main.setImageResource(R.drawable.ic_add);
-                fab_sub1.startAnimation(fab_close);
-                fab_sub2.startAnimation(fab_close);
-                fab_sub1.setClickable(false);
-                fab_sub2.setClickable(false);
-                isFabOpen = false;
-                } else {
-                fab_main.setImageResource(R.drawable.ic_close);
-                fab_sub1.startAnimation(fab_open);
-                fab_sub2.startAnimation(fab_open);
-                fab_sub1.setClickable(true);
-                fab_sub2.setClickable(true);
-                isFabOpen = true;
-                }
-            }
-        }
-        );
-
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2 , StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-
-
-
-        placeViewModel = ViewModelProviders.of(this).get(PlaceViewModel.class);
-        placeRepository.fetchAllTasks (extitle).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
-//                    placeViewModel.getAllPlaces ().observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
-            @Override
-            public void onChanged(List<Place> places) {
-                updateTaskList();
-            }
-        });
-
-        new ItemTouchHelper (new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                placeViewModel.delete(adapter.getPlaceAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity (), "장소 삭제", Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView);
-
-        adapter.setOnItemClickListener(new PlaceAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Place place) {
-
-                Intent intent = new Intent(getContext (), AddEditPlaceActivity.class);
-                intent.putExtra(AddEditPlaceActivity.EXTRA_ID, place.getId());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_TITLE, place.getTitle());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_DESCRIPTION, place.getDescription());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_LAT, place.getLat());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_LNG, place.getLng ());
+                String email = bundle.getString("extitle");
+                Intent intent=new Intent (getActivity (), MainMapActivity.class);
+                intent.putExtra("extitle", email);
                 intent.putExtra("extitle", extitle);
-                startActivityForResult(intent, EDIT_PLACE_REQUEST);
+                startActivity (intent);
+            }
+        });
+        dialog01= new Dialog (getContext ());
+        dialog01.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog01.setContentView (R.layout.dialog_accountinfo);
+        buttonViewvv.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                showDialog01();
+
+            }
+
+            private void showDialog01() {
+                dialog01.show(); // 다이얼로그 띄우기
+
+                /* 이 함수 안에 원하는 디자인과 기능을 구현하면 된다. */
+
+                // 위젯 연결 방식은 각자 취향대로~
+                // '아래 아니오 버튼'처럼 일반적인 방법대로 연결하면 재사용에 용이하고,
+                // '아래 네 버튼'처럼 바로 연결하면 일회성으로 사용하기 편함.
+                // *주의할 점: findViewById()를 쓸 때는 -> 앞에 반드시 다이얼로그 이름을 붙여야 한다.
+
+                // 아니오 버튼
+                Button noBtn = dialog01.findViewById(R.id.noBtn);
+                noBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 원하는 기능 구현
+                        dialog01.dismiss(); // 다이얼로그 닫기
+                    }
+                });
+                // 네 버튼
+                dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog01.dismiss();
+                    }
+                });
 
             }
         });
-        updateTaskList();
+        buttonViewv.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                String email = bundle.getString("extitle");
+                Intent intent=new Intent (getActivity (), PhotoViewActivity.class);
+                intent.putExtra("extitle", email);
+                startActivity (intent);
+            }
+        });
+        cv_frag1 = rootView.findViewById (R.id.cv_frag1);
+        cv_frag1.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                String email = bundle.getString("extitle");
+                Intent intent=new Intent (getActivity (), MainMapActivity.class);
+                intent.putExtra("extitle", email);
+//                intent.putExtra("extitle", extitle);
+                startActivity (intent);
+            }
+        });
+        cv_frag2 = rootView.findViewById (R.id.cv_frag2);
+        cv_frag2.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                String email = bundle.getString("extitle");
+                Intent intent=new Intent (getActivity (), PhotoViewActivity.class);
+                intent.putExtra("extitle", email);
+                startActivity (intent);
+            }
+        });
+        cv_frag3.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                showDialog01();
+            }
+
+            private void showDialog01() {
+                    dialog01.show(); // 다이얼로그 띄우기
+
+                    /* 이 함수 안에 원하는 디자인과 기능을 구현하면 된다. */
+
+                    // 위젯 연결 방식은 각자 취향대로~
+                    // '아래 아니오 버튼'처럼 일반적인 방법대로 연결하면 재사용에 용이하고,
+                    // '아래 네 버튼'처럼 바로 연결하면 일회성으로 사용하기 편함.
+                    // *주의할 점: findViewById()를 쓸 때는 -> 앞에 반드시 다이얼로그 이름을 붙여야 한다.
+
+                    // 아니오 버튼
+                    Button noBtn = dialog01.findViewById(R.id.noBtn);
+                    noBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // 원하는 기능 구현
+                            dialog01.dismiss(); // 다이얼로그 닫기
+                        }
+                    });
+                    // 네 버튼
+                    dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog01.dismiss();
+                        }
+                    });
+
+                
+            }
+        });
+        btn_mainback.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+
+        tv_mainpicture = rootView.findViewById (R.id.tv_mainpicture);
+        qwer = rootView.findViewById (R.id.qwer);
+        placeViewModel = ViewModelProviders.of(this).get(PlaceViewModel.class);
+        placeViewModel.getRowCount(userid).observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer>0){
+                    qwer.setText(String.valueOf(integer)+"개의 여행지를 방문했습니다.");
+                }
+            }
+        });
+
 
         return rootView;
-    }
 
-    private void updateTaskList() {
-        Bundle bundle = getArguments();
-        String extitle = bundle.getString("extitle");
-        placeViewModel = new ViewModelProvider (this).get (PlaceViewModel.class);
-        placeRepository.fetchAllTasks (extitle).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
-//        placeViewModel.getAllPlaces ().observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
-            @Override
-            public void onChanged(List<Place> places) {
-                adapter.submitList(places);
-                if(places.size() > 0) {
-                    emptyImage.setVisibility (View.GONE);
-                    emptyView.setVisibility (View.GONE);}
-                else {
-                    emptyView.setVisibility (View.VISIBLE);
-                    emptyImage.setVisibility (View.VISIBLE);
-
-                }
-            }
-        });
-    }
-
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && requestCode == ADD_PLACE_REQUEST) {
-            String title = data.getStringExtra(AddEditPlaceActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditPlaceActivity.EXTRA_DESCRIPTION);
-            String userid = data.getStringExtra(AddEditPlaceActivity.EXTRA_USERID);
-            Double lat = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LAT));
-            Double lng = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LNG));
-
-            Place place = new Place(title, description, userid, lat, lng);
-            placeViewModel.insert(place);
-            updateTaskList();
-            Toast.makeText(getActivity (), "플레이스 세이브", Toast.LENGTH_SHORT).show();
-
-        } else if (requestCode == EDIT_PLACE_REQUEST && resultCode == RESULT_OK) {
-
-            int id = data.getIntExtra(AddEditPlaceActivity.EXTRA_ID, -1);
-
-            if (id == -1){
-                Toast.makeText(getActivity (), "플레이스 업데이트 불가", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            String title = data.getStringExtra(AddEditPlaceActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditPlaceActivity.EXTRA_DESCRIPTION);
-            String userid = data.getStringExtra(AddEditPlaceActivity.EXTRA_USERID);
-//            Double lat = Double.valueOf (data.getStringExtra(TestActivity.EXTRA_LAT));
-//            Double lng = Double.valueOf (data.getStringExtra(TestActivity.EXTRA_LNG));
-              Double lat = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LAT));
-              Double lng = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LNG));
-            Place place = new Place(title, description, userid, lat, lng);
-            place.setId(id);
-            placeViewModel.update(place);
-            updateTaskList();
-            Toast.makeText(getActivity (), "업데이트 성공", Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(getActivity (), "저장하지않음", Toast.LENGTH_SHORT).show();
-        }
-        updateTaskList();
     }
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-    @Override
-    public void onResume() {
-        super.onResume ();
-        updateTaskList();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete_all_places:
-                placeViewModel.deleteAllPlaces();
-                Toast.makeText(getActivity (), "모든 데이터 삭제", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
 }

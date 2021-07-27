@@ -16,6 +16,8 @@ import com.android.gpspro.Fragment.FragmentPage3;
 import com.android.gpspro.Fragment.FragmentPage4;
 import com.android.gpspro.Fragment.FragmentPage5;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
 
@@ -34,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 BottomNavigate(menuItem.getItemId());
 
-
                 return true;
             }
         });
         mBottomNV.setSelectedItemId(R.id.navigation_1);
     }
 
-    private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
+    public void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
+
         String tag = String.valueOf(id);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (id == R.id.navigation_2){
                 fragment = new FragmentPage2 ();
+                Bundle bundle = new Bundle(1);
+                bundle.putString("extitle",extitle);
+                fragment.setArguments (bundle);
             }else if (id == R.id.navigation_3){
                 fragment=new FragmentPage3 ();
                 Bundle bundle = new Bundle(1);
@@ -75,8 +80,16 @@ public class MainActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle(1);
                 bundle.putString("extitle",extitle);
                 fragment.setArguments (bundle);
-            } else {
+            } else if(id == R.id.navigation_5){
                 fragment=new FragmentPage5 ();
+                Bundle bundle = new Bundle(1);
+                bundle.putString("extitle",extitle);
+                fragment.setArguments (bundle);
+            } else if(id == 3){
+                fragment=new FragmentPage3 ();
+                Bundle bundle = new Bundle(1);
+                bundle.putString("extitle",extitle);
+                fragment.setArguments (bundle);
             }
 
             fragmentTransaction.add(R.id.content_layout, fragment, tag);

@@ -16,6 +16,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.android.gpspro.Place;
 import com.android.gpspro.PlaceRepository;
@@ -65,25 +68,25 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
+public class FragmentPage3 extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    public static final String EXTRA_ID =
-            "com.bdtask.architectureexample.EXTRA_ID";
-    public static final String EXTRA_TITLE =
-            "com.bdtask.architectureexample.EXTRA_TITLE";
-    public static final String EXTRA_DESCRIPTION =
-            "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
-    public static final String EXTRA_USERID=
-            "com.bdtask.architectureexample.EXTRA_USERID";
+//    public static final String EXTRA_ID =
+//            "com.bdtask.architectureexample.EXTRA_ID";
+//    public static final String EXTRA_TITLE =
+//            "com.bdtask.architectureexample.EXTRA_TITLE";
+//    public static final String EXTRA_DESCRIPTION =
+//            "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
+//    public static final String EXTRA_USERID=
+//            "com.bdtask.architectureexample.EXTRA_USERID";
+//    public static final String EXTRA_LAT =
+//            "com.bdtask.architectureexample.EXTRA_LAT";
+//    public static final String EXTRA_LNG =
+//            "com.bdtask.architectureexample.EXTRA_LNG";
+//    public static final String EXTRA_COUNT =
+//            "com.bdtask.architectureexample.EXTRA_COUNT";
+//    public static final String EXTRA_PRIORITY =
+//            "com.bdtask.architectureexample.EXTRA_PRIORITY";
 
-    public static final String EXTRA_LAT =
-            "com.bdtask.architectureexample.EXTRA_LAT";
-    public static final String EXTRA_LNG =
-            "com.bdtask.architectureexample.EXTRA_LNG";
-    public static final String EXTRA_COUNT =
-            "com.bdtask.architectureexample.EXTRA_COUNT";
-    public static final String EXTRA_PRIORITY =
-            "com.bdtask.architectureexample.EXTRA_PRIORITY";
     private FragmentActivity mContext;
     private PlaceViewModel model;
     private PlaceViewModel placeViewModel;
@@ -99,12 +102,12 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     String[] userid = new String[100];
     int[] id = new int[100];
     int[] count= new int[100];
-    int countt=10;
     private PlaceRepository placeRepository;
     private FusedLocationProviderClient mFusedLocationProviderClient; // Deprecated된 FusedLocationApi를 대체
     private LocationRequest locationRequest;
     private Location mCurrentLocatiion;
     private TextView tv_conte;
+    private TextView qwer;
      LatLng previousPosition = null;
     private final LatLng mDefaultLocation = new LatLng (37.56, 126.97);
     private static final int DEFAULT_ZOOM = 15;
@@ -135,9 +138,6 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
 
-
-
-        // 초기화 해야 하는 리소스들을 여기서 초기화 해준다.
     }
 
     @Nullable
@@ -145,7 +145,8 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // Layout 을 inflate 하는 곳이다.
         setHasOptionsMenu(true);
-
+        Bundle bundle = getArguments();
+        String userid = bundle.getString("extitle");
         if (savedInstanceState != null) {
             mCurrentLocatiion = savedInstanceState.getParcelable (KEY_LOCATION);
             CameraPosition mCameraPosition = savedInstanceState.getParcelable (KEY_CAMERA_POSITION);
@@ -159,6 +160,16 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         tracking = 1 - tracking;
         placeRepository = new PlaceRepository (getContext ());
         tv_conte=layout.findViewById (R.id.tv_conte);
+        qwer = layout.findViewById (R.id.qwer);
+        placeViewModel = ViewModelProviders.of(this).get(PlaceViewModel.class);
+        placeViewModel.getRowCount(userid).observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer>0){
+                    qwer.setText(String.valueOf(integer)+"개의 여행지를 방문했습니다.");
+                }
+            }
+        });
         return layout;
     }
 
@@ -193,12 +204,12 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Bundle bundle = getArguments();
-        String extitle = bundle.getString("extitle");
-        getActivity ().setTitle ("나의 "+extitle+" 여행");
+        String useridd = bundle.getString("extitle");
+        getActivity ().setTitle ("나의 "+useridd+" 여행");
         mMap = googleMap;
         model = new ViewModelProvider (this).get (PlaceViewModel.class);
 //        model.getAllPlaces ().observe (this, new Observer<List<Place>> () {
-        placeRepository.fetchAllTasks (extitle).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
+        model.getAllPlaces (useridd).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
                 updateUserProfileList (places);
@@ -228,7 +239,7 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
                         id[i] = userProfile.getId ();
 
                             markerOptions.position (new LatLng (latt[i], lngg[i]))
-                                    .title ("마커" + extitle) // 타이틀.
+                                    .title (title[i]) // 타이틀.
                                     .icon (BitmapDescriptorFactory.fromBitmap (smallMarker));
                             addedMarker = mMap.addMarker (markerOptions);
 
@@ -238,7 +249,7 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
-
+        mMap.setOnMarkerClickListener (this);
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
             @Override
             public void onMapClick(LatLng point) {
@@ -275,13 +286,13 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
     private void setDefaultLocation() {
         if (currentMarker != null) currentMarker.remove ();
 
-        MarkerOptions markerOptions = new MarkerOptions ();
-        markerOptions.position (mDefaultLocation);
-        markerOptions.title ("위치정보 가져올 수 없음");
-        markerOptions.snippet ("위치 퍼미션과 GPS 활성 여부 확인하세요");
-        markerOptions.draggable (true);
-        markerOptions.icon (BitmapDescriptorFactory.defaultMarker (BitmapDescriptorFactory.HUE_RED));
-        currentMarker = mMap.addMarker (markerOptions);
+//        MarkerOptions markerOptions = new MarkerOptions ();
+//        markerOptions.position (mDefaultLocation);
+//        markerOptions.title ("위치정보 가져올 수 없음");
+//        markerOptions.snippet ("위치 퍼미션과 GPS 활성 여부 확인하세요");
+//        markerOptions.draggable (true);
+//        markerOptions.icon (BitmapDescriptorFactory.defaultMarker (BitmapDescriptorFactory.HUE_RED));
+//        currentMarker = mMap.addMarker (markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom (mDefaultLocation, 15);
         mMap.moveCamera (cameraUpdate);
@@ -515,20 +526,16 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
         mFusedLocationProviderClient.requestLocationUpdates (locationRequest, locationCallback, null);
         if (mMap!=null) mMap.setMyLocationEnabled(true);
     }
-
-
     @Override
     public void onPause() {
         super.onPause();
         mapView.onPause();
     }
-
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
     }
-
     @Override
     public void onDestroyView() { // 프래그먼트와 관련된 View 가 제거되는 단계
         super.onDestroyView();
@@ -537,12 +544,20 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback {
             mFusedLocationProviderClient.removeLocationUpdates(locationCallback);
         }
     }
-
     @Override
     public void onDestroy() {
         // Destroy 할 때는, 반대로 OnDestroyView에서 View를 제거하고, OnDestroy()를 호출한다.
         super.onDestroy();
         mapView.onDestroy();
     }
-
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Intent intent = new Intent();
+        intent.setAction (Intent.ACTION_VIEW);
+        LatLng location = marker.getPosition();
+        Uri uri = Uri.parse ("geo:"+location.latitude+""+location.longitude+"?z=16"+"&q="+location.latitude+","+location.longitude+"(aaa)");
+        intent.setData (uri);
+        startActivity (intent);
+        return false;
+    }
 }

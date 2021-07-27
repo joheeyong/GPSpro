@@ -33,14 +33,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MygpsActivity" />
         <activity android:name=".AddEditPlaceActivity" />
         <activity android:name=".AddClickPlaceActivity" />
-        <activity android:name=".TestActivity" />
-        <activity android:name=".Test3Activity" />
         <activity android:name=".test"/>
         <activity android:name=".AddEditNoteActivity"/>
-
+        <activity android:name=".PhotoViewActivity"/>
+        <activity android:name=".MainMapActivity"/>
+        <activity android:name=".AddEditAccountActivity"/>
     </application>
 
 </manifest>

@@ -9,14 +9,14 @@
     <RelativeLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="160dp">
 
         <ImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/iv_profile"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_person" />
+            android:src="@drawable/logopic" />
 
     </RelativeLayout>
 
@@ -28,7 +28,7 @@
         android:gravity="center_vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:hint=" Contact Name "
+        android:hint=" 사진의 제목을 정해주세요 "
         android:textSize="16sp" />
 
     <View
@@ -40,20 +40,13 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:background="@android:color/transparent"
         android:gravity="center_vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:hint=" Contact Email "
         android:textSize="16sp" />
 
-
-    <View
-        android:layout_marginTop="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>
 

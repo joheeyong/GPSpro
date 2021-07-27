@@ -38,8 +38,15 @@ public class PlaceViewModel extends AndroidViewModel {
         repository.deleteAllNotes();
     }
 
-    public LiveData<List<Place>> getAllPlaces() {
-        return allPlaces;
+//    public LiveData<List<Place>> getAllPlaces() {
+//        return allPlaces;
+//    }
+
+    public LiveData<List<Place>> getAllPlaces(String userid) {
+        return repository.getAllNotes(userid);
     }
+
+    public LiveData<Integer> getRowCount(String userid) {
+        return repository.getRowCount(userid); }
 
 }

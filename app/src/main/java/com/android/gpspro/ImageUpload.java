@@ -43,5 +43,8 @@ public class ImageUpload {
         }
         return result;
     }
+
+    public static void goToAlbum(PhotoViewActivity mContext) {
+    }
 }
 

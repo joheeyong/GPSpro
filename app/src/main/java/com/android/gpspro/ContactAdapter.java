@@ -17,9 +17,9 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
     private static final String TAG = "ContactsAdapter";
-    private FragmentPage4 fragment1;
+    private FragmentPage4 fragment4;
     private List<Contact> contacts;
-
+    private NoteAdapter.OnItemLongClickListener listenerr;
     public void addItems(List<Contact> contacts){
         this.contacts = contacts;
     }
@@ -28,10 +28,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         contacts.add(contact);
     }
 
-    public ContactAdapter(FragmentPage4 fragment1, List<Contact> contacts) {
-        this.fragment1 = fragment1;
+    public ContactAdapter(FragmentPage4 fragment4, List<Contact> contacts) {
+        this.fragment4 = fragment4;
         this.contacts = contacts;
     }
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -77,7 +79,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment1.editContactDialog(contact);
+                fragment4.editContactDialog(contact);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener (new View.OnLongClickListener () {
+            @Override
+            public boolean onLongClick(View v) {
+
+                return false;
             }
         });
     }
@@ -85,5 +95,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     @Override
     public int getItemCount() {
         return contacts.size();
+    }
+
+
+    public class OnItemLongClickListener {
     }
 }

@@ -10,8 +10,10 @@
     tools:showIn="@layout/activity_main">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="170dp"
         android:id="@+id/recycler_view_contacts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

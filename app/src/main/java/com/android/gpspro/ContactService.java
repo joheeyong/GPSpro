@@ -1,6 +1,8 @@
 package com.android.gpspro;
 
 
+import androidx.lifecycle.LiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,4 +41,12 @@ public class ContactService {
         }
         return contactRepository.findAlll(email);
     }
+
+
+//    public LiveData<Integer> getRow() {
+//        return ContactRepository.getRow();
+//    }
 }
+
+
+

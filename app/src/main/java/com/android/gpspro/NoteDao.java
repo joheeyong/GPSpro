@@ -22,13 +22,11 @@ public interface NoteDao {
     @Delete
     void delete(Note note);
 
-    //@Query is used to create custom query
     @Query("DELETE FROM note_table")
     void deleteAllNotes();
 
-    @Query("SELECT * FROM note_table ")
-
-        //LiveData observes table live. whenever data changes to db. It will update data to view.
+    @Query("SELECT * FROM note_table order by date DESC")
     LiveData<List<Note>> getAllNotes();
+
 
 }

@@ -1,6 +1,7 @@
 package com.android.gpspro;
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -9,11 +10,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 import java.text.SimpleDateFormat;
 
 import androidx.annotation.NonNull;
@@ -45,6 +49,9 @@ public class AddEditNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_save);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기본 타이틀 사용 안함
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); // 커스텀 사용
         getSupportActionBar().setCustomView(R.layout.title_item); // 커스텀 사용할 파일 위치
@@ -54,10 +61,11 @@ public class AddEditNoteActivity extends AppCompatActivity {
         tv = findViewById(R.id.tv);
         calendarView = findViewById (R.id.calendar);
 
+
+
         SimpleDateFormat formatter =new SimpleDateFormat ("yyyy - MM - dd");
         Date date = new Date(calendarView.getDate ());
         edit_text_date.setText (formatter.format (date));
-
         calendarView.setOnDateChangeListener (new CalendarView.OnDateChangeListener () {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -67,14 +75,6 @@ public class AddEditNoteActivity extends AppCompatActivity {
             }
         });
 
-        RatingBar rb = (RatingBar) findViewById(R.id.ratingBar1);
-        rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                tv.setText(String.valueOf(rating));
-            }
-        });
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
@@ -85,11 +85,24 @@ public class AddEditNoteActivity extends AppCompatActivity {
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
             edit_text_date.setText(intent.getStringExtra(EXTRA_DATE));
-            tv.setText(intent.getStringExtra(EXTRA_STAR));
+//            tv.setText(intent.getStringExtra(EXTRA_STAR));
+            tv.setText("2.5");
+
         }else {
             setTitle("Add Note");
         }
+
+        RatingBar rb = (RatingBar) findViewById(R.id.ratingBar1);
+        rb.setRating((float) 2.5);
+        rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                tv.setText(String.valueOf(rating));
+            }
+        });
     }
+
 
     private void saveNote() {
         String title = editTextTitle.getText().toString();
@@ -114,6 +127,8 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
         setResult(RESULT_OK, data);
         finish();
+
+
     }
 
 
