@@ -49,8 +49,8 @@ public class AddEditAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("extitle");
-        setTitle ("여행 경비 등록");
+        String extitle = intent.getStringExtra("extitle");
+        setTitle ("여행 경비 등록"+extitle);
         rg_Transport = findViewById(R.id.rg_Transport);
         rg_lodgment= findViewById(R.id.rg_lodgment);
         rg_food= findViewById(R.id.rg_food);

@@ -48,9 +48,8 @@ public class FragmentPage5 extends Fragment {
         setHasOptionsMenu(true);
         ViewGroup rootView = (ViewGroup)inflater.inflate (R.layout.fragment_page_5, container, false);
         Bundle bundle = getArguments();
-        String userid = bundle.getString("extitle");
+        String extitle = bundle.getString("extitle");
         FloatingActionButton buttonAddNote = rootView.findViewById(R.id.button_add_note);
-
         dialog01= new Dialog (getContext ());
         dialog01.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog01.setContentView (R.layout.dialog_accountinfo);
@@ -60,27 +59,16 @@ public class FragmentPage5 extends Fragment {
             public void onClick(View v) {
                 showDialog01();
             }
-
             private void showDialog01() {
-                dialog01.show(); // 다이얼로그 띄우기
-
-                /* 이 함수 안에 원하는 디자인과 기능을 구현하면 된다. */
-
-                // 위젯 연결 방식은 각자 취향대로~
-                // '아래 아니오 버튼'처럼 일반적인 방법대로 연결하면 재사용에 용이하고,
-                // '아래 네 버튼'처럼 바로 연결하면 일회성으로 사용하기 편함.
-                // *주의할 점: findViewById()를 쓸 때는 -> 앞에 반드시 다이얼로그 이름을 붙여야 한다.
-
-                // 아니오 버튼
+                dialog01.show();
                 Button noBtn = dialog01.findViewById(R.id.noBtn);
                 noBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // 원하는 기능 구현
-                        dialog01.dismiss(); // 다이얼로그 닫기
+                        dialog01.dismiss();
                     }
                 });
-                // 네 버튼
+
                 dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -95,7 +83,7 @@ public class FragmentPage5 extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity (), AddEditAccountActivity.class);
-                intent.putExtra ("extitle",userid);
+                intent.putExtra ("extitle",extitle);
                 startActivityForResult (intent,ADD_NOTE_REQUEST);
             }
         });
@@ -110,7 +98,7 @@ public class FragmentPage5 extends Fragment {
         recyclerView.setAdapter(adapter);
         qwer = rootView.findViewById (R.id.qwer);
         accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);;
-        accountViewModel.getmTotal(userid).observe(getActivity (), new Observer<String> () {
+        accountViewModel.getmTotal(extitle).observe(getActivity (), new Observer<String> () {
             @Override
             public void onChanged(String string) {
                 if (string == null) {
@@ -129,7 +117,7 @@ public class FragmentPage5 extends Fragment {
             }
         });
         accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
-        accountViewModel.getAllNotes(userid).observe(getViewLifecycleOwner(), new Observer<List<Account>>() {
+        accountViewModel.getAllNotes(extitle).observe(getViewLifecycleOwner(), new Observer<List<Account>>() {
             @Override
             public void onChanged(List<Account> accounts) {
                 adapter.submitList(accounts);
@@ -158,12 +146,8 @@ public class FragmentPage5 extends Fragment {
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
 //                startActivity (intent);
             }
-
-
         });
         return rootView;
-
-
 
     }
     @Override
@@ -187,14 +171,17 @@ public class FragmentPage5 extends Fragment {
 //                Toast.makeText(getContext (), "Note can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
+            Bundle bundle = getArguments();
+            String extitle = bundle.getString("extitle");
             String title = data.getStringExtra(AddEditAccountActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditAccountActivity.EXTRA_DESCRIPTION);
             int priority = data.getIntExtra(AddEditAccountActivity.EXTRA_PRIORITY, 1);
-            String userid = data.getStringExtra(AddEditAccountActivity.EXTRA_USERID);
+            String userid = extitle;
             Account note = new Account (title, description,userid, priority);
+//            accountViewModel.insert(note);
             note.setId(id);
             accountViewModel.update(note);
-//            Toast.makeText(getContext (), "Note Updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext (), "Note Updated", Toast.LENGTH_SHORT).show();
         } else {
 //            Toast.makeText(getContext (), "Note not saved", Toast.LENGTH_SHORT).show();
         }

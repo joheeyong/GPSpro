@@ -141,7 +141,6 @@ public class test extends AppCompatActivity {
 //                버튼 클릭시 동작
                 dlg.setPositiveButton("확인",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which) {
-                        //토스트 메시지
                 noteViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
 //                Toast.makeText(test.this, "여행을 삭제했습니다.", Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(test.this,"확인을 눌르셨습니다.",Toast.LENGTH_SHORT).show();
@@ -184,25 +183,6 @@ public class test extends AppCompatActivity {
             }
 
         });
-//        adapter.setOnItemLongClickListener (new NoteAdapter.OnItemLongClickListener () {
-//            @Override
-//            public void onItemLongClick(Note none) {
-//                AlertDialog.Builder dlg = new AlertDialog.Builder(test.this);
-//                dlg.setTitle("여행 삭제"); //제목
-//                dlg.setMessage("정말 삭제 하시겠습니까?"); // 메시지// 아이콘 설정
-////                버튼 클릭시 동작
-//                dlg.setPositiveButton("확인",new DialogInterface.OnClickListener(){
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        //토스트 메시지
-//                        noteViewModel.deleteAllNotes();
-//                        Toast.makeText(test.this, "모든 여행을 삭제했습니다.", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                dlg.setNegativeButton("취소", null);
-//                dlg.show();
-//            }
-//        });
-
         emptyButton.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {

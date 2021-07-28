@@ -21,9 +21,9 @@ public class AccountRepository {
         new InsertNoteAsyncTask(accountDao).execute(account);
     }
 
-    public void update(Account account) { new UpdateNoteAsyncTask(accountDao).execute(account); }
+    public void update(Account account) { new UpdateNoteAsyncTask (accountDao).execute (account); }
 
-    public void delete(Account account) { new DeleteNoteAsyncTask (accountDao).execute(account); }
+    public void delete(Account account) { new DeleteNoteAsyncTask(accountDao).execute(account); }
 
     public void deleteAllNotes() { new DeleteAllNotesAsyncTask (accountDao).execute(); }
 
@@ -55,12 +55,27 @@ public class AccountRepository {
         }
     }
 
+//    private static class UpdateNoteAsyncTask extends AsyncTask<Account, Void, Void> {
+//
+//        private AccountDao accountDao;
+//
+//        private UpdateNoteAsyncTask(AccountDao accountDao) {
+//            this.accountDao = accountDao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Account... accounts) {
+//            accountDao.update (accounts[0]);
+//            return null;
+//        }
+//
+//}
+
     private static class UpdateNoteAsyncTask extends AsyncTask<Account, Void, Void> {
 
         private AccountDao accountDao;
 
-        private UpdateNoteAsyncTask(AccountDao accountDao) {
-            this.accountDao = accountDao;
+        private UpdateNoteAsyncTask(AccountDao accountDao) { this.accountDao = accountDao;
         }
 
         @Override
@@ -68,8 +83,8 @@ public class AccountRepository {
             accountDao.update (accounts[0]);
             return null;
         }
+    }
 
-}
     private static class DeleteNoteAsyncTask extends AsyncTask<Account, Void, Void> {
         private AccountDao accountDao;
 
