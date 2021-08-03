@@ -1,4 +1,4 @@
-package com.android.gpspro.Activity;
+package com.android.gpspro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.gpspro.R;
-
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,9 +33,8 @@ public class AddEditAccountActivity extends AppCompatActivity {
             "com.bdtask.architectureexample.EXTRA_DESCRIPTION";
     public static final String EXTRA_PRIORITY =
             "com.bdtask.architectureexample.EXTRA_PRIORITY";
-    public static final String EXTRA_IDD =
-            "com.bdtask.architectureexample.EXTRA_UDD";
-
+    public static final String EXTRA_USERID =
+            "com.bdtask.architectureexample.EXTRA_USERID";
 
 
     private RadioButton rg_Transport, rg_lodgment,rg_food,rg_shopping,rg_tourism,rg_other;
@@ -52,7 +49,7 @@ public class AddEditAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
         Intent intent = getIntent();
-        String userid = intent.getStringExtra("userid");
+        String userID = intent.getStringExtra("extitle");
         setTitle ("여행 경비 등록");
         rg_Transport = findViewById(R.id.rg_Transport);
         rg_lodgment= findViewById(R.id.rg_lodgment);
@@ -161,12 +158,12 @@ public class AddEditAccountActivity extends AppCompatActivity {
             return;
         }
         Intent intent = getIntent();
-        String idd = String.valueOf (intent.getIntExtra("idd",1000));
+        String userID = intent.getStringExtra("extitle");
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_PRIORITY, priority);
-        data.putExtra (EXTRA_IDD,idd);
+        data.putExtra (EXTRA_USERID,userID);
 
         int id = getIntent().getIntExtra(EXTRA_ID,-1);
         if (id != -1){

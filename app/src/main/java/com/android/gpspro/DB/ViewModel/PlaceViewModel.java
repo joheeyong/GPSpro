@@ -27,9 +27,7 @@ public class PlaceViewModel extends AndroidViewModel {
         repository.insert(place);
     }
 
-    public void update(Place place) {
-        repository.update(place);
-    }
+    public void update(Place place) { repository.update(place); }
 
     public void delete(Place place) {
         repository.delete(place);

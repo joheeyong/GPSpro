@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.gpspro.DB.Entity.Account;
-import com.android.gpspro.Adapter.AccountAdapter;
-import com.android.gpspro.DB.ViewModel.AccountViewModel;
-import com.android.gpspro.Activity.AddEditAccountActivity;
+import com.android.gpspro.Account;
+import com.android.gpspro.AccountAdapter;
+import com.android.gpspro.AccountViewModel;
+import com.android.gpspro.AddClickPlaceActivity;
+import com.android.gpspro.AddEditAccountActivity;
+import com.android.gpspro.AddEditPlaceActivity;
 import com.android.gpspro.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,22 +40,17 @@ public class FragmentPage5 extends Fragment {
     private AccountViewModel accountViewModel;
     private Button btn_info;
     TextView qwer;
-    String favSum;
-    String favSumm;
+    String favSum = "0";
     Dialog dialog01;
-    String resilt_int;
-//
-//    String[] qwerr = {"교통", "숙박", "식비", "쇼핑", "관광", "기타"};
-//    int i=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         ViewGroup rootView = (ViewGroup)inflater.inflate (R.layout.fragment_page_5, container, false);
         Bundle bundle = getArguments();
-//        String userid = bundle.getString("userid");
-        int idd =bundle.getInt ("idd");
+        String userid = bundle.getString("extitle");
         FloatingActionButton buttonAddNote = rootView.findViewById(R.id.button_add_note);
+
         dialog01= new Dialog (getContext ());
         dialog01.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog01.setContentView (R.layout.dialog_accountinfo);
@@ -62,150 +60,42 @@ public class FragmentPage5 extends Fragment {
             public void onClick(View v) {
                 showDialog01();
             }
+
             private void showDialog01() {
-                dialog01.show();
-                Button noBtn = dialog01.findViewById(R.id.btn_close);
-                TextView tv_allcount =dialog01.findViewById (R.id.tv_allcount);
-                TextView tv_1count = dialog01.findViewById (R.id.tv_1count);
-                TextView tv_2count = dialog01.findViewById (R.id.tv_2count);
-                TextView tv_3count = dialog01.findViewById (R.id.tv_3count);
-                TextView tv_4count = dialog01.findViewById (R.id.tv_4count);
-                TextView tv_5count = dialog01.findViewById (R.id.tv_5count);
-                TextView tv_6count = dialog01.findViewById (R.id.tv_6count);
+                dialog01.show(); // 다이얼로그 띄우기
 
-                accountViewModel = ViewModelProviders.of(getActivity ()).get(AccountViewModel.class);;
-                accountViewModel.getmTotal(idd).observe(getActivity (), new Observer<String> () {
-                    @Override
-                    public void onChanged(String string) {
-                        if (string == null) {
-                            favSum = "0";
-                            tv_allcount.setText("아직 사용한 금액이 없습니다.");
-                        } else {
+                /* 이 함수 안에 원하는 디자인과 기능을 구현하면 된다. */
 
-                            long value = Long.parseLong(string);
-                            DecimalFormat format = new DecimalFormat("###,###");
-                            format.format(value);
-                            String resilt_int =format.format (value);
-                            favSum = string;
-                            tv_allcount.setText("이번 여행에서 총 "+resilt_int+" 원을 사용했습니다.");
-                        }
-                    }
-                });
+                // 위젯 연결 방식은 각자 취향대로~
+                // '아래 아니오 버튼'처럼 일반적인 방법대로 연결하면 재사용에 용이하고,
+                // '아래 네 버튼'처럼 바로 연결하면 일회성으로 사용하기 편함.
+                // *주의할 점: findViewById()를 쓸 때는 -> 앞에 반드시 다이얼로그 이름을 붙여야 한다.
 
-                    accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
-                    accountViewModel.getmTotall (idd, "교통").observe (getActivity (), new Observer<String> () {
-                        @Override
-                        public void onChanged(String string) {
-                            if (string == null) {
-                                favSumm = "0";
-                                tv_1count.setText ("교통 : 0 원");
-                            } else {
-                                long value = Long.parseLong (string);
-                                DecimalFormat format = new DecimalFormat ("###,###");
-                                format.format (value);
-                                resilt_int = format.format (value);
-                                tv_1count.setText ("교통 : " + resilt_int + " 원");
-                            }
-                        }
-                    });
-                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
-                accountViewModel.getmTotall (idd, "숙박").observe (getActivity (), new Observer<String> () {
-                    @Override
-                    public void onChanged(String string) {
-                        if (string == null) {
-                            favSumm = "0";
-                            tv_2count.setText ("숙박 : 0 원");
-                        } else {
-                            long value = Long.parseLong (string);
-                            DecimalFormat format = new DecimalFormat ("###,###");
-                            format.format (value);
-                            resilt_int = format.format (value);
-                            tv_2count.setText ("숙박 : " + resilt_int + " 원");
-                        }
-                    }
-                });
-                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
-                accountViewModel.getmTotall (idd, "식비").observe (getActivity (), new Observer<String> () {
-                    @Override
-                    public void onChanged(String string) {
-                        if (string == null) {
-                            favSumm = "0";
-                            tv_3count.setText ("식비 : 0 원");
-                        } else {
-                            long value = Long.parseLong (string);
-                            DecimalFormat format = new DecimalFormat ("###,###");
-                            format.format (value);
-                            resilt_int = format.format (value);
-                            tv_3count.setText ("식비 : " + resilt_int + " 원");
-                        }
-                    }
-                });
-                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
-                accountViewModel.getmTotall (idd, "쇼핑").observe (getActivity (), new Observer<String> () {
-                    @Override
-                    public void onChanged(String string) {
-                        if (string == null) {
-                            favSumm = "0";
-                            tv_4count.setText ("쇼핑 : 0 원");
-                        } else {
-                            long value = Long.parseLong (string);
-                            DecimalFormat format = new DecimalFormat ("###,###");
-                            format.format (value);
-                            resilt_int = format.format (value);
-                            tv_4count.setText ("쇼핑 : " + resilt_int + " 원");
-                        }
-                    }
-                });
-                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
-                accountViewModel.getmTotall (idd, "관광").observe (getActivity (), new Observer<String> () {
-                    @Override
-                    public void onChanged(String string) {
-                        if (string == null) {
-                            favSumm = "0";
-                            tv_5count.setText ("관광 : 0 원");
-                        } else {
-                            long value = Long.parseLong (string);
-                            DecimalFormat format = new DecimalFormat ("###,###");
-                            format.format (value);
-                            resilt_int = format.format (value);
-                            tv_5count.setText ("관광 : " + resilt_int + " 원");
-                        }
-                    }
-                });
-                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
-                accountViewModel.getmTotall (idd, "기타").observe (getActivity (), new Observer<String> () {
-                    @Override
-                    public void onChanged(String string) {
-                        if (string == null) {
-                            favSumm = "0";
-                            tv_6count.setText ("기타 : 0 원");
-                        } else {
-                            long value = Long.parseLong (string);
-                            DecimalFormat format = new DecimalFormat ("###,###");
-                            format.format (value);
-                            resilt_int = format.format (value);
-                            tv_6count.setText ("기타 : " + resilt_int + " 원");
-                        }
-                    }
-                });
-
-
-
+                // 아니오 버튼
+                Button noBtn = dialog01.findViewById(R.id.noBtn);
                 noBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 원하는 기능 구현
+                        dialog01.dismiss(); // 다이얼로그 닫기
+                    }
+                });
+                // 네 버튼
+                dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog01.dismiss();
                     }
                 });
+
             }
         });
-
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity (), AddEditAccountActivity.class);
-                intent.putExtra ("idd",idd);
+                intent.putExtra ("extitle",userid);
                 startActivityForResult (intent,ADD_NOTE_REQUEST);
             }
         });
@@ -220,14 +110,16 @@ public class FragmentPage5 extends Fragment {
         recyclerView.setAdapter(adapter);
         qwer = rootView.findViewById (R.id.qwer);
         accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);;
-        accountViewModel.getmTotal(idd).observe(getActivity (), new Observer<String> () {
+        accountViewModel.getmTotal(userid).observe(getActivity (), new Observer<String> () {
             @Override
             public void onChanged(String string) {
                 if (string == null) {
                     favSum = "0";
                     qwer.setText("아직 경비 등록이 되지 않았습니다.");
                 } else {
-                    long value = Long.parseLong(string);
+//                    String money="999999999" ;
+//                    String result_int = format.format(value);
+                 long value = Long.parseLong(string);
                     DecimalFormat format = new DecimalFormat("###,###");
                     format.format(value);
                     String resilt_int =format.format (value);
@@ -237,7 +129,7 @@ public class FragmentPage5 extends Fragment {
             }
         });
         accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
-        accountViewModel.getAllNotes(idd).observe(getViewLifecycleOwner(), new Observer<List<Account>>() {
+        accountViewModel.getAllNotes(userid).observe(getViewLifecycleOwner(), new Observer<List<Account>>() {
             @Override
             public void onChanged(List<Account> accounts) {
                 adapter.submitList(accounts);
@@ -262,11 +154,16 @@ public class FragmentPage5 extends Fragment {
                 intent.putExtra(AddEditAccountActivity.EXTRA_TITLE, account.getTime());
                 intent.putExtra(AddEditAccountActivity.EXTRA_DESCRIPTION, account.getCategory());
                 intent.putExtra(AddEditAccountActivity.EXTRA_PRIORITY, account.getPrice());
-                intent.putExtra(AddEditAccountActivity.EXTRA_IDD, account.getIdd());
+                intent.putExtra(AddEditAccountActivity.EXTRA_USERID, account.getUserid());
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
+//                startActivity (intent);
             }
+
+
         });
         return rootView;
+
+
 
     }
     @Override
@@ -277,27 +174,29 @@ public class FragmentPage5 extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK) {
-            Bundle bundle = getArguments();
-            int idd =bundle.getInt ("idd");
             String title = data.getStringExtra(AddEditAccountActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditAccountActivity.EXTRA_DESCRIPTION);
             int priority = data.getIntExtra(AddEditAccountActivity.EXTRA_PRIORITY, 1);
-            Account note = new Account (title, description,idd, priority);
+            String userid = data.getStringExtra(AddEditAccountActivity.EXTRA_USERID);
+            Account note = new Account (title, description,userid, priority);
             accountViewModel.insert(note);
+//            Toast.makeText(getContext (), "Note saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditAccountActivity.EXTRA_ID, -1);
             if (id == -1){
+//                Toast.makeText(getContext (), "Note can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Bundle bundle = getArguments();
-            int idd =bundle.getInt ("idd");
             String title = data.getStringExtra(AddEditAccountActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditAccountActivity.EXTRA_DESCRIPTION);
             int priority = data.getIntExtra(AddEditAccountActivity.EXTRA_PRIORITY, 1);
-            Account note = new Account (title, description,idd, priority);
+            String userid = data.getStringExtra(AddEditAccountActivity.EXTRA_USERID);
+            Account note = new Account (title, description,userid, priority);
             note.setId(id);
             accountViewModel.update(note);
+//            Toast.makeText(getContext (), "Note Updated", Toast.LENGTH_SHORT).show();
         } else {
+//            Toast.makeText(getContext (), "Note not saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

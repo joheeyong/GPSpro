@@ -35,9 +35,7 @@ public class PlaceRepository {
         new InsertPlaceAsyncTask (placeDao).execute (place);
     }
 
-    public void update(Place place) {
-        new UpdatePlaceAsyncTask (placeDao).execute (place);
-    }
+    public void update(Place place) { new UpdatePlaceAsyncTask (placeDao).execute (place); }
 
     public void delete(Place place) {
         new DeletePlaceAsyncTask (placeDao).execute (place);
