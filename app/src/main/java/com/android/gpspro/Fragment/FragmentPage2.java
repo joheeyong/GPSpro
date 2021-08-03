@@ -1,6 +1,6 @@
 package com.android.gpspro.Fragment;
 
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +9,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,23 +27,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.android.gpspro.AddClickPlaceActivity;
-import com.android.gpspro.AddEditPlaceActivity;
-import com.android.gpspro.MainActivity;
-import com.android.gpspro.Place;
-import com.android.gpspro.PlaceAdapter;
-import com.android.gpspro.PlaceRepository;
-import com.android.gpspro.PlaceViewModel;
+import com.android.gpspro.Activity.AddClickPlaceActivity;
+import com.android.gpspro.Activity.AddEditPlaceActivity;
+import com.android.gpspro.Activity.MainActivity;
+import com.android.gpspro.DB.Entity.Place;
+import com.android.gpspro.Adapter.PlaceAdapter;
+import com.android.gpspro.DB.Repository.PlaceRepository;
+import com.android.gpspro.DB.ViewModel.PlaceViewModel;
 import com.android.gpspro.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -50,7 +47,6 @@ public class FragmentPage2 extends Fragment {
     public static final int ADD_PLACE_REQUEST = 1;
     public static final int EDIT_PLACE_REQUEST = 2;
     private static final int RESULT_OK = -1;
-    private PlaceRepository placeRepository;
     private PlaceViewModel placeViewModel;
     private TextView emptyView, emptyView2;
     private ImageView emptyImage;
@@ -60,6 +56,7 @@ public class FragmentPage2 extends Fragment {
     PlaceAdapter adapter = new PlaceAdapter();
     LinearLayout asdf;
     MainActivity activity;
+    Dialog dialog01;
 
     @Nullable
     @Override
@@ -70,22 +67,25 @@ public class FragmentPage2 extends Fragment {
         emptyView = rootView.findViewById (R.id.empty_view);
         emptyView2 = rootView.findViewById (R.id.empty_view2);
         Bundle bundle = getArguments();
-        String extitle = bundle.getString("extitle");
-        String userid = bundle.getString("extitle");
-        getActivity ().setTitle ("나의 "+extitle+" 여행");
+        String userid = bundle.getString("userid");
+        int idd = bundle.getInt("idd");
+        getActivity ().setTitle ("나의 "+userid+" 여행");
         fab_open = AnimationUtils.loadAnimation(getActivity (), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getActivity (), R.anim.fab_close);
-        placeRepository = new PlaceRepository (getContext ());
         FloatingActionButton fab_main = rootView.findViewById(R.id.fab_main);
         FloatingActionButton  fab_sub1 = rootView.findViewById(R.id.fab_sub1);
         FloatingActionButton  fab_sub2= rootView.findViewById(R.id.fab_sub2);
         asdf = rootView.findViewById (R.id.asdf);
+        dialog01= new Dialog (getContext ());
+        dialog01.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog01.setContentView (R.layout.dialog_placechoice);
 
         fab_sub1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity (), AddEditPlaceActivity.class);
-                intent.putExtra ("extitle",extitle);
+                intent.putExtra ("userid",userid);
+                intent.putExtra ("idd",idd);
                 startActivityForResult (intent,ADD_PLACE_REQUEST);
             }
         });
@@ -93,7 +93,8 @@ public class FragmentPage2 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity (), AddClickPlaceActivity.class);
-                intent.putExtra ("extitle",extitle);
+                intent.putExtra ("userid",userid);
+                intent.putExtra ("idd",idd);
                 startActivityForResult (intent,ADD_PLACE_REQUEST);
             }
         });
@@ -135,90 +136,74 @@ public class FragmentPage2 extends Fragment {
         );
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager (2 , StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager (getContext ()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
 
 
         placeViewModel = ViewModelProviders.of(this).get(PlaceViewModel.class);
-        placeViewModel.getAllPlaces (userid).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
+        placeViewModel.getAllPlaces (idd).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
                 updateTaskList();
             }
         });
 
-        new ItemTouchHelper (new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                placeViewModel.delete(adapter.getPlaceAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity (), "장소 삭제", Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView);
-
         adapter.setOnItemClickListener(new PlaceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Place place) {
 
-                Intent intent = new Intent(getContext (), AddEditPlaceActivity.class);
-                intent.putExtra(AddEditPlaceActivity.EXTRA_ID, place.getId());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_TITLE, place.getTitle());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_DESCRIPTION, place.getDescription());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_LAT, place.getLat());
-                intent.putExtra(AddEditPlaceActivity.EXTRA_LNG, place.getLng ());
-                intent.putExtra("extitle", extitle);
-                startActivityForResult(intent, EDIT_PLACE_REQUEST);
-
+                dialog01.show();
+                Button noBtn = dialog01.findViewById(R.id.noBtn);
+                noBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent (getContext (), AddEditPlaceActivity.class);
+                        intent.putExtra (AddEditPlaceActivity.EXTRA_ID, place.getId ());
+                        intent.putExtra (AddEditPlaceActivity.EXTRA_TITLE, place.getTitle ());
+                        intent.putExtra (AddEditPlaceActivity.EXTRA_DESCRIPTION, place.getDescription ());
+                        intent.putExtra (AddEditPlaceActivity.EXTRA_LAT, place.getLat ());
+                        intent.putExtra (AddEditPlaceActivity.EXTRA_LNG, place.getLng ());
+                        intent.putExtra ("userid", userid);
+                        intent.putExtra (AddEditPlaceActivity.EXTRA_IDD, place.getIdd ());
+                        intent.putExtra ("idd", idd);
+                        startActivityForResult (intent, EDIT_PLACE_REQUEST);
+                        dialog01.dismiss();
+                    }
+                });
+                dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        placeViewModel.delete (place);
+                        dialog01.dismiss();
+                    }
+                });
             }
         });
-//        adapter.setOnItemLongClickListener(new PlaceAdapter.OnItemLongClickListener () {
-//            @Override
-//            public void OnItemLongClick(Place place) {
-//                Toast.makeText(getActivity (), "플레이스 세이브", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        });
-
-
         updateTaskList();
-
         return rootView;
     }
 
     private void updateTaskList() {
         Bundle bundle = getArguments();
-        String extitle = bundle.getString("extitle");
+        int idd = bundle.getInt ("idd");
         placeViewModel = new ViewModelProvider (this).get (PlaceViewModel.class);
-//        placeRepository.fetchAllTasks (extitle).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
-        placeViewModel.getAllPlaces (extitle).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
+        placeViewModel.getAllPlaces (idd).observe(getViewLifecycleOwner(), new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
                 adapter.submitList(places);
                 if(places.size() > 0) {
                     emptyImage.setVisibility (View.GONE);
                     emptyView.setVisibility (View.GONE);
-                    emptyView2.setVisibility (View.GONE);}
+                    emptyView2.setVisibility (View.GONE); }
                 else {
                     emptyView.setVisibility (View.VISIBLE);
                     emptyView2.setVisibility (View.VISIBLE);
-                    emptyImage.setVisibility (View.VISIBLE);
-
-                }
+                    emptyImage.setVisibility (View.VISIBLE); }
             }
         });
     }
-
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -227,62 +212,33 @@ public class FragmentPage2 extends Fragment {
         if (resultCode == RESULT_OK && requestCode == ADD_PLACE_REQUEST) {
             String title = data.getStringExtra(AddEditPlaceActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditPlaceActivity.EXTRA_DESCRIPTION);
-            String userid = data.getStringExtra(AddEditPlaceActivity.EXTRA_USERID);
             Double lat = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LAT));
             Double lng = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LNG));
-
-            Place place = new Place(title, description, userid, lat, lng);
+            int idd= Integer.parseInt (data.getStringExtra(AddEditPlaceActivity.EXTRA_IDD));
+            Place place = new Place(idd, title, description, lat, lng);
             placeViewModel.insert(place);
-            updateTaskList();
-            Toast.makeText(getActivity (), "플레이스 세이브", Toast.LENGTH_SHORT).show();
 
         } else if (requestCode == EDIT_PLACE_REQUEST && resultCode == RESULT_OK) {
 
             int id = data.getIntExtra(AddEditPlaceActivity.EXTRA_ID, -1);
 
             if (id == -1){
-                Toast.makeText(getActivity (), "플레이스 업데이트 불가", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             String title = data.getStringExtra(AddEditPlaceActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditPlaceActivity.EXTRA_DESCRIPTION);
-            String userid = data.getStringExtra(AddEditPlaceActivity.EXTRA_USERID);
             Double lat = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LAT));
             Double lng = Double.valueOf (data.getStringExtra(AddEditPlaceActivity.EXTRA_LNG));
-            Place place = new Place(title, description, userid, lat, lng);
+            int idd= Integer.parseInt (data.getStringExtra(AddEditPlaceActivity.EXTRA_IDD));
+            Place place = new Place(idd, title, description, lat, lng);
             place.setId(id);
             placeViewModel.update(place);
-            updateTaskList();
-            Toast.makeText(getActivity (), "업데이트 성공", Toast.LENGTH_SHORT).show();
 
         } else {
-            Toast.makeText(getActivity (), "저장하지않음", Toast.LENGTH_SHORT).show();
         }
         updateTaskList();
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-    @Override
-    public void onResume() {
-        super.onResume ();
-        updateTaskList();
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete_all_places:
-                placeViewModel.deleteAllPlaces();
-                Toast.makeText(getActivity (), "모든 데이터 삭제", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
 
 }

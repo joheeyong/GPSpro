@@ -1,33 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="1000dp"
+    android:layout_height="350dp"
     android:layout_gravity="center"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:orientation="vertical">
     <TextView
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:id="@+id/tv_allcount"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="앱을 종료하시겠습니까?" />
+        android:textColor="#347be9"
+        android:text="이번 여행에서 총 50,000 원을 사용했습니다."
+        android:textSize="15sp"/>
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_1count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="교통 : 50,000원" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_2count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="숙박 : 150,000원" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_3count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="식비 : 200,000원" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_4count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="쇼핑 : 300,000원" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_5count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="관광 : 0원" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_6count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="기타 : 20,000" />
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <Button
-            android:id="@+id/noBtn"
-            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#347be9"
+            android:backgroundTint="#FFFFFF"
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="아니오" />
-
-        <Button
-            android:id="@+id/yesBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="네" />
+            android:text="닫기" />
     </LinearLayout>
 
 </LinearLayout>

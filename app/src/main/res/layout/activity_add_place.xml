@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddEditPlaceActivity"
+    tools:context=".Activity.AddEditPlaceActivity"
     android:background="#D5D5D5">
 
     <LinearLayout
@@ -38,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <Button
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/white"
             android:layout_width="wrap_content"

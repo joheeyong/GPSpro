@@ -4,25 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/AppTheme.AppBarOverlay">-->
-
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="?attr/colorPrimary"-->
-<!--            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
     <ImageView
         android:layout_gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:src="@drawable/logopic"/>
     <TextView
         android:layout_marginTop="220dp"
@@ -31,8 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:text="등록된 사진이 없습니다."
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:textColor="#4C4C4C"
         android:textSize="20dp"/>
 
     <include layout="@layout/content_mainphoto" />

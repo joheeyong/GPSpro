@@ -2,20 +2,20 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     android:orientation="vertical"
     android:padding="10dp">
 
     <RelativeLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="250dp">
 
         <ImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/iv_profile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="250dp"
             android:src="@drawable/logopic" />
 
     </RelativeLayout>
@@ -31,11 +31,6 @@
         android:hint=" 사진의 제목을 정해주세요 "
         android:textSize="16sp" />
 
-    <View
-        android:layout_marginTop="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
 
     <EditText
         android:id="@+id/email"

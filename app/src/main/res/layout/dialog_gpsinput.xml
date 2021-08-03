@@ -48,8 +48,6 @@
             android:inputType="textPersonName"
             android:background="@null"
             android:textSize="12dp"
-
-
             />
 
 
@@ -104,17 +102,19 @@
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#4374D9"
+            android:backgroundTint="#FFFFFF"
             android:text="확인"
-            android:textColor="#FFFFFF" />
+            android:textSize="18sp"
+            android:textColor="#4374D9" />
 
     <Button
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#4374D9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="취소"
-        android:backgroundTint="#4374D9"
+        android:textSize="18sp"
+        android:backgroundTint="#FFFFFF"
         android:id="@+id/btn_cancle"/>
 
 

@@ -25,21 +25,21 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB9WOpt7YiSdF0Xc2Y9DTsRAkgZEcIOcUo" />
 
-        <activity android:name=".LodingActivity">
+        <activity android:name=".Activity.LodingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AddEditPlaceActivity" />
-        <activity android:name=".AddClickPlaceActivity" />
-        <activity android:name=".test"/>
-        <activity android:name=".AddEditNoteActivity"/>
-        <activity android:name=".PhotoViewActivity"/>
-        <activity android:name=".MainMapActivity"/>
-        <activity android:name=".AddEditAccountActivity"/>
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.AddEditPlaceActivity" />
+        <activity android:name=".Activity.AddClickPlaceActivity" />
+        <activity android:name=".Activity.PhotoViewActivity"/>
+        <activity android:name=".Activity.MainMapActivity"/>
+        <activity android:name=".Activity.AddEditAccountActivity"/>
+        <activity android:name=".Activity.TravelActivity"/>
+        <activity android:name=".Activity.AddEditTravelActivity"/>
     </application>
 
 </manifest>

@@ -17,29 +17,32 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.room.Room;
 
-import com.android.gpspro.ContactService;
-import com.android.gpspro.MainActivity;
-import com.android.gpspro.MainMapActivity;
-import com.android.gpspro.PhotoViewActivity;
-import com.android.gpspro.PlaceDatabase;
-import com.android.gpspro.PlaceViewModel;
+import com.android.gpspro.Activity.MainActivity;
+import com.android.gpspro.Activity.MainMapActivity;
+import com.android.gpspro.DB.ViewModel.AccountViewModel;
+import com.android.gpspro.Activity.PhotoViewActivity;
+import com.android.gpspro.DB.ViewModel.PlaceViewModel;
 import com.android.gpspro.R;
+
+import java.text.DecimalFormat;
 
 public class FragmentPage1 extends Fragment {
 
     private PlaceViewModel placeViewModel;
-    private TextView qwer, tv_mainpicture;
+    private AccountViewModel accountViewModel;
+    private TextView tv_countplace, tv_mainpicture, tv_mainmoney;
     MainActivity activity;
-    private Button buttonViewv, buttonView,buttonViewvv,btn_mainback;
-    private CardView cv_frag2,cv_frag3;
-    private CardView cv_frag1;
+    private Button btn_mainpicture, btn_countplace,btn_mainback;
+    private CardView cv_frag1,cv_frag2,cv_frag3;
+    String favSumm;
     Dialog dialog01;
+    String resilt_int;
+    String favSum = "0";
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        //현재 소속된 액티비티를 메인 액티비티로 한다.
         activity = (MainActivity) getActivity();
     }
 
@@ -53,157 +56,247 @@ public class FragmentPage1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
-        String extitle = bundle.getString("extitle");
-        String userid = bundle.getString("extitle");
-        getActivity ().setTitle ("나의 "+extitle+" 여행");
+
+        String userid = bundle.getString("userid");
+        int idd = bundle.getInt ("idd");
+        getActivity ().setTitle ("나의 "+userid+" 여행");
 
         ViewGroup rootView = (ViewGroup)inflater.inflate (R.layout.fragment_page_1, container, false);
-        buttonViewv = rootView.findViewById (R.id.buttonViewv);
-        buttonView = rootView.findViewById (R.id.buttonView);
-        buttonViewvv= rootView.findViewById (R.id.buttonViewvv);
-        btn_mainback=rootView.findViewById (R.id.btn_mainback);
-        cv_frag3=rootView.findViewById (R.id.cv_frag3);
-        buttonView.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                String email = bundle.getString("extitle");
-                Intent intent=new Intent (getActivity (), MainMapActivity.class);
-                intent.putExtra("extitle", email);
-                intent.putExtra("extitle", extitle);
-                startActivity (intent);
-            }
-        });
+
         dialog01= new Dialog (getContext ());
         dialog01.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog01.setContentView (R.layout.dialog_accountinfo);
-        buttonViewvv.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                showDialog01();
 
-            }
+        btn_countplace = rootView.findViewById (R.id.btn_countplace);
+        btn_mainpicture = rootView.findViewById (R.id.btn_mainpicture);
+        btn_mainback=rootView.findViewById (R.id.btn_mainback);
 
-            private void showDialog01() {
-                dialog01.show(); // 다이얼로그 띄우기
-
-                /* 이 함수 안에 원하는 디자인과 기능을 구현하면 된다. */
-
-                // 위젯 연결 방식은 각자 취향대로~
-                // '아래 아니오 버튼'처럼 일반적인 방법대로 연결하면 재사용에 용이하고,
-                // '아래 네 버튼'처럼 바로 연결하면 일회성으로 사용하기 편함.
-                // *주의할 점: findViewById()를 쓸 때는 -> 앞에 반드시 다이얼로그 이름을 붙여야 한다.
-
-                // 아니오 버튼
-                Button noBtn = dialog01.findViewById(R.id.noBtn);
-                noBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // 원하는 기능 구현
-                        dialog01.dismiss(); // 다이얼로그 닫기
-                    }
-                });
-                // 네 버튼
-                dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog01.dismiss();
-                    }
-                });
-
-            }
-        });
-        buttonViewv.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                String email = bundle.getString("extitle");
-                Intent intent=new Intent (getActivity (), PhotoViewActivity.class);
-                intent.putExtra("extitle", email);
-                startActivity (intent);
-            }
-        });
         cv_frag1 = rootView.findViewById (R.id.cv_frag1);
+        cv_frag2 = rootView.findViewById (R.id.cv_frag2);
+        cv_frag3=rootView.findViewById (R.id.cv_frag3);
+        tv_countplace = rootView.findViewById (R.id.tv_countplace);
+        tv_mainmoney = rootView.findViewById (R.id.tv_mainmoney);
+
+
         cv_frag1.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                String email = bundle.getString("extitle");
+                String userid = bundle.getString("userid");
+                int idd = bundle.getInt ("idd");
                 Intent intent=new Intent (getActivity (), MainMapActivity.class);
-                intent.putExtra("extitle", email);
-//                intent.putExtra("extitle", extitle);
+                intent.putExtra("userid", userid);
+                intent.putExtra ("idd",idd);
                 startActivity (intent);
             }
         });
-        cv_frag2 = rootView.findViewById (R.id.cv_frag2);
+        btn_countplace.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                String userid = bundle.getString("userid");
+                int idd = bundle.getInt ("idd");
+                Intent intent=new Intent (getActivity (), MainMapActivity.class);
+                intent.putExtra("userid", userid);
+                intent.putExtra ("idd",idd);
+                startActivity (intent);
+            }
+        });
+        placeViewModel = ViewModelProviders.of(this).get(PlaceViewModel.class);
+        placeViewModel.getRowCount(idd).observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer>0){
+                    tv_countplace.setText(String.valueOf(integer)+"개의 여행지를 방문했습니다.");
+                }
+            }
+        });
+
         cv_frag2.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                String email = bundle.getString("extitle");
+                int idd = bundle.getInt ("idd");
                 Intent intent=new Intent (getActivity (), PhotoViewActivity.class);
-                intent.putExtra("extitle", email);
+                intent.putExtra("idd", idd);
                 startActivity (intent);
             }
         });
+        btn_mainpicture.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                int idd = bundle.getInt ("idd");
+                Intent intent=new Intent (getActivity (), PhotoViewActivity.class);
+                intent.putExtra("idd", idd);
+                startActivity (intent);
+            }
+        });
+
         cv_frag3.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 showDialog01();
             }
-
             private void showDialog01() {
-                    dialog01.show(); // 다이얼로그 띄우기
+                dialog01.show();
+                Button noBtn = dialog01.findViewById(R.id.btn_close);
+                TextView tv_allcount =dialog01.findViewById (R.id.tv_allcount);
+                TextView tv_1count = dialog01.findViewById (R.id.tv_1count);
+                TextView tv_2count = dialog01.findViewById (R.id.tv_2count);
+                TextView tv_3count = dialog01.findViewById (R.id.tv_3count);
+                TextView tv_4count = dialog01.findViewById (R.id.tv_4count);
+                TextView tv_5count = dialog01.findViewById (R.id.tv_5count);
+                TextView tv_6count = dialog01.findViewById (R.id.tv_6count);
 
-                    /* 이 함수 안에 원하는 디자인과 기능을 구현하면 된다. */
+                accountViewModel = ViewModelProviders.of(getActivity ()).get(AccountViewModel.class);;
+                accountViewModel.getmTotal(idd).observe(getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSum = "0";
+                            tv_allcount.setText("아직 사용한 금액이 없습니다.");
+                        } else {
 
-                    // 위젯 연결 방식은 각자 취향대로~
-                    // '아래 아니오 버튼'처럼 일반적인 방법대로 연결하면 재사용에 용이하고,
-                    // '아래 네 버튼'처럼 바로 연결하면 일회성으로 사용하기 편함.
-                    // *주의할 점: findViewById()를 쓸 때는 -> 앞에 반드시 다이얼로그 이름을 붙여야 한다.
-
-                    // 아니오 버튼
-                    Button noBtn = dialog01.findViewById(R.id.noBtn);
-                    noBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // 원하는 기능 구현
-                            dialog01.dismiss(); // 다이얼로그 닫기
+                            long value = Long.parseLong(string);
+                            DecimalFormat format = new DecimalFormat("###,###");
+                            format.format(value);
+                            String resilt_int =format.format (value);
+                            favSum = string;
+                            tv_allcount.setText("이번 여행에서 총 "+resilt_int+" 원을 사용했습니다.");
                         }
-                    });
-                    // 네 버튼
-                    dialog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog01.dismiss();
-                        }
-                    });
+                    }
+                });
 
-                
+                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
+                accountViewModel.getmTotall (idd, "교통").observe (getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSumm = "0";
+                            tv_1count.setText ("교통 : 0 원");
+                        } else {
+                            long value = Long.parseLong (string);
+                            DecimalFormat format = new DecimalFormat ("###,###");
+                            format.format (value);
+                            resilt_int = format.format (value);
+                            tv_1count.setText ("교통 : " + resilt_int + " 원");
+                        }
+                    }
+                });
+                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
+                accountViewModel.getmTotall (idd, "숙박").observe (getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSumm = "0";
+                            tv_2count.setText ("숙박 : 0 원");
+                        } else {
+                            long value = Long.parseLong (string);
+                            DecimalFormat format = new DecimalFormat ("###,###");
+                            format.format (value);
+                            resilt_int = format.format (value);
+                            tv_2count.setText ("숙박 : " + resilt_int + " 원");
+                        }
+                    }
+                });
+                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
+                accountViewModel.getmTotall (idd, "식비").observe (getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSumm = "0";
+                            tv_3count.setText ("식비 : 0 원");
+                        } else {
+                            long value = Long.parseLong (string);
+                            DecimalFormat format = new DecimalFormat ("###,###");
+                            format.format (value);
+                            resilt_int = format.format (value);
+                            tv_3count.setText ("식비 : " + resilt_int + " 원");
+                        }
+                    }
+                });
+                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
+                accountViewModel.getmTotall (idd, "쇼핑").observe (getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSumm = "0";
+                            tv_4count.setText ("쇼핑 : 0 원");
+                        } else {
+                            long value = Long.parseLong (string);
+                            DecimalFormat format = new DecimalFormat ("###,###");
+                            format.format (value);
+                            resilt_int = format.format (value);
+                            tv_4count.setText ("쇼핑 : " + resilt_int + " 원");
+                        }
+                    }
+                });
+                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
+                accountViewModel.getmTotall (idd, "관광").observe (getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSumm = "0";
+                            tv_5count.setText ("관광 : 0 원");
+                        } else {
+                            long value = Long.parseLong (string);
+                            DecimalFormat format = new DecimalFormat ("###,###");
+                            format.format (value);
+                            resilt_int = format.format (value);
+                            tv_5count.setText ("관광 : " + resilt_int + " 원");
+                        }
+                    }
+                });
+                accountViewModel = ViewModelProviders.of (getActivity ()).get (AccountViewModel.class);
+                accountViewModel.getmTotall (idd, "기타").observe (getActivity (), new Observer<String> () {
+                    @Override
+                    public void onChanged(String string) {
+                        if (string == null) {
+                            favSumm = "0";
+                            tv_6count.setText ("기타 : 0 원");
+                        } else {
+                            long value = Long.parseLong (string);
+                            DecimalFormat format = new DecimalFormat ("###,###");
+                            format.format (value);
+                            resilt_int = format.format (value);
+                            tv_6count.setText ("기타 : " + resilt_int + " 원");
+                        }
+                    }
+                });
+
+
+
+                noBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog01.dismiss();
+                    }
+                });
             }
         });
+
+        accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
+        accountViewModel.getmTotal(idd).observe(getViewLifecycleOwner(), new Observer<String> () {
+            @Override
+            public void onChanged(String string) {
+                if (string == null) {
+                    favSum = "0";
+                    tv_mainmoney.setText("여행 경비을 등록해주세요.");
+                } else {
+                    long value = Long.parseLong(string);
+                    DecimalFormat format = new DecimalFormat("###,###");
+                    format.format(value);
+                    String resilt_int =format.format (value);
+                    favSum = string;
+                    tv_mainmoney.setText(resilt_int+" 원을 사용했습니다.");
+                }
+            }
+        });
+
         btn_mainback.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
             }
         });
-
-        tv_mainpicture = rootView.findViewById (R.id.tv_mainpicture);
-        qwer = rootView.findViewById (R.id.qwer);
-        placeViewModel = ViewModelProviders.of(this).get(PlaceViewModel.class);
-        placeViewModel.getRowCount(userid).observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                if(integer>0){
-                    qwer.setText(String.valueOf(integer)+"개의 여행지를 방문했습니다.");
-                }
-            }
-        });
-
-
         return rootView;
-
-    }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
 }
