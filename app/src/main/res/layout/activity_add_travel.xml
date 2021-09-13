@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.AddEditTravelActivity"
+    tools:context="travel.android.gpspro.Activity.AddEditTravelActivity"
     android:background="#EAEAEA">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,12 +56,6 @@
             android:text="수정 시 앱이 재시작됩니다."
             android:textColor="@color/black" />
     </LinearLayout>
-    <!--    <EditText-->
-    <!--        android:id="@+id/edit_text_title"-->
-    <!--        android:inputType="text"-->
-    <!--        android:hint="Title"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content" />-->
 
     <LinearLayout
         android:layout_marginTop="5dp"
@@ -148,7 +150,7 @@
         <RatingBar
             android:theme="@style/CustomRatingBar"
             style="?android:attr/ratingBarStyleIndicator"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_gravity="center"
             android:id="@+id/ratingBar1"
             android:layout_width="wrap_content"
@@ -167,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:ems="10"
+
             android:text="2.5"
             android:inputType="textPersonName" />
 
@@ -222,12 +224,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/tv"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:textColor="#000000"-->
-    <!--        android:textSize="30dp"-->
-    <!--        android:text="0.1" />-->
-
 </LinearLayout>
+</ScrollView>

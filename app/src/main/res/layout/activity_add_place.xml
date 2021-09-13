@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.AddEditPlaceActivity"
+    tools:context="travel.android.gpspro.Activity.AddEditPlaceActivity"
     android:background="#D5D5D5">
 
     <LinearLayout

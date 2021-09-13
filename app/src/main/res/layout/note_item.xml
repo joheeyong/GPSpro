@@ -76,28 +76,6 @@
                     android:gravity="right"
                     android:id="@+id/coment"
                     android:textStyle="bold"/>
-<!--                <TextView-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="여행일    2021-07-20"-->
-<!--                    android:id="@+id/abcc"/>-->
-<!--                <TextView-->
-<!--                    android:textAlignment="center"-->
-<!--                    android:gravity="center"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textColor="#EDD200"-->
-<!--                    android:text="별점 ★"-->
-<!--                    android:id="@+id/abcc"/>-->
-<!--                <TextView-->
-<!--                    android:textAlignment="center"-->
-<!--                    android:gravity="center"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textColor="#ED0000"-->
-<!--                    android:text="최고였어요!"-->
-<!--                    android:id="@+id/abccc"/>-->
             </LinearLayout>
 
 

@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -24,22 +23,28 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB9WOpt7YiSdF0Xc2Y9DTsRAkgZEcIOcUo" />
-
-        <activity android:name=".Activity.LodingActivity">
+        <activity android:name="travel.android.gpspro.Activity.LodingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.AddEditPlaceActivity" />
-        <activity android:name=".Activity.AddClickPlaceActivity" />
-        <activity android:name=".Activity.PhotoViewActivity"/>
-        <activity android:name=".Activity.MainMapActivity"/>
-        <activity android:name=".Activity.AddEditAccountActivity"/>
-        <activity android:name=".Activity.TravelActivity"/>
-        <activity android:name=".Activity.AddEditTravelActivity"/>
+        <activity android:name="travel.android.gpspro.Activity.MainActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.AddEditPlaceActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.AddClickPlaceActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.PhotoViewActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.MainMapActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.AddEditAccountActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.TravelActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+        android:screenOrientation="portrait"></activity>
+        <activity android:name="travel.android.gpspro.Activity.AddEditTravelActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
