@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +22,8 @@ import com.android.gpspro.R;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import travel.NetworkStatus;
 
 public class AddEditPlaceActivity extends AppCompatActivity {
     public static final String EXTRA_ID =
@@ -48,8 +49,8 @@ public class AddEditPlaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_place);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userid");
         int idd = intent.getIntExtra("idd",1000);
@@ -73,6 +74,9 @@ public class AddEditPlaceActivity extends AppCompatActivity {
 
 
     public double clickShowMap(View view) {
+        int status = NetworkStatus.getConnectivityStatus (getApplicationContext ());
+        if (status == NetworkStatus.TYPE_MOBILE || status == NetworkStatus.TYPE_WIFI){
+
         Geocoder geocoder= new Geocoder(this, Locale.KOREA);
         List<Address> addresses=null;
         String addr= editTextTitle.getText().toString();
@@ -106,6 +110,9 @@ public class AddEditPlaceActivity extends AppCompatActivity {
                 editTextDescription.setText (addr);
                 editTextTitle.setText (addresses.get (0).getAdminArea ()+" "+addresses.get (0).getPostalCode ()+" "+addresses.get (0).getFeatureName ());
             }
+        }}else{
+            Toast toast = Toast.makeText(getApplicationContext(), "네트워크 연결이 끊겼습니다.",Toast.LENGTH_SHORT);
+            toast.show();
         }
         return 0;
     }

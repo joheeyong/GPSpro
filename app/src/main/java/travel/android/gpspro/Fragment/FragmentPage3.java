@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -52,6 +53,7 @@ import com.google.maps.android.SphericalUtil;
 
 import java.util.List;
 
+import travel.NetworkStatus;
 import travel.android.gpspro.DB.Entity.Place;
 import travel.android.gpspro.DB.ViewModel.PlaceViewModel;
 
@@ -120,7 +122,13 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback, Googl
             CameraPosition mCameraPosition = savedInstanceState.getParcelable (KEY_CAMERA_POSITION);
         }
         View layout = inflater.inflate (R.layout.fragment_page_3, container, false);
-        mapView = (MapView) layout.findViewById (R.id.map);
+
+        int status = NetworkStatus.getConnectivityStatus (getContext ());
+        if (status != NetworkStatus.TYPE_MOBILE && status != NetworkStatus.TYPE_WIFI) {
+            Toast.makeText(getActivity(),"네트워크 연결이 끊겼습니다.",Toast.LENGTH_SHORT).show();
+        }
+
+            mapView = (MapView) layout.findViewById (R.id.map);
         if (mapView != null) {
             mapView.onCreate (savedInstanceState);
         }

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
+import travel.NetworkStatus;
 import travel.android.gpspro.DB.Entity.Place;
 import travel.android.gpspro.DB.ViewModel.PlaceViewModel;
 
@@ -138,82 +140,85 @@ public class AddClickPlaceActivity extends AppCompatActivity
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng point) {
-                Dialog dialog;
-                LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                LinearLayout loginLayout = (LinearLayout) vi.inflate(R.layout.dialog_gpsinput, null);
-                final Button save = (Button) loginLayout.findViewById(R.id.btn_save);
-                final Button cancle = (Button) loginLayout.findViewById(R.id.btn_cancle);
-                final EditText id = (EditText)loginLayout.findViewById(R.id.id);
-                final EditText pw = (EditText)loginLayout.findViewById(R.id.pw);
-                final TextView clicklng = (TextView) loginLayout.findViewById(R.id.clicklng);
-                final TextView clicklat = (TextView) loginLayout.findViewById(R.id.clicklat);
-                TextView txt_redzone = (TextView) loginLayout.findViewById(R.id.txt_redzone);
+                int status = NetworkStatus.getConnectivityStatus (getApplicationContext ());
+                if (status == NetworkStatus.TYPE_MOBILE || status == NetworkStatus.TYPE_WIFI){
+
+                    Dialog dialog;
+                LayoutInflater vi = (LayoutInflater) getSystemService (Context.LAYOUT_INFLATER_SERVICE);
+                LinearLayout loginLayout = (LinearLayout) vi.inflate (R.layout.dialog_gpsinput, null);
+                final Button save = (Button) loginLayout.findViewById (R.id.btn_save);
+                final Button cancle = (Button) loginLayout.findViewById (R.id.btn_cancle);
+                final EditText id = (EditText) loginLayout.findViewById (R.id.id);
+                final EditText pw = (EditText) loginLayout.findViewById (R.id.pw);
+                final TextView clicklng = (TextView) loginLayout.findViewById (R.id.clicklng);
+                final TextView clicklat = (TextView) loginLayout.findViewById (R.id.clicklat);
+                TextView txt_redzone = (TextView) loginLayout.findViewById (R.id.txt_redzone);
                 Double latitude = point.latitude;
                 Double longitude = point.longitude;
-                clicklat.setText (String.valueOf(latitude));
-                clicklng.setText (String.valueOf(longitude));
+                clicklat.setText (String.valueOf (latitude));
+                clicklng.setText (String.valueOf (longitude));
                 List<Address> list = null;
                 try {
                     double d1 = point.latitude;
                     double d2 = point.longitude;
-                    list = geocoder.getFromLocation(
+                    list = geocoder.getFromLocation (
                             d1,
                             d2,
                             10);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    e.printStackTrace ();
                 }
                 if (list != null) {
                     if (list.size () == 0) {
                         id.setText ("해당되는 주소 정보는 없습니다");
                     } else {
-                        id.setText (list.get (0).getAdminArea () +" "+ list.get (0).getThoroughfare ()+" " + list.get (0).getPostalCode ());
+                        id.setText (list.get (0).getAdminArea () + " " + list.get (0).getThoroughfare () + " " + list.get (0).getPostalCode ());
                     }
                 }
-                dialog=new AlertDialog.Builder(AddClickPlaceActivity.this)
-                        .setView(loginLayout)
-                        .show();
+                dialog = new AlertDialog.Builder (AddClickPlaceActivity.this)
+                        .setView (loginLayout)
+                        .show ();
                 save.setOnClickListener (new View.OnClickListener () {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = getIntent();
-                        String title = id.getText().toString();
-                        String description = pw.getText().toString();
-                        String lat = clicklat.getText().toString();
-                        String lng = clicklng.getText().toString();
-                        if (title.trim().isEmpty()) {
+                        Intent intent = getIntent ();
+                        String title = id.getText ().toString ();
+                        String description = pw.getText ().toString ();
+                        String lat = clicklat.getText ().toString ();
+                        String lng = clicklng.getText ().toString ();
+                        if (title.trim ().isEmpty ()) {
                             txt_redzone.setVisibility (View.VISIBLE);
                             return;
                         }
-                        String idd = String.valueOf (intent.getIntExtra("idd",1000));
-                        Intent data = new Intent();
-                        data.putExtra(EXTRA_TITLE, title);
-                        data.putExtra(EXTRA_DESCRIPTION, description);
-                        data.putExtra(EXTRA_IDD, idd);
-                        data.putExtra(EXTRA_LAT, lat);
-                        data.putExtra(EXTRA_LNG, lng);
-                        int id = getIntent().getIntExtra(EXTRA_ID,-1);
-                        if (id != -1){
-                            data.putExtra(EXTRA_ID,id);
+                        String idd = String.valueOf (intent.getIntExtra ("idd", 1000));
+                        Intent data = new Intent ();
+                        data.putExtra (EXTRA_TITLE, title);
+                        data.putExtra (EXTRA_DESCRIPTION, description);
+                        data.putExtra (EXTRA_IDD, idd);
+                        data.putExtra (EXTRA_LAT, lat);
+                        data.putExtra (EXTRA_LNG, lng);
+                        int id = getIntent ().getIntExtra (EXTRA_ID, -1);
+                        if (id != -1) {
+                            data.putExtra (EXTRA_ID, id);
                         }
-                        setResult(RESULT_OK, data);
+                        setResult (RESULT_OK, data);
                         Double latt, lngt;
-                        latt= Double.valueOf (clicklat.getText().toString());
-                        lngt= Double.valueOf (clicklng.getText().toString());
+                        latt = Double.valueOf (clicklat.getText ().toString ());
+                        lngt = Double.valueOf (clicklng.getText ().toString ());
                         MarkerOptions makerOptions = new MarkerOptions ();
 
-                        BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.gpsmia3);
-                        Bitmap b=bitmapdraw.getBitmap();
-                        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
+                        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources ().getDrawable (R.drawable.gpsmia3);
+                        Bitmap b = bitmapdraw.getBitmap ();
+                        Bitmap smallMarker = Bitmap.createScaledBitmap (b, 100, 100, false);
 
                         makerOptions
                                 .position (new LatLng (latt, lngt))
                                 .title ("마커" + title)
-                                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker));// 타이틀.
+                                .icon (BitmapDescriptorFactory.fromBitmap (smallMarker));// 타이틀.
 
                         googleMap.addMarker (makerOptions);
                         dialog.dismiss ();
-                        overridePendingTransition(R.anim.stay, R.anim.slide_down);
+                        overridePendingTransition (R.anim.stay, R.anim.slide_down);
                         finish ();
                     }
                 });
@@ -223,6 +228,10 @@ public class AddClickPlaceActivity extends AppCompatActivity
                         dialog.dismiss ();
                     }
                 });
+            } else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "네트워크 연결이 끊겼습니다.",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
     }
