@@ -91,7 +91,7 @@ public class AddEditTravelActivity extends AppCompatActivity {
         });
     }
 
-    private void saveNote() {
+    private void saveTravel() {
         String title = et_title.getText().toString();
         String description = et_description.getText().toString();
         String date = tv_date.getText().toString();
@@ -130,7 +130,7 @@ public class AddEditTravelActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_note:
-                saveNote();
+                saveTravel();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

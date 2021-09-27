@@ -20,6 +20,9 @@ public class TravelViewModel extends AndroidViewModel {
         repository = new TravelRepository(application);
         allTravels = repository.getAllTravels();
     }
+    public LiveData<List<Travel>> getAllTravels() {
+        return allTravels;
+    }
 
     public void insert(Travel travel) {
         repository.insert(travel);
@@ -35,9 +38,5 @@ public class TravelViewModel extends AndroidViewModel {
 
     public void deleteAllNotes() {
         repository.deleteAllNotes();
-    }
-
-    public LiveData<List<Travel>> getAllTravels() {
-        return allTravels;
     }
 }

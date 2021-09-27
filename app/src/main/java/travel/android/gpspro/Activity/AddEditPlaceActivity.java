@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import travel.NetworkStatus;
+import travel.android.gpspro.Other.NetworkStatus;
 
 public class AddEditPlaceActivity extends AppCompatActivity {
     public static final String EXTRA_ID =

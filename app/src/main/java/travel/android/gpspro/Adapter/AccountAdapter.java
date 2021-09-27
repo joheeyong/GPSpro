@@ -55,23 +55,17 @@ public class AccountAdapter extends ListAdapter<Account, AccountAdapter.NoteHold
         format.format(value);
         String resilt_int =format.format (value);
         holder.textViewPriority.setText(resilt_int+" 원");
-        String a ="숙박";
-        String b ="교통";
-        String c ="식비";
-        String d ="쇼핑";
-        String e ="관광";
-        String f ="기타";
-        if (a.equals (currentNote.getCategory ())){
+        if ("숙박".equals (currentNote.getCategory ())){
             holder.iv_pick.setBackgroundResource (R.drawable.ic_tnrqkrcol);
-        } else if (b.equals (currentNote.getCategory ())){
+        } else if ("교통".equals (currentNote.getCategory ())){
             holder.iv_pick.setBackgroundResource (R.drawable.ic_trainnbla);
-        } else if (c.equals (currentNote.getCategory ())){
+        } else if ("식비".equals (currentNote.getCategory ())){
             holder.iv_pick.setBackgroundResource (R.drawable.ic_pokeblack);
-        } else if (d.equals (currentNote.getCategory ())){
+        } else if ("쇼핑".equals (currentNote.getCategory ())){
             holder.iv_pick.setBackgroundResource (R.drawable.ic_shopbla);
-        } else if (e.equals (currentNote.getCategory ())){
+        } else if ("관광".equals (currentNote.getCategory ())){
             holder.iv_pick.setBackgroundResource (R.drawable.ic_rndwjsbla);
-        } else if (f.equals (currentNote.getCategory ())){
+        } else if ("기타".equals (currentNote.getCategory ())){
             holder.iv_pick.setBackgroundResource (R.drawable.ic_nulllbla);
         }
 

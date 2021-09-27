@@ -53,9 +53,9 @@ import com.google.maps.android.SphericalUtil;
 
 import java.util.List;
 
-import travel.NetworkStatus;
 import travel.android.gpspro.DB.Entity.Place;
 import travel.android.gpspro.DB.ViewModel.PlaceViewModel;
+import travel.android.gpspro.Other.NetworkStatus;
 
 public class FragmentPage3 extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -216,7 +216,7 @@ public class FragmentPage3 extends Fragment implements OnMapReadyCallback, Googl
             public void onMapClick(LatLng point) {
             }
         });
-        setDefaultLocation (); // GPS를 찾지 못하는 장소에 있을 경우 지도의 초기 위치가 필요함.
+        setDefaultLocation ();
 
         getLocationPermission ();
 

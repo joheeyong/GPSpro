@@ -37,8 +37,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         this.contacts = contacts;
     }
 
-
-
     class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvName;
@@ -58,7 +56,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             tvName.setText(name);
             tvEmail.setText(email);
 
-            if(profileURL == null || profileURL.equals("") ){ // 사진 업로드를 하지 않으면 기본 값 null
+            if(profileURL == null || profileURL.equals("") ){
                 ivProfile.setImageResource(R.drawable.logopic);
             }else{
                 ImageUpload.setImage(profileURL, ivProfile);

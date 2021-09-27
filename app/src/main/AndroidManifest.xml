@@ -19,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GPSpro"
         android:usesCleartextTraffic="true">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB9WOpt7YiSdF0Xc2Y9DTsRAkgZEcIOcUo" />
@@ -46,5 +45,4 @@
         <activity android:name="travel.android.gpspro.Activity.AddEditTravelActivity" android:configChanges="screenSize|orientation" android:turnScreenOn="false"
             android:screenOrientation="portrait"></activity>
     </application>
-
 </manifest>

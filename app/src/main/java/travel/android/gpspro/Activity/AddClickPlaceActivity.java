@@ -38,9 +38,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-import travel.NetworkStatus;
 import travel.android.gpspro.DB.Entity.Place;
 import travel.android.gpspro.DB.ViewModel.PlaceViewModel;
+import travel.android.gpspro.Other.NetworkStatus;
 
 public class AddClickPlaceActivity extends AppCompatActivity
         implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,

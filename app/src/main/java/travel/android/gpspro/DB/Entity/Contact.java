@@ -34,10 +34,6 @@ public class Contact {
         return profileURL;
     }
 
-//    public void setProfileURL(String profileURL) {
-//        this.profileURL = profileURL;
-//    }
-
     public long getId() {
         return id;
     }

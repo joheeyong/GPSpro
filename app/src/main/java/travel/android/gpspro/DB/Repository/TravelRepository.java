@@ -36,9 +36,7 @@ public class TravelRepository {
         new DeleteAllTravelsAsyncTask(travelDao).execute();
     }
 
-    public LiveData<List<Travel>> getAllTravels() {
-        return allTravels;
-    }
+    public LiveData<List<Travel>> getAllTravels() { return allTravels; }
 
     private static class InsertTravelAsyncTask extends AsyncTask<Travel, Void, Void> {
 
